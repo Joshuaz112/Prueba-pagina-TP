@@ -40,6 +40,21 @@
     .btn.primary:hover{background:linear-gradient(135deg,var(--primary-700),#1e40af);box-shadow:var(--shadow-lg)}
     .muted{color:var(--muted)}
 
+    /* Login visuals */
+    .login-container{display:flex;align-items:center;justify-content:center;padding:20px}
+    .login-box{max-width:420px;margin:0 auto;text-align:center;padding:48px;border-radius:20px;box-shadow:var(--shadow-xl);background:#fff;position:relative;overflow:hidden}
+    .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--primary),var(--success),var(--warning))}
+    .form-group{margin-bottom:16px;text-align:left}
+    .form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--text)}
+    .form-group input{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:10px;font-size:14px;transition:all 0.3s ease}
+    .form-group input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(59,130,246,0.1);transform:translateY(-1px)}
+    .login-btn{display:inline-flex;align-items:center;gap:8px;justify-content:center;width:100%;padding:14px 16px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-700));color:#fff;font-weight:700;cursor:pointer;box-shadow:var(--shadow);transition:all 0.3s ease}
+    .login-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .forgot-password{margin-top:12px}
+    .forgot-password a{color:var(--primary-700);text-decoration:none;font-weight:600}
+    .forgot-password a:hover{text-decoration:underline}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
     /* Header */
     .site-header{position:fixed;top:0;left:0;right:0;z-index:3000;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
     .topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;border-bottom:1px solid var(--line);overflow:visible}
