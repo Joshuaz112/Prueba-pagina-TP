@@ -765,11 +765,11 @@ import { initAuthUI } from "./auth.js";
       document.getElementById('activeUsers').textContent = students.filter(s => s.cuentas?.alumno?.user).length;
     }
 
-    function doAdminLogin(e) {
+    async function doAdminLogin(e) {
       e.preventDefault();
       const email = $('#email').value.trim();
       const pass = $('#pass').value.trim();
-      const ses = signIn(email, pass);
+      const ses = await signIn(email, pass);
       if (ses && ses.role === 'admin') {
         checkAuth();
       } else {
