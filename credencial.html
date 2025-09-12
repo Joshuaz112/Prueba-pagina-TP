@@ -95,27 +95,10 @@
     .credential-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="waves" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M0,20 Q10,0 20,20 T40,20" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23waves)"/></svg>') repeat;opacity:0.3}
     
     .credential-logos{display:flex;justify-content:space-between;align-items:center;padding:20px;position:relative;z-index:2;height:100%}
-    /* Logo del Liceo (HSB) - Escudo */
-    .logo-left{width:60px;height:60px;position:relative;box-shadow:var(--shadow-lg);clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)}
-    .logo-left::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#1e40af 0%,#1e40af 40%,#dc2626 40%,#dc2626 100%);clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)}
-    .logo-left::after{content:'HSB';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-weight:800;font-size:14px;z-index:2;text-shadow:1px 1px 2px rgba(0,0,0,0.3)}
-    
-    /* Elementos del logo HSB */
-    .logo-left-tree{position:absolute;top:8px;right:8px;width:12px;height:16px;background:#dc2626;clip-path:polygon(50% 0%, 20% 40%, 30% 40%, 10% 70%, 40% 70%, 30% 100%, 70% 100%, 60% 70%, 90% 70%, 70% 40%, 80% 40%);z-index:3}
-    .logo-left-circle{position:absolute;top:6px;right:6px;width:16px;height:16px;background:#fff;border-radius:50%;z-index:2}
-    .logo-left-step{position:absolute;bottom:8px;right:8px;width:8px;height:12px;background:#fff;z-index:2}
-    
-    /* Logo TP Enfermería - Circular */
-    .logo-right{width:60px;height:60px;background:#3b82f6;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
-    .logo-right::before{content:'';position:absolute;left:8px;top:50%;transform:translateY(-50%);width:20px;height:20px;background:#fff;border-radius:2px;z-index:1}
-    .logo-right::after{content:'TP';position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-weight:800;font-size:16px;z-index:2}
-    
-    /* Mano con cruz médica para el logo TP */
-    .logo-right-hand{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:18px;height:18px;z-index:2}
-    .logo-right-hand::before{content:'';position:absolute;width:100%;height:100%;background:#fff;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;transform:rotate(-20deg)}
-    .logo-right-hand::after{content:'';position:absolute;top:2px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#fff;border-radius:1px;z-index:3}
-    
-    .logo-right-text{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:#fff;font-size:7px;font-weight:600;z-index:2;white-space:nowrap}
+    /* Logos por imagen */
+    .logo-img{width:60px;height:60px;border-radius:12px;object-fit:contain;background:#fff;box-shadow:var(--shadow-lg);padding:6px}
+    /* Ocultar versiones CSS anteriores (por compatibilidad) */
+    .logo-left,.logo-right{display:none}
     
     .credential-photo{display:flex;justify-content:center;margin:20px 0}
     .photo-frame{width:120px;height:150px;border:4px solid #3b82f6;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-lg);background:#fff}
@@ -143,14 +126,7 @@
       .credential-card{width:350px;height:525px}
       .credential-header{height:100px}
       .credential-logos{padding:15px}
-      .logo-left,.logo-right{width:50px;height:50px}
-      .logo-left::after{font-size:12px}
-      .logo-right::after{font-size:14px}
-      .logo-right-text{font-size:6px;bottom:6px}
-      .logo-left-tree{width:10px;height:14px;top:6px;right:6px}
-      .logo-left-circle{width:14px;height:14px;top:4px;right:4px}
-      .logo-left-step{width:6px;height:10px;bottom:6px;right:6px}
-      .logo-right-hand{width:16px;height:16px;left:4px}
+      .logo-img{width:50px;height:50px}
       .photo-frame{width:100px;height:125px}
       .student-name h2{font-size:16px}
       .student-run{font-size:12px}
@@ -261,15 +237,8 @@
       <div class="credential-card" id="credentialCard">
         <div class="credential-header">
           <div class="credential-logos">
-            <div class="logo-left">
-              <div class="logo-left-circle"></div>
-              <div class="logo-left-tree"></div>
-              <div class="logo-left-step"></div>
-            </div>
-            <div class="logo-right">
-              <div class="logo-right-hand"></div>
-              <div class="logo-right-text">Enfermería</div>
-            </div>
+            <img id="logoLeftImg" class="logo-img" alt="Logo Liceo" src="logo-liceo.webp">
+            <img id="logoRightImg" class="logo-img" alt="Logo TP" src="logo-tp.webp">
           </div>
         </div>
         
@@ -304,6 +273,17 @@
           <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></span>
           Descargar PDF
         </button>
+        <label class="btn" for="logoLeftInput" title="Cambiar logo liceo">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg></span>
+          Logo Liceo
+        </label>
+        <input id="logoLeftInput" type="file" accept="image/*" style="display:none">
+        <label class="btn" for="logoRightInput" title="Cambiar logo TP">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg></span>
+          Logo TP
+        </label>
+        <input id="logoRightInput" type="file" accept="image/*" style="display:none">
+        <button class="btn" id="btnResetLogos">Restaurar logos</button>
       </div>
     </div>
   </div>
@@ -380,6 +360,34 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadCredential);
+
+    // --- Logos por imagen con persistencia ---
+    const K_LOGO_LEFT = 'tp_logo_left';
+    const K_LOGO_RIGHT = 'tp_logo_right';
+    function applyLogos(){
+      try{
+        const l = localStorage.getItem(K_LOGO_LEFT);
+        const r = localStorage.getItem(K_LOGO_RIGHT);
+        if(l) document.getElementById('logoLeftImg').src = l;
+        if(r) document.getElementById('logoRightImg').src = r;
+      }catch{}
+    }
+    document.addEventListener('DOMContentLoaded', applyLogos);
+
+    // UI de carga de logos
+    function readFileAsDataURL(file){
+      return new Promise((res, rej)=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=rej; fr.readAsDataURL(file); });
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const inL = document.getElementById('logoLeftInput');
+      const inR = document.getElementById('logoRightInput');
+      const imgL = document.getElementById('logoLeftImg');
+      const imgR = document.getElementById('logoRightImg');
+      const btnReset = document.getElementById('btnResetLogos');
+      inL && (inL.onchange = async (e)=>{ const f=e.target.files?.[0]; if(!f) return; const url=await readFileAsDataURL(f); try{ localStorage.setItem(K_LOGO_LEFT, url); }catch{} if(imgL) imgL.src=url; });
+      inR && (inR.onchange = async (e)=>{ const f=e.target.files?.[0]; if(!f) return; const url=await readFileAsDataURL(f); try{ localStorage.setItem(K_LOGO_RIGHT, url); }catch{} if(imgR) imgR.src=url; });
+      btnReset && (btnReset.onclick = ()=>{ try{ localStorage.removeItem(K_LOGO_LEFT); localStorage.removeItem(K_LOGO_RIGHT);}catch{} if(imgL) imgL.src='logo-liceo.webp'; if(imgR) imgR.src='logo-tp.webp'; });
+    });
   </script>
 
   <script type="module">
