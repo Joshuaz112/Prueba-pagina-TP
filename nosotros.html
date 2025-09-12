@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Inicio | TP Enfermería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ 
+      --bg:#f8fafc; 
+      --card:#fff; 
+      --text:#0f172a; 
+      --muted:#64748b; 
+      --primary:#3b82f6; 
+      --primary-700:#1d4ed8; 
+      --primary-50:#eff6ff;
+      --success:#10b981;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --line:#e2e8f0;
+      --shadow-sm:0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-xl:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);min-height:100vh}
+    .container{max-width:1200px;margin:20px auto;padding:0 20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px;transition:all 0.3s ease;position:relative;overflow:hidden}
+    .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--success));opacity:0;transition:opacity 0.3s ease}
+    .card:hover::before{opacity:1}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border:none;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600;background:#fff;cursor:pointer;transition:all 0.3s ease;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+    .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
+    .btn:hover::before{left:100%}
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary-700));color:#fff;box-shadow:var(--shadow)}
+    .btn.primary:hover{background:linear-gradient(135deg,var(--primary-700),#1e40af);box-shadow:var(--shadow-lg)}
+    .muted{color:var(--muted)}
+
+    /* Header */
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:3000;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;border-bottom:1px solid var(--line);overflow:visible}
+    .topbar-left{display:flex;gap:12px;align-items:center}
+    .topbar-right{display:flex;gap:16px;align-items:center;position:relative;overflow:visible}
+
+    .icon{width:20px;height:20px;display:inline-block;vertical-align:middle;transition:all 0.3s ease}
+    .icon svg{width:100%;height:100%}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .link-icon{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:.9rem;padding:8px 12px;border-radius:8px;transition:all 0.3s ease}
+    .link-icon:hover{color:var(--primary);background:var(--primary-50);transform:translateY(-1px)}
+
+    /* Navbar responsive */
+    .navbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 20px;background:rgba(255,255,255,0.8)}
+    .hamb{display:none;background:linear-gradient(135deg,var(--primary),var(--success));color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:600;transition:all 0.3s ease}
+    .hamb:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .menu{display:flex;gap:24px;align-items:center;justify-content:flex-start;position:relative}
+    .menu a{color:var(--primary-700);text-decoration:none;font-weight:600;padding:8px 16px;border-radius:8px;transition:all 0.3s ease;position:relative}
+    .menu a:hover{background:var(--primary-50);color:var(--primary);transform:translateY(-1px)}
+    .logo{display:flex;justify-content:center;transition:all 0.3s ease}
+    .logo img{height:100px;width:100px;border-radius:50%;box-shadow:var(--shadow);transition:all 0.3s ease;border:4px solid #fff}
+    .logo:hover img{transform:scale(1.05);box-shadow:var(--shadow-lg)}
+    .header-spacer{height:160px}
+
+    /* Dropdown + hover */
+    .nav-item{position:relative}
+    .nav-item>a,.nav-item>button{all:unset;cursor:pointer;color:var(--primary-700);font-weight:700;padding:6px 0}
+    .nav-item.has-sub>button .chev{display:inline-block;transform:rotate(0deg);transition:transform .18s ease}
+    .nav-item.has-sub.open>button .chev{transform:rotate(90deg)}
+    .submenu{display:none;position:absolute;top:32px;left:0;background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px rgba(2,6,23,.12);border-radius:12px;padding:8px;min-width:220px;z-index:5000}
+    .submenu a{display:block;padding:8px 10px;border-radius:8px;color:#0f172a;text-decoration:none}
+    .submenu a:hover{background:#f1f5f9}
+    .nav-item.has-sub.open>.submenu{display:block}
+    @media(hover:hover) and (pointer:fine){ .nav-item.has-sub:hover>.submenu{display:block} }
+
+    /* Alinear el menú de Cuenta al borde derecho del botón */
+    #nav-user{position:relative;margin-left:8px}
+    #nav-user .submenu{right:0;left:auto;top:32px}
+
+    /* Mobile */
+    @media(max-width:900px){ .logo img{height:96px;width:96px} .header-spacer{height:148px} }
+    @media(max-width:720px){
+      .navbar{grid-template-columns:auto 1fr auto}
+      .hamb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;cursor:pointer}
+      .menu{display:none;position:absolute;top:124px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px;flex-direction:column;gap:12px;z-index:3050}
+      .menu.open{display:flex}
+      .logo{grid-column:2}
+      .topbar{flex-wrap:wrap;gap:8px}
+      .topbar-right{margin-left:auto}
+      .submenu{position:static;border:1px solid var(--line);border-radius:10px;box-shadow:none;margin-top:6px}
+      #nav-user .submenu{position:static;right:auto;left:auto;top:auto}
+    }
+
+    header.hero{background:linear-gradient(135deg,var(--primary) 0%,var(--success) 50%,var(--warning) 100%);color:#fff;padding:60px 20px;text-align:center;position:relative;overflow:hidden;margin-bottom:40px}
+    header.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;opacity:0.3}
+    header.hero h1{position:relative;z-index:1;font-size:3rem;font-weight:800;margin:0;text-shadow:0 2px 4px rgba(0,0,0,0.1);animation:fadeInUp 0.8s ease-out}
+    header.hero p{position:relative;z-index:1;font-size:1.3rem;opacity:0.9;margin:16px 0 0 0;max-width:600px;margin-left:auto;margin-right:auto;animation:fadeInUp 0.8s ease-out 0.2s both}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @media print{ .site-header,.btn,.hamb,.menu{display:none!important}; .card{box-shadow:none;border:0} header.hero{background:#fff;color:#000;border-bottom:2px solid #e5e7eb} }
+  
+    /* RESPONSIVE PATCH */
+    .topbar-right{ position:relative; overflow:visible; }
+    #nav-user{ position:relative; }
+    #nav-user .submenu{ right:0; left:auto; top:32px; z-index:5000; }
+    @media (max-width: 1200px){
+      .navbar{ grid-template-columns: auto 1fr auto !important; }
+    }
+    @media (max-width: 1024px){
+      .logo img{ height:96px; width:96px; }
+      .header-spacer{ height:148px; }
+    }
+    @media (max-width: 900px){
+      .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
+      .menu.open{ display:flex !important; }
+    }
+    @media (max-width: 720px){
+      #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; }
+    }
+        
+
+/* SEARCH & RNPI PATCH */
+.search-bar{display:flex;gap:8px;align-items:center;margin:10px 0 14px 0}
+.search-bar input[type="search"]{flex:1;min-width:220px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px}
+.btn-rnpi{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;text-decoration:none;color:#0f172a;font-weight:700}
+.btn-rnpi svg{width:16px;height:16px}
+.card-footer{margin-top:8px}
+
+</style>
+  <script>
+    function setupHeader(){
+      // Menú hamburguesa
+      const hamb=document.getElementById('hamb');
+      const navMenu=document.getElementById('mainMenu');
+      if(hamb&&navMenu){
+        hamb.addEventListener('click',(e)=>{e.stopPropagation();navMenu.classList.toggle('open');});
+      }
+      // Desplegables
+      const dropdowns=document.querySelectorAll('.nav-item.has-sub');
+      dropdowns.forEach(drop=>{
+        const btn=drop.querySelector('button');
+        if(btn){
+          btn.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            const wasOpen=drop.classList.contains('open');
+            dropdowns.forEach(d=>d.classList.remove('open'));
+            if(!wasOpen) drop.classList.add('open');
+          });
+        }
+      });
+      document.addEventListener('click',()=>{ if(navMenu) navMenu.classList.remove('open'); dropdowns.forEach(d=>d.classList.remove('open')); });
+    }
+    document.addEventListener('DOMContentLoaded',setupHeader);
+  </script>
+</head>
+<body>
+
+  <div class="site-header">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamb" id="hamb" aria-label="Abrir menú">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
+        </button>
+      </div>
+      <div class="topbar-right">
+        <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
+        <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
+        <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
+        <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
+
+        <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
+        <div id="nav-user" class="nav-item has-sub">
+          <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
+          <div class="submenu" id="accountMenu" style="min-width:200px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar">
+      <nav id="mainMenu" class="menu">
+        <a href="index.html">Inicio</a>
+        <div class="nav-item has-sub">
+          <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
+          <div class="submenu">
+            <a href="nosotros.html">Nosotros</a>
+            <a href="programa.html">Programa</a>
+            <a href="convenios.html">Convenios</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+        <a href="docentes.html">Docentes</a>
+         <div class="nav-item has-sub">
+          <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
+          <div class="submenu">
+            <a href="alumnos.html">Alumnos</a>
+            <a href="exalumnos.html">Exalumnos</a>
+          </div>
+        </div>
+              <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
+      </nav>
+      <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="header-spacer"></div>
+
+<header class="hero">
+  <h1>Acerca de Nosotros</h1>
+  <p>Formando profesionales de la salud con excelencia y compromiso</p>
+  <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+      <span>Excelencia Académica</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+      <span>Compromiso Social</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 7H17c-.8 0-1.54.37-2.01.99L14 9l-1.5-2H9v13h2v-6h2.5l2.5 6H20z"/></svg></span>
+      <span>Innovación Educativa</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="about-section">
+    <h2>Nuestra Institución</h2>
+    <p>El Liceo Técnico Profesional es una institución educativa comprometida con la formación de técnicos en enfermería de alta calidad, preparando a nuestros estudiantes para enfrentar los desafíos del sector salud con profesionalismo, ética y competencias técnicas sólidas.</p>
+    <p>Con más de una década de experiencia en educación técnica, hemos formado a cientos de profesionales que hoy contribuyen al bienestar de la comunidad a través de su trabajo en hospitales, clínicas, centros de salud y organizaciones del sector sanitario.</p>
+  </div>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-8A5.5 5.5 0 0 1 12 5.1 5.5 5.5 0 0 1 21.3 13c-2.3 3.6-9.3 8-9.3 8zm1-12h2v2h2v2h-2v2h-2v-2h-2v-2h2z"/></svg></span>
+      </div>
+      <h3 class="feature-title">Misión</h3>
+      <p class="feature-description">Formar técnicos en enfermería con excelencia académica, ética profesional y compromiso social, preparándolos para contribuir al bienestar de la comunidad a través de la atención de calidad en el sector salud.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v2a8 8 0 1 1-8 8H2A10 10 0 1 0 12 2zm0 4v2a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6zm0 4a2 2 0 1 0 2 2 2 2 0 0 0-2-2z"/></svg></span>
+      </div>
+      <h3 class="feature-title">Visión</h3>
+      <p class="feature-description">Ser reconocidos como el referente regional en educación técnica en salud, caracterizándonos por la innovación pedagógica, la calidad de nuestros egresados y nuestro impacto positivo en el sistema sanitario local.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 13.5 10 11l2 2 3-3 4 4-2 2-1-1-3 3a3 3 0 0 1-4.2 0L8 16l-2 2-4-4 2-2 3.5 1.5zM14 7l-2-2-3 3 2 2 3-3z"/></svg></span>
+      </div>
+      <h3 class="feature-title">Valores Institucionales</h3>
+      <p class="feature-description">Respeto, compromiso, trabajo en equipo, integridad, responsabilidad social y excelencia profesional. Estos valores guían todas nuestras acciones y forman parte integral de la formación de nuestros estudiantes.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+      </div>
+      <h3 class="feature-title">Excelencia Académica</h3>
+      <p class="feature-description">Nuestro currículo está diseñado para proporcionar una formación integral que combina conocimientos teóricos sólidos con experiencia práctica, asegurando que nuestros egresados estén preparados para los desafíos del mundo laboral.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg></span>
+      </div>
+      <h3 class="feature-title">Cuerpo Docente</h3>
+      <p class="feature-description">Contamos con un equipo de profesionales altamente calificados, con amplia experiencia en el sector salud y formación pedagógica especializada, comprometidos con el desarrollo integral de nuestros estudiantes.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
+      </div>
+      <h3 class="feature-title">Infraestructura Moderna</h3>
+      <p class="feature-description">Nuestras instalaciones cuentan con laboratorios equipados con tecnología de punta, simuladores de alta fidelidad y espacios de aprendizaje diseñados para replicar entornos hospitalarios reales.</p>
+    </div>
+  </div>
+  
+  <div class="about-section">
+    <h2>Nuestro Compromiso</h2>
+    <p>Estamos comprometidos con la formación de profesionales que no solo dominen las técnicas de enfermería, sino que también desarrollen las competencias blandas necesarias para brindar una atención humanizada y de calidad. Nuestros egresados son reconocidos por su profesionalismo, ética y capacidad de trabajo en equipo.</p>
+  </div>
+</div>
+
+<script>
+  (async function(){
+    const lbl = document.getElementById('cuentaLabel');
+    const menu = document.getElementById('cuentaMenu');
+    if(!lbl || !menu) return;
+    let mod=null; try{ mod = await import('./students.js'); }catch(e){}
+    const getStudent = mod && mod.getStudent ? mod.getStudent : (id)=>null;
+    function roleInfo(){ if(sessionStorage.getItem('tp_admin')==='1') return {role:'admin'};
+      const sid=sessionStorage.getItem('tp_student_id'); if(sid) return {role:'alumno', id:sid};
+      const gid=sessionStorage.getItem('tp_guardian_id'); if(gid) return {role:'apoderado', id:gid}; return {role:null}; }
+    function myAccountHref(info){ if(info.role==='admin') return 'admin.html'; if(info.role) return 'calificaciones.html'; return 'admin.html'; }
+    function render(){
+      const info=roleInfo(); menu.innerHTML='';
+      const base = `<a href="${myAccountHref(info)}"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg></span> Mi cuenta</a>`;
+      if(info.role==='admin'){ lbl.textContent='Admin ▾'; menu.innerHTML = base + `<button id='logoutBtn'><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 17v-2h4v-2h-4V9L6 12l4 3zm2 3H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5V2H7a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h5z"/></svg></span> Cerrar sesión</button>`; }
+      else if(info.role){ const s=getStudent(info.id); const nombre=(s&&s.nombre)?s.nombre.split(' ')[0]:'Cuenta'; lbl.textContent=nombre+' ▾'; menu.innerHTML = base + `<button id='logoutBtn'><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 17v-2h4v-2h-4V9L6 12l4 3zm2 3H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5V2H7a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h5z"/></svg></span> Cerrar sesión</button>`; }
+      else { lbl.textContent='Cuenta ▾'; menu.innerHTML = base; }
+      const btn=document.getElementById('logoutBtn'); if(btn) btn.onclick=()=>{ sessionStorage.removeItem('tp_admin'); sessionStorage.removeItem('tp_student_id'); sessionStorage.removeItem('tp_guardian_id'); render(); location.href='index.html'; };
+      window.tpUpdateCuenta = render;
+    }
+    render();
+  })();
+</script>
+
+
+
+<script>/* submenu-behavior: hover intent + mobile memory */
+document.addEventListener('DOMContentLoaded', function(){
+  try{
+    var KEY = 'open_menus';
+    var openSet = new Set(JSON.parse(sessionStorage.getItem(KEY) || '[]'));
+    var items = document.querySelectorAll('.nav-item.has-sub');
+    items.forEach(function(item){
+      var btn = item.querySelector('button[data-menu-id]');
+      var arrow = btn ? btn.querySelector('.chev') : null;
+      if(!btn) return;
+      var id = btn.getAttribute('data-menu-id') || 'menu-' + Math.random().toString(36).slice(2);
+
+      // Restaurar en móvil
+      var isMobile = window.matchMedia('(max-width:720px)').matches;
+      if(isMobile && openSet.has(id)) item.classList.add('open');
+      if(arrow){ arrow.textContent = item.classList.contains('open') ? '▾' : '▸'; }
+
+      // Móvil: toggle por toque + memoria
+      btn.addEventListener('click', function(e){
+        var isMobileNow = window.matchMedia('(max-width:720px)').matches;
+        if(isMobileNow){
+          e.preventDefault();
+          item.classList.toggle('open');
+          if(item.classList.contains('open')) openSet.add(id); else openSet.delete(id);
+          sessionStorage.setItem(KEY, JSON.stringify(Array.from(openSet)));
+          if(arrow){ arrow.textContent = item.classList.contains('open') ? '▾' : '▸'; }
+        }
+      });
+
+      // Desktop: hover-intent (retardos)
+      var overTimer = null, outTimer = null;
+      function openMenu(){ item.classList.add('open'); if(arrow) arrow.textContent='▾'; }
+      function closeMenu(){ item.classList.remove('open'); if(arrow) arrow.textContent='▸'; }
+      function isDesktop(){ return window.matchMedia('(min-width:721px)').matches; }
+
+      item.addEventListener('mouseenter', function(){
+        if(!isDesktop()) return;
+        clearTimeout(outTimer);
+        overTimer = setTimeout(openMenu, 120);
+      });
+      item.addEventListener('mouseleave', function(){
+        if(!isDesktop()) return;
+        clearTimeout(overTimer);
+        outTimer = setTimeout(closeMenu, 260);
+      });
+    });
+  }catch(e){ /* no-op */ }
+});
+</script>
+
+
+<script>
+// add-enter-key: generic handler for login inputs
+document.addEventListener('DOMContentLoaded', function(){
+  function wireEnter(emailSel, passSel, btnSel){
+    var email = document.querySelector(emailSel);
+    var pass = document.querySelector(passSel);
+    var btn  = document.querySelector(btnSel);
+    if(!email || !pass || !btn) return;
+    function handler(e){
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        btn.click();
+      }
+    }
+    email.addEventListener('keydown', handler);
+    pass.addEventListener('keydown', handler);
+  }
+  // Common patterns
+  wireEnter('#email', '#pass', '#enter');     // alumno/apoderado, privado
+  wireEnter('#email', '#pass', '#btnLogin');  // admin
+});
+</script>
+
+
+<script type="module">
+  import { initAuthUI } from './auth.js';
+  initAuthUI();
+</script>
+
+<script>
+// HAMB_PATCH
+document.addEventListener('DOMContentLoaded', function(){
+  const hamb = document.getElementById('hamb');
+  const navMenu = document.getElementById('mainMenu');
+  if(hamb && navMenu){
+    hamb.addEventListener('click', function(e){
+      e.stopPropagation();
+      navMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', function(){ navMenu.classList.remove('open'); });
+  }
+});
+</script>
+
+
+<script>
+// FILTER & RNPI PATCH
+document.addEventListener('DOMContentLoaded', function(){
+  // --- Filtro por nombre/curso ---
+  var filterInput = document.getElementById('filterInput');
+  if(filterInput){
+    var grid = document.querySelector('.cards-grid') || document.querySelector('[data-grid="cards"]');
+    function normalize(t){ return (t||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+    function doFilter(){
+      var q = normalize(filterInput.value);
+      var cards = document.querySelectorAll('.student-card, .alumno-card, .exalumno-card');
+      cards.forEach(function(card){
+        var text = normalize(card.textContent);
+        card.style.display = (!q || text.indexOf(q) !== -1) ? '' : 'none';
+      });
+    }
+    filterInput.addEventListener('input', doFilter);
+  }
+
+  // --- Botones RNPI en exalumnos ---
+  var exCards = document.querySelectorAll('.exalumno-card');
+  exCards.forEach(function(card){
+    // Evitar duplicar
+    if(card.querySelector('.btn-rnpi')) return;
+    var footer = card.querySelector('.card-footer');
+    if(!footer){
+      footer = document.createElement('div');
+      footer.className = 'card-footer';
+      card.appendChild(footer);
+    }
+    var btn = document.createElement('a');
+    btn.className = 'btn-rnpi';
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.href = 'https://rnpi.superdesalud.gob.cl/#';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 1 5 5v1h1a4 4 0 1 1 0 8h-1v1a5 5 0 1 1-10 0v-1H6a4 4 0 1 1 0-8h1V7a5 5 0 0 1 5-5zm-3 14v1a3 3 0 1 0 6 0v-1H9zm9-2a2 2 0 0 0 0-4h-1v4h1zM7 14v-4H6a2 2 0 1 0 0 4h1zm3-7a3 3 0 1 0 6 0V7a3 3 0 1 0-6 0V7z"/></svg> RNPI';
+    btn.addEventListener('click', function(){
+      var rut = card.getAttribute('data-rut') || card.getAttribute('data-run') || '';
+      if(navigator.clipboard && rut){
+        navigator.clipboard.writeText(rut).catch(function(){});
+      }
+      // No podemos prellenar RNPI (SPA), abrimos home y dejamos RUT en portapapeles si existía
+    });
+    footer.appendChild(btn);
+  });
+});
+</script>
+
+</body></html>

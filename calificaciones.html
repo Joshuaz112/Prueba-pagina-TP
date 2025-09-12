@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Calificaciones | TP Enfermería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ 
+      --bg:#f8fafc; 
+      --card:#fff; 
+      --text:#0f172a; 
+      --muted:#64748b; 
+      --primary:#3b82f6; 
+      --primary-700:#1d4ed8; 
+      --primary-50:#eff6ff;
+      --success:#10b981;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --line:#e2e8f0;
+      --shadow-sm:0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-xl:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);min-height:100vh}
+    .container{max-width:1200px;margin:20px auto;padding:0 20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px;transition:all 0.3s ease;position:relative;overflow:hidden}
+    .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--success));opacity:0;transition:opacity 0.3s ease}
+    .card:hover::before{opacity:1}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border:none;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600;background:#fff;cursor:pointer;transition:all 0.3s ease;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+    .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
+    .btn:hover::before{left:100%}
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary-700));color:#fff;box-shadow:var(--shadow)}
+    .btn.primary:hover{background:linear-gradient(135deg,var(--primary-700),#1e40af);box-shadow:var(--shadow-lg)}
+    .muted{color:var(--muted)}
+
+    /* Header */
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:3000;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;border-bottom:1px solid var(--line);overflow:visible}
+    .topbar-left{display:flex;gap:12px;align-items:center}
+    .topbar-right{display:flex;gap:16px;align-items:center;position:relative;overflow:visible}
+    .icon{width:20px;height:20px;display:inline-block;vertical-align:middle;transition:all 0.3s ease}
+    .icon svg{width:100%;height:100%}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .link-icon{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:.9rem;padding:8px 12px;border-radius:8px;transition:all 0.3s ease}
+    .link-icon:hover{color:var(--primary);background:var(--primary-50);transform:translateY(-1px)}
+
+    .navbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 20px;background:rgba(255,255,255,0.8)}
+    .hamb{display:none;background:linear-gradient(135deg,var(--primary),var(--success));color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:600;transition:all 0.3s ease}
+    .hamb:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .menu{display:flex;gap:24px;align-items:center;justify-content:flex-start;position:relative}
+    .menu a{color:var(--primary-700);text-decoration:none;font-weight:600;padding:8px 16px;border-radius:8px;transition:all 0.3s ease;position:relative}
+    .menu a:hover{background:var(--primary-50);color:var(--primary);transform:translateY(-1px)}
+    .logo{display:flex;justify-content:center;transition:all 0.3s ease}
+    .logo img{height:100px;width:100px;border-radius:50%;box-shadow:var(--shadow);transition:all 0.3s ease;border:4px solid #fff}
+    .logo:hover img{transform:scale(1.05);box-shadow:var(--shadow-lg)}
+    .header-spacer{height:160px}
+
+    .nav-item{position:relative}
+    .nav-item>a,.nav-item>button{all:unset;cursor:pointer;color:var(--primary-700);font-weight:700;padding:6px 0}
+    .nav-item.has-sub>button .chev{display:inline-block;transform:rotate(0deg);transition:transform .18s ease}
+    .nav-item.has-sub.open>button .chev{transform:rotate(90deg)}
+    .submenu{display:none;position:absolute;top:32px;left:0;background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px rgba(2,6,23,.12);border-radius:12px;padding:8px;min-width:220px;z-index:5000}
+    .submenu a{display:block;padding:8px 10px;border-radius:8px;color:#0f172a;text-decoration:none}
+    .submenu a:hover{background:#f1f5f9}
+    .nav-item.has-sub.open>.submenu{display:block}
+    @media(hover:hover) and (pointer:fine){ .nav-item.has-sub:hover>.submenu{display:block} }
+
+    #nav-user{position:relative;margin-left:8px}
+    #nav-user .submenu{right:0;left:auto;top:32px}
+
+    @media(max-width:900px){ .logo img{height:96px;width:96px} .header-spacer{height:148px} }
+    @media(max-width:720px){
+      .navbar{grid-template-columns:auto 1fr auto}
+      .hamb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;cursor:pointer}
+      .menu{display:none;position:absolute;top:124px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px;flex-direction:column;gap:12px;z-index:3050}
+      .menu.open{display:flex}
+      .logo{grid-column:2}
+      .topbar{flex-wrap:wrap;gap:8px}
+      .topbar-right{margin-left:auto}
+      .submenu{position:static;border:1px solid var(--line);border-radius:10px;box-shadow:none;margin-top:6px}
+      #nav-user .submenu{position:static;right:auto;left:auto;top:auto}
+    }
+
+    header.hero{background:linear-gradient(135deg,var(--primary) 0%,var(--success) 50%,var(--warning) 100%);color:#fff;padding:60px 20px;text-align:center;position:relative;overflow:hidden;margin-bottom:40px}
+    header.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;opacity:0.3}
+    header.hero h1{position:relative;z-index:1;font-size:3rem;font-weight:800;margin:0;text-shadow:0 2px 4px rgba(0,0,0,0.1);animation:fadeInUp 0.8s ease-out}
+    header.hero p{position:relative;z-index:1;font-size:1.3rem;opacity:0.9;margin:16px 0 0 0;max-width:600px;margin-left:auto;margin-right:auto;animation:fadeInUp 0.8s ease-out 0.2s both}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    
+    /* Estilos para las tablas de calificaciones */
+    tbody tr{transition:all 0.2s ease}
+    tbody tr:hover{background:linear-gradient(135deg,#f8fafc,#eff6ff);transform:scale(1.01)}
+    tbody td{padding:16px 20px;border-bottom:1px solid var(--line);transition:all 0.2s ease}
+    tbody td:first-child{font-weight:600;color:var(--primary-700)}
+    tbody td:not(:first-child){text-align:center;font-weight:600}
+    tbody td:last-child{background:var(--primary-50);color:var(--primary-700);font-weight:700;font-size:1.1rem}
+    
+    @media print{ 
+      .site-header,.btn,.hamb,.menu{display:none!important}
+      .card{box-shadow:none;border:1px solid #e5e7eb;page-break-inside:avoid}
+      header.hero{background:#fff;color:#000;border-bottom:2px solid #e5e7eb;padding:20px 0;margin-bottom:20px}
+      header.hero h1{font-size:2rem;margin:0}
+      header.hero p{font-size:1rem;margin:8px 0 0 0}
+      header.hero div{display:none}
+      
+      /* Mostrar elementos específicos del PDF */
+      .pdf-header,.student-info,.final-average,.pdf-footer{display:block!important}
+      
+      /* Estilos específicos para el PDF */
+      body{background:#fff;color:#000;font-size:12px;line-height:1.4}
+      .container{max-width:100%;margin:0;padding:0}
+      
+      /* Header del PDF */
+      .pdf-header{text-align:center;margin-bottom:30px;padding:20px 0;border-bottom:3px solid #3b82f6}
+      .pdf-header h1{color:#1d4ed8;font-size:2.5rem;margin:0;font-weight:800}
+      .pdf-header h2{color:#374151;font-size:1.5rem;margin:10px 0 0 0;font-weight:600}
+      .pdf-header p{color:#6b7280;font-size:1.1rem;margin:8px 0 0 0}
+      
+      /* Información del estudiante */
+      .student-info{background:#f8fafc;padding:20px;border-radius:8px;margin-bottom:25px;border-left:4px solid #3b82f6}
+      .student-info h3{color:#1d4ed8;font-size:1.3rem;margin:0 0 10px 0;font-weight:700}
+      .student-info p{color:#374151;margin:5px 0;font-size:1rem}
+      
+      /* Tabla de calificaciones mejorada */
+      .grades-table{width:100%;border-collapse:collapse;margin-top:20px;background:#fff}
+      .grades-table thead{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff}
+      .grades-table thead th{padding:15px 12px;text-align:center;font-weight:700;font-size:0.9rem;letter-spacing:0.5px;border:1px solid #1e40af}
+      .grades-table tbody tr:nth-child(even){background:#f8fafc}
+      .grades-table tbody tr:hover{background:#e0f2fe}
+      .grades-table tbody td{padding:12px;text-align:center;border:1px solid #e5e7eb;font-weight:600}
+      .grades-table tbody td:first-child{text-align:left;font-weight:700;color:#1d4ed8;background:#f1f5f9}
+      .grades-table tbody td:last-child{background:#dbeafe;color:#1d4ed8;font-weight:800;font-size:1.1rem}
+      
+      /* Promedio general destacado */
+      .final-average{text-align:center;margin:25px 0;padding:20px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-radius:10px;border:2px solid #3b82f6}
+      .final-average h3{color:#1d4ed8;font-size:1.4rem;margin:0 0 10px 0;font-weight:700}
+      .final-average .average-number{font-size:2.5rem;font-weight:800;color:#1d4ed8;margin:0}
+      
+      /* Footer del PDF */
+      .pdf-footer{margin-top:40px;padding-top:20px;border-top:2px solid #e5e7eb;text-align:center;color:#6b7280;font-size:0.9rem}
+      
+      /* Evitar saltos de página en elementos importantes */
+      .student-info,.final-average{page-break-inside:avoid}
+      .grades-table{page-break-inside:auto}
+      .grades-table thead{display:table-header-group}
+      .grades-table tbody tr{page-break-inside:avoid}
+    }
+  
+    /* RESPONSIVE PATCH */
+    .topbar-right{ position:relative; overflow:visible; }
+    #nav-user{ position:relative; }
+    #nav-user .submenu{ right:0; left:auto; top:32px; z-index:5000; }
+    @media (max-width: 1200px){
+      .navbar{ grid-template-columns: auto 1fr auto !important; }
+    }
+    @media (max-width: 1024px){
+      .logo img{ height:96px; width:96px; }
+      .header-spacer{ height:148px; }
+    }
+    @media (max-width: 900px){
+      .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
+      .menu.open{ display:flex !important; }
+    }
+    @media (max-width: 720px){
+      #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; }
+    }
+  </style>
+
+  <script>
+    function setupHeader(){
+      // Menú hamburguesa
+      const hamb=document.getElementById('hamb');
+      const navMenu=document.getElementById('mainMenu');
+      if(hamb&&navMenu){
+        hamb.addEventListener('click',(e)=>{e.stopPropagation();navMenu.classList.toggle('open');});
+      }
+      // Desplegables
+      const dropdowns=document.querySelectorAll('.nav-item.has-sub');
+      dropdowns.forEach(drop=>{
+        const btn=drop.querySelector('button');
+        if(btn){
+          btn.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            const wasOpen=drop.classList.contains('open');
+            dropdowns.forEach(d=>d.classList.remove('open'));
+            if(!wasOpen) drop.classList.add('open');
+          });
+        }
+      });
+      document.addEventListener('click',()=>{ if(navMenu) navMenu.classList.remove('open'); dropdowns.forEach(d=>d.classList.remove('open')); });
+    }
+    document.addEventListener('DOMContentLoaded',setupHeader);
+  </script>
+</head>
+<body>
+
+  <!-- Header integrado -->
+  <div class="site-header">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamb" id="hamb" aria-label="Abrir menú">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
+        </button>
+      </div>
+      <div class="topbar-right">
+        <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
+        <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
+        <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
+        <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
+
+        <!-- Cuenta (dropdown; lo rellena auth.js si lo usas) -->
+        <div id="nav-user" class="nav-item has-sub">
+          <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
+          <div class="submenu" id="accountMenu" style="min-width:200px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar">
+      <nav id="mainMenu" class="menu">
+        <a href="index.html">Inicio</a>
+        <div class="nav-item has-sub">
+          <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
+          <div class="submenu">
+            <a href="nosotros.html">Nosotros</a>
+            <a href="programa.html">Programa</a>
+            <a href="convenios.html">Convenios</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+        <a href="docentes.html">Docentes</a>
+        <div class="nav-item has-sub">
+          <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
+          <div class="submenu">
+            <!-- Ajusté rutas para que apunten a estas páginas -->
+            <a href="alumnos.html">Alumnos</a>
+            <a href="exalumnos.html">Exalumnos</a>
+          </div>
+        </div>
+              <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
+      </nav>
+      <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="header-spacer"></div>
+
+  <header class="hero">
+    <h1>Mis Calificaciones</h1>
+    <p>Seguimiento académico y rendimiento estudiantil</p>
+    <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+        <span>Rendimiento Académico</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+        <span>Seguimiento Personalizado</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
+        <span>Reportes Detallados</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="card" style="text-align:center;margin-bottom:32px">
+      <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--warning),#f59e0b);border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg)">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+      </div>
+      <h2 style="margin:0 0 16px 0;color:var(--primary-700);font-size:2rem">Rendimiento Académico</h2>
+      <p style="font-size:1.1rem;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.6">Consulta tus calificaciones, promedios y el estado de tu rendimiento académico en tiempo real.</p>
+    </div>
+    
+    <div class="card" id="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid var(--primary-50)">
+        <div>
+          <h2 id="stuName" style="margin:0;color:var(--primary-700);font-size:1.75rem">Alumno</h2>
+          <p class="muted" style="margin:8px 0 0 0;font-size:1rem">Promedio general: <strong id="promGeneral" style="color:var(--primary);font-size:1.2rem">0.0</strong></p>
+        </div>
+        <button class="btn primary" onclick="updatePDFDataAndPrint()" style="display:inline-flex;align-items:center;gap:8px">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg></span>
+          Guardar como PDF
+        </button>
+      </div>
+      
+      <!-- Elementos específicos para el PDF (solo visibles al imprimir) -->
+      <div class="pdf-header" style="display:none">
+        <h1>REPORTE DE CALIFICACIONES</h1>
+        <h2>Liceo Técnico Profesional</h2>
+        <p>Período Académico 2025</p>
+      </div>
+      
+      <div class="student-info" style="display:none">
+        <h3>Información del Estudiante</h3>
+        <p><strong>Nombre:</strong> <span id="pdfStuName">Alumno</span></p>
+        <p><strong>Fecha de emisión:</strong> <span id="pdfDate"></span></p>
+        <p><strong>Promedio General:</strong> <span id="pdfPromGeneral">0.0</span></p>
+      </div>
+      
+      <div style="overflow-x:auto;border-radius:12px;box-shadow:var(--shadow)">
+        <table class="grades-table" style="width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden">
+          <thead>
+            <tr style="background:linear-gradient(135deg,#f8fafc,#e2e8f0)">
+              <th style="padding:16px 20px;color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;text-align:left;border-bottom:2px solid var(--primary)">ASIGNATURA</th>
+              <th style="padding:16px 20px;color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;text-align:center;border-bottom:2px solid var(--primary)">N1</th>
+              <th style="padding:16px 20px;color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;text-align:center;border-bottom:2px solid var(--primary)">N2</th>
+              <th style="padding:16px 20px;color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;text-align:center;border-bottom:2px solid var(--primary)">N3</th>
+              <th style="padding:16px 20px;color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;text-align:center;border-bottom:2px solid var(--primary)">N4</th>
+              <th style="padding:16px 20px;color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;text-align:center;border-bottom:2px solid var(--primary)">N5</th>
+              <th style="padding:16px 20px;color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;text-align:center;border-bottom:2px solid var(--primary)">PROMEDIO</th>
+            </tr>
+          </thead>
+          <tbody id="tbody" style="background:#fff"></tbody>
+        </table>
+      </div>
+      
+      <div class="final-average" style="display:none">
+        <h3>Promedio General</h3>
+        <p class="average-number" id="pdfFinalAverage">0.0</p>
+      </div>
+      
+      <div class="pdf-footer" style="display:none">
+        <p>Este documento ha sido generado automáticamente por el sistema de gestión académica del Liceo Técnico Profesional.</p>
+        <p>Para consultas o aclaraciones, contactar a la administración del establecimiento.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { requireAuth, getSession } from './auth.js';
+    import { currentStudentId, getStudent, listSubjects, getGrade, finalFor } from './students.js';
+    
+    // Requerir autenticación
+    requireAuth('login.html');
+    
+    const ses = getSession();
+    const q = (s)=>document.querySelector(s);
+
+    function tryResolveStudentId(){
+      try{
+        const id = currentStudentId && currentStudentId();
+        if (id) return id;
+      }catch{}
+      return null;
+    }
+
+    function renderNotes(){
+      const id = tryResolveStudentId();
+      if(!id){
+        const tb = q('#tbody');
+        if (tb) tb.innerHTML = `<tr><td colspan="7" class="muted">No fue posible asociar la cuenta al alumno. Pide al administrador que vincule tu usuario con un estudiante.</td></tr>`;
+        q('#promGeneral') && (q('#promGeneral').textContent = '0');
+        q('#stuName') && (q('#stuName').textContent = ses?.name || 'Usuario');
+        return;
+      }
+      
+      const stu = getStudent(id);
+      if (q('#stuName')) q('#stuName').textContent = stu?.nombre || ses?.name || 'Alumno';
+
+      // Actualizar elementos del PDF
+      const pdfStuName = q('#pdfStuName');
+      const pdfPromGeneral = q('#pdfPromGeneral');
+      const pdfFinalAverage = q('#pdfFinalAverage');
+      const pdfDate = q('#pdfDate');
+      
+      if(pdfStuName) pdfStuName.textContent = stu?.nombre || ses?.name || 'Alumno';
+      if(pdfDate) pdfDate.textContent = new Date().toLocaleDateString('es-CL', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      const subs = listSubjects();
+      let sum=0, count=0;
+      const rows = subs.map(sub=>{
+        const rec = getGrade(id, sub.id);
+        const n = (rec.n||[]).slice(0, sub.nCount);
+        while(n.length < sub.nCount) n.push(0);
+        while(n.length < 5) n.push('');
+        const res = finalFor(id, sub);
+        if(res.promedio>0){ sum += res.promedio; count++; }
+        return `<tr><td><strong>${sub.nombre}</strong></td>
+          <td>${n[0]||0}</td><td>${n[1]||0}</td><td>${n[2]||0}</td><td>${n[3]||0}</td><td>${n[4]||0}</td>
+          <td><strong>${res.promedio}</strong></td></tr>`;
+      }).join('');
+      
+      const tbody = q('#tbody');
+      if (tbody) tbody.innerHTML = rows || `<tr><td colspan='7' class='muted'>Sin asignaturas</td></tr>`;
+      
+      const finalAverage = count ? (sum/count).toFixed(1) : 0;
+      const avgEl = q('#promGeneral');
+      if (avgEl) avgEl.textContent = finalAverage;
+      
+      // Actualizar elementos del PDF
+      if(pdfPromGeneral) pdfPromGeneral.textContent = finalAverage;
+      if(pdfFinalAverage) pdfFinalAverage.textContent = finalAverage;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderNotes);
+
+    // Función para actualizar datos del PDF antes de imprimir
+    window.updatePDFDataAndPrint = function() {
+      // Actualizar fecha actual
+      const pdfDate = document.getElementById('pdfDate');
+      if (pdfDate) {
+        pdfDate.textContent = new Date().toLocaleDateString('es-CL', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      }
+      
+      // Actualizar nombre del usuario
+      const sessionData = getSession();
+      const pdfStuName = document.getElementById('pdfStuName');
+      if (pdfStuName) {
+        pdfStuName.textContent = sessionData?.name || 'Alumno';
+      }
+      
+      // Actualizar promedio general
+      const promGeneral = document.getElementById('promGeneral');
+      const pdfPromGeneral = document.getElementById('pdfPromGeneral');
+      const pdfFinalAverage = document.getElementById('pdfFinalAverage');
+      
+      if (promGeneral && pdfPromGeneral && pdfFinalAverage) {
+        const average = promGeneral.textContent;
+        pdfPromGeneral.textContent = average;
+        pdfFinalAverage.textContent = average;
+      }
+      
+      // Imprimir
+      window.print();
+    }
+  </script>
+
+  <!-- Inicializar UI de autenticación -->
+  <script type="module">
+    import { initAuthUI } from './auth.js';
+    initAuthUI();
+  </script>
+
+</body>
+</html>

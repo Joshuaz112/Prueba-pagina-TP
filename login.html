@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Inicio | TP Enfermería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{ 
+      --bg:#f8fafc; 
+      --card:#fff; 
+      --text:#0f172a; 
+      --muted:#64748b; 
+      --primary:#3b82f6; 
+      --primary-700:#1d4ed8; 
+      --primary-50:#eff6ff;
+      --success:#10b981;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+      --line:#e2e8f0;
+      --shadow-sm:0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-xl:0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);min-height:100vh}
+    .container{max-width:1200px;margin:20px auto;padding:0 20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px;transition:all 0.3s ease;position:relative;overflow:hidden}
+    .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--success));opacity:0;transition:opacity 0.3s ease}
+    .card:hover::before{opacity:1}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border:none;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600;background:#fff;cursor:pointer;transition:all 0.3s ease;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+    .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
+    .btn:hover::before{left:100%}
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary-700));color:#fff;box-shadow:var(--shadow)}
+    .btn.primary:hover{background:linear-gradient(135deg,var(--primary-700),#1e40af);box-shadow:var(--shadow-lg)}
+    .muted{color:var(--muted)}
+
+    /* Header */
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:3000;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;border-bottom:1px solid var(--line);overflow:visible}
+    .topbar-left{display:flex;gap:12px;align-items:center}
+    .topbar-right{display:flex;gap:16px;align-items:center;position:relative;overflow:visible}
+
+    .icon{width:20px;height:20px;display:inline-block;vertical-align:middle;transition:all 0.3s ease}
+    .icon svg{width:100%;height:100%}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .link-icon{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:.9rem;padding:8px 12px;border-radius:8px;transition:all 0.3s ease}
+    .link-icon:hover{color:var(--primary);background:var(--primary-50);transform:translateY(-1px)}
+
+    /* Navbar responsive */
+    .navbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 20px;background:rgba(255,255,255,0.8)}
+    .hamb{display:none;background:linear-gradient(135deg,var(--primary),var(--success));color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:600;transition:all 0.3s ease}
+    .hamb:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+    .menu{display:flex;gap:24px;align-items:center;justify-content:flex-start;position:relative}
+    .menu a{color:var(--primary-700);text-decoration:none;font-weight:600;padding:8px 16px;border-radius:8px;transition:all 0.3s ease;position:relative}
+    .menu a:hover{background:var(--primary-50);color:var(--primary);transform:translateY(-1px)}
+    .logo{display:flex;justify-content:center;transition:all 0.3s ease}
+    .logo img{height:100px;width:100px;border-radius:50%;box-shadow:var(--shadow);transition:all 0.3s ease;border:4px solid #fff}
+    .logo:hover img{transform:scale(1.05);box-shadow:var(--shadow-lg)}
+    .header-spacer{height:160px}
+
+    /* Dropdown + hover */
+    .nav-item{position:relative}
+    .nav-item>a,.nav-item>button{all:unset;cursor:pointer;color:var(--primary-700);font-weight:700;padding:6px 0}
+    .nav-item.has-sub>button .chev{display:inline-block;transform:rotate(0deg);transition:transform .18s ease}
+    .nav-item.has-sub.open>button .chev{transform:rotate(90deg)}
+    .submenu{display:none;position:absolute;top:32px;left:0;background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px rgba(2,6,23,.12);border-radius:12px;padding:8px;min-width:220px;z-index:5000}
+    .submenu a{display:block;padding:8px 10px;border-radius:8px;color:#0f172a;text-decoration:none}
+    .submenu a:hover{background:#f1f5f9}
+    .nav-item.has-sub.open>.submenu{display:block}
+    @media(hover:hover) and (pointer:fine){ .nav-item.has-sub:hover>.submenu{display:block} }
+
+    /* Alinear el menú de Cuenta al borde derecho del botón */
+    #nav-user{position:relative;margin-left:8px}
+    #nav-user .submenu{right:0;left:auto;top:32px}
+
+    /* Mobile */
+    @media(max-width:900px){ .logo img{height:96px;width:96px} .header-spacer{height:148px} }
+    @media(max-width:720px){
+      .navbar{grid-template-columns:auto 1fr auto}
+      .hamb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;cursor:pointer}
+      .menu{display:none;position:absolute;top:124px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px;flex-direction:column;gap:12px;z-index:3050}
+      .menu.open{display:flex}
+      .logo{grid-column:2}
+      .topbar{flex-wrap:wrap;gap:8px}
+      .topbar-right{margin-left:auto}
+      .submenu{position:static;border:1px solid var(--line);border-radius:10px;box-shadow:none;margin-top:6px}
+      #nav-user .submenu{position:static;right:auto;left:auto;top:auto}
+    }
+
+    header.hero{background:linear-gradient(135deg,var(--primary) 0%,var(--success) 50%,var(--warning) 100%);color:#fff;padding:60px 20px;text-align:center;position:relative;overflow:hidden;margin-bottom:40px}
+    header.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;opacity:0.3}
+    header.hero h1{position:relative;z-index:1;font-size:3rem;font-weight:800;margin:0;text-shadow:0 2px 4px rgba(0,0,0,0.1);animation:fadeInUp 0.8s ease-out}
+    header.hero p{position:relative;z-index:1;font-size:1.3rem;opacity:0.9;margin:16px 0 0 0;max-width:600px;margin-left:auto;margin-right:auto;animation:fadeInUp 0.8s ease-out 0.2s both}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @media print{ .site-header,.btn,.hamb,.menu{display:none!important}; .card{box-shadow:none;border:0} header.hero{background:#fff;color:#000;border-bottom:2px solid #e5e7eb} }
+  
+    /* RESPONSIVE PATCH */
+    .topbar-right{ position:relative; overflow:visible; }
+    #nav-user{ position:relative; }
+    #nav-user .submenu{ right:0; left:auto; top:32px; z-index:5000; }
+    @media (max-width: 1200px){
+      .navbar{ grid-template-columns: auto 1fr auto !important; }
+    }
+    @media (max-width: 1024px){
+      .logo img{ height:96px; width:96px; }
+      .header-spacer{ height:148px; }
+    }
+    @media (max-width: 900px){
+      .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
+      .menu.open{ display:flex !important; }
+    }
+    @media (max-width: 720px){
+      #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; }
+    }
+        
+
+/* SEARCH & RNPI PATCH */
+.search-bar{display:flex;gap:8px;align-items:center;margin:10px 0 14px 0}
+.search-bar input[type="search"]{flex:1;min-width:220px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px}
+.btn-rnpi{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;text-decoration:none;color:#0f172a;font-weight:700}
+.btn-rnpi svg{width:16px;height:16px}
+.card-footer{margin-top:8px}
+
+</style>
+  <script>
+    function setupHeader(){
+      // Menú hamburguesa
+      const hamb=document.getElementById('hamb');
+      const navMenu=document.getElementById('mainMenu');
+      if(hamb&&navMenu){
+        hamb.addEventListener('click',(e)=>{e.stopPropagation();navMenu.classList.toggle('open');});
+      }
+      // Desplegables
+      const dropdowns=document.querySelectorAll('.nav-item.has-sub');
+      dropdowns.forEach(drop=>{
+        const btn=drop.querySelector('button');
+        if(btn){
+          btn.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            const wasOpen=drop.classList.contains('open');
+            dropdowns.forEach(d=>d.classList.remove('open'));
+            if(!wasOpen) drop.classList.add('open');
+          });
+        }
+      });
+      document.addEventListener('click',()=>{ if(navMenu) navMenu.classList.remove('open'); dropdowns.forEach(d=>d.classList.remove('open')); });
+    }
+    document.addEventListener('DOMContentLoaded',setupHeader);
+  </script>
+</head>
+<body>
+
+  <div class="site-header">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamb" id="hamb" aria-label="Abrir menú">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
+        </button>
+      </div>
+      <div class="topbar-right">
+        <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
+        <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
+        <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
+        <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
+
+        <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
+        <div id="nav-user" class="nav-item has-sub">
+          <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
+          <div class="submenu" id="accountMenu" style="min-width:200px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar">
+      <nav id="mainMenu" class="menu">
+        <a href="index.html">Inicio</a>
+        <div class="nav-item has-sub">
+          <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
+          <div class="submenu">
+            <a href="nosotros.html">Nosotros</a>
+            <a href="programa.html">Programa</a>
+            <a href="convenios.html">Convenios</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+        <a href="docentes.html">Docentes</a>
+         <div class="nav-item has-sub">
+          <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
+          <div class="submenu">
+            <a href="alumnos.html">Alumnos</a>
+            <a href="exalumnos.html">Exalumnos</a>
+          </div>
+        </div>
+              <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
+      </nav>
+      <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="header-spacer"></div>
+
+  <!-- Contenido -->
+  <main class="login-container">
+    <div class="login-box">
+      <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);animation:pulse 2s infinite">
+        <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+      </div>
+      <h2>Acceso al Portal</h2>
+      <p>Ingresa tus credenciales para acceder a tu cuenta</p>
+      <form id="loginForm" action="#" method="post" novalidate>
+        <div class="form-group">
+          <label for="username">Correo electrónico o usuario</label>
+          <input type="text" id="username" name="username" autocomplete="username email" placeholder="tu@correo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="login-btn">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v12z"/></svg></span>
+          Iniciar Sesión
+        </button>
+      </form>
+      <div class="forgot-password">
+        <a href="#">¿Olvidaste tu contraseña?</a>
+      </div>
+      <div style="margin-top:24px;padding:16px;background:var(--primary-50);border-radius:12px;border-left:4px solid var(--primary)">
+        <p style="margin:0;font-size:0.9rem;color:var(--primary-700)">
+          <strong>¿No tienes cuenta?</strong><br>
+          Contacta al administrador para obtener acceso al portal.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Auth -->
+  <script type="module">
+    import { signIn, initAuthUI, isLoggedIn } from './auth.js';
+
+    // Si ya está logueado, redirige fuera de /login
+    if (isLoggedIn()) {
+      const next = new URLSearchParams(location.search).get('next') || 'index.html';
+      location.href = next;
+    }
+
+    // Manejo del submit
+    const form = document.getElementById('loginForm');
+    const userEl = document.getElementById('username');
+    const passEl = document.getElementById('password');
+
+    async function doLogin(e){
+      e && e.preventDefault();
+      const email = (userEl?.value||'').trim();
+      const pass  = (passEl?.value||'').trim();
+      const ses = await signIn(email, pass);
+      if(!ses){ alert('Credenciales inválidas'); return; }
+      const next = new URLSearchParams(location.search).get('next') || 'index.html';
+      location.href = next;
+    }
+    form?.addEventListener('submit', doLogin);
+
+    // Pinta menú de cuenta / calificaciones visible según sesión
+    initAuthUI();
+  </script>
+
+<script type="module">import { initAuthUI } from "./auth.js"; document.addEventListener("DOMContentLoaded", initAuthUI);</script>
+</body>
+</html>
