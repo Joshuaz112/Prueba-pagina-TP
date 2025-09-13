@@ -196,6 +196,10 @@
     .btn-group{display:flex;gap:8px;flex-wrap:wrap}
     .btn-sm{padding:8px 12px;font-size:0.85rem;position:relative;z-index:2}
     .btn-lg{padding:16px 24px;font-size:1.1rem;position:relative;z-index:2}
+    /* Branding */
+    .brand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .brand-card{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px}
+    .brand-preview{width:96px;height:96px;border-radius:12px;object-fit:contain;background:#fff;border:4px solid #fff;box-shadow:var(--shadow-lg)}
     
     /* Botones en tablas */
     .table-actions .btn{position:relative;z-index:2}
@@ -481,6 +485,7 @@
   <div class="admin-tabs">
     <button class="tab active" id="tab-general">General</button>
     <button class="tab" id="tab-exalumnos">Ex alumnos</button>
+    <button class="tab" id="tab-branding">Branding</button>
   </div>
 
   <section id="general">
@@ -638,6 +643,41 @@
       </div>
     </div>
   </section>
+
+  <section id="branding" style="display:none">
+    <div class="section-header">
+      <h2>Branding de Credencial</h2>
+      <p class="muted">Administra los logos que se muestran en la credencial</p>
+    </div>
+    <div class="brand-grid">
+      <div class="brand-card">
+        <h4 style="margin:0 0 12px 0;color:var(--primary-700)">Logo Izquierdo (Liceo)</h4>
+        <img id="prevLeft" class="brand-preview" alt="Vista previa" src="logo-liceo.webp">
+        <div style="margin-top:12px">
+          <label class="btn" for="fileLeft" style="cursor:pointer">Cargar archivo</label>
+          <input id="fileLeft" type="file" accept="image/*" style="display:none">
+        </div>
+        <div style="margin-top:8px">
+          <input id="urlLeft" placeholder="https://... o ruta local" style="width:100%">
+        </div>
+      </div>
+      <div class="brand-card">
+        <h4 style="margin:0 0 12px 0;color:var(--primary-700)">Logo Derecho (TP)</h4>
+        <img id="prevRight" class="brand-preview" alt="Vista previa" src="logo-tp.webp">
+        <div style="margin-top:12px">
+          <label class="btn" for="fileRight" style="cursor:pointer">Cargar archivo</label>
+          <input id="fileRight" type="file" accept="image/*" style="display:none">
+        </div>
+        <div style="margin-top:8px">
+          <input id="urlRight" placeholder="https://... o ruta local" style="width:100%">
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:16px;justify-content:flex-end">
+      <button id="btnBrandReset" class="btn">Restablecer</button>
+      <button id="btnBrandSave" class="btn primary">Guardar cambios</button>
+    </div>
+  </section>
 </div>
 
 <dialog id="editStudent"><div class="sheet" style="padding:16px">
@@ -664,8 +704,10 @@
 
 <script type="module" src="students.js"></script>
 <script type="module" src="auth.js"></script>
+<script type="module" src="branding.js"></script>
 <script type="module">
 import { initAuthUI } from "./auth.js";
+import { getBranding, setBranding, resetBranding } from './branding.js';
 
   // --- Script de autenticación y lógica de la página ---
   document.addEventListener('DOMContentLoaded', async function() {
@@ -724,11 +766,19 @@ import { initAuthUI } from "./auth.js";
     }
 
     // Tabs de admin
-    const tGen = $('#tab-general'), tEx = $('#tab-exalumnos');
-    const sGen = $('#general'), sEx = $('#exalumnos');
-    if (tGen && tEx) {
-      tGen.onclick = () => { tGen.classList.add('active'); tEx.classList.remove('active'); sGen.style.display = 'block'; sEx.style.display = 'none'; };
-      tEx.onclick = () => { tEx.classList.add('active'); tGen.classList.remove('active'); sEx.style.display = 'block'; sGen.style.display = 'none'; };
+    const tGen = $('#tab-general'), tEx = $('#tab-exalumnos'), tBr = $('#tab-branding');
+    const sGen = $('#general'), sEx = $('#exalumnos'), sBr = $('#branding');
+    function setActive(tab){
+      [tGen,tEx,tBr].forEach(b=> b && b.classList.remove('active'));
+      tab && tab.classList.add('active');
+      sGen.style.display = (tab===tGen)?'block':'none';
+      sEx.style.display = (tab===tEx)?'block':'none';
+      sBr.style.display = (tab===tBr)?'block':'none';
+    }
+    if (tGen && tEx && tBr) {
+      tGen.onclick = () => setActive(tGen);
+      tEx.onclick = () => setActive(tEx);
+      tBr.onclick = () => { setActive(tBr); loadBrandingUI(); };
     }
 
     // --- Lógica de Autenticación ---
@@ -751,8 +801,62 @@ import { initAuthUI } from "./auth.js";
         adminPanel.style.display = 'block';
         document.getElementById('statsPanel').style.display = 'grid';
         updateStats();
+        // Inicializar branding UI por si el admin entra directo
+        loadBrandingUI();
       }
     }
+    // --- Branding ---
+    const prevLeft = document.getElementById('prevLeft');
+    const prevRight = document.getElementById('prevRight');
+    const urlLeft = document.getElementById('urlLeft');
+    const urlRight = document.getElementById('urlRight');
+    const fileLeft = document.getElementById('fileLeft');
+    const fileRight = document.getElementById('fileRight');
+    const btnBrandSave = document.getElementById('btnBrandSave');
+    const btnBrandReset = document.getElementById('btnBrandReset');
+
+    function loadBrandingUI(){
+      try{
+        const b = getBranding();
+        if (prevLeft) prevLeft.src = b.logoLeftUrl;
+        if (prevRight) prevRight.src = b.logoRightUrl;
+        if (urlLeft) urlLeft.value = b.logoLeftUrl || '';
+        if (urlRight) urlRight.value = b.logoRightUrl || '';
+      }catch(err){ console.error(err); }
+    }
+
+    async function readFileAsDataURL(file) {
+      return new Promise((res, rej) => {
+        const fr = new FileReader();
+        fr.onload = () => res(fr.result);
+        fr.onerror = rej;
+        fr.readAsDataURL(file);
+      });
+    }
+
+    fileLeft && (fileLeft.onchange = async (e)=>{
+      const f = e.target.files?.[0]; if(!f) return;
+      try{ const data = await readFileAsDataURL(f); if (prevLeft) prevLeft.src = data; if (urlLeft) urlLeft.value = data; }catch{}
+    });
+    fileRight && (fileRight.onchange = async (e)=>{
+      const f = e.target.files?.[0]; if(!f) return;
+      try{ const data = await readFileAsDataURL(f); if (prevRight) prevRight.src = data; if (urlRight) urlRight.value = data; }catch{}
+    });
+
+    urlLeft && (urlLeft.oninput = (e)=>{ const v = (e.target.value||'').trim(); if (prevLeft && v) prevLeft.src = v; });
+    urlRight && (urlRight.oninput = (e)=>{ const v = (e.target.value||'').trim(); if (prevRight && v) prevRight.src = v; });
+
+    btnBrandSave && (btnBrandSave.onclick = ()=>{
+      const leftUrl = (urlLeft?.value||'').trim();
+      const rightUrl = (urlRight?.value||'').trim();
+      setBranding({ logoLeftUrl: leftUrl || 'logo-liceo.webp', logoRightUrl: rightUrl || 'logo-tp.webp' });
+      alert('Branding guardado. Las credenciales usarán los nuevos logos.');
+    });
+    btnBrandReset && (btnBrandReset.onclick = ()=>{
+      resetBranding();
+      loadBrandingUI();
+      alert('Branding restablecido a valores por defecto.');
+    });
 
     function updateStats() {
       const students = listStudents() || [];
