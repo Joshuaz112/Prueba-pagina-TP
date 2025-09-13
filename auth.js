@@ -14,8 +14,8 @@ export async function signIn(email, pass){
   const e = (email||'').trim().toLowerCase();
   const p = (pass||'').trim();
 
-  // Admin compatibility: accept classic credentials OR any email containing "admin"
-  if ((e==='admin@liceo.cl' && p==='tp2025') || e.includes('admin')){
+  // Admin compatibility: cualquier email que contenga "admin" debe usar la contraseña oficial
+  if (e.includes('admin') && p==='tp2025'){
     const session = { email, role: 'admin', name: (email.split('@')[0]||'Admin') };
     sessionStorage.setItem(KEY, JSON.stringify(session));
     return session;
@@ -65,7 +65,9 @@ export function requireAuth(loginUrl='login.html'){
   }
 }
 
-// Rellena el dropdown "Cuenta": si no hay sesión -> link a login; si hay -> Mi cuenta / Cerrar sesión
+// Rellena el dropdown "Cuenta":
+// - Sin sesión -> enlace a login.
+// - Con sesión -> enlaces a Inicio, Calificaciones, Mi Credencial y Cerrar sesión (más Admin si aplica).
 export function initAuthUI(){
   const ses = getSession();
 
