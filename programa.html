@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Inicio | TP Enfermería</title>
+  <title>Programa | TP Enfermería</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo-tp.webp">
   <style>
     :root{ 
       --bg:#f8fafc; 
@@ -190,6 +191,7 @@
           </div>
         </div>
         <a href="docentes.html">Docentes</a>
+        <a id="nav-calif" href="calificaciones.html" style="display:none">Calificaciones</a>
          <div class="nav-item has-sub">
           <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
           <div class="submenu">
@@ -348,6 +350,30 @@
     <p>Al completar exitosamente el programa, los estudiantes obtienen el título de <strong>Técnico en Enfermería</strong>, certificado por el Ministerio de Educación, que los habilita para ejercer profesionalmente en el sector salud tanto en el ámbito público como privado.</p>
   </div>
 </div>
+
+<footer style="background:#fff;border-top:1px solid #e2e8f0;margin-top:40px">
+  <div style="max-width:1200px;margin:0 auto;padding:20px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
+      <div style="display:flex;gap:12px;align-items:center">
+        <img src="logo-tp.webp" alt="TP" style="height:40px;width:40px;border-radius:8px;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.05)"/>
+        <div style="color:#64748b;font-size:.9rem">
+          <strong style="color:#0f172a">Liceo TP Enfermería</strong><br>
+          Comprometidos con la excelencia y la formación integral.
+        </div>
+      </div>
+      <nav>
+        <a href="index.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Inicio</a>
+        <a href="nosotros.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Nosotros</a>
+        <a href="programa.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Programa</a>
+        <a href="convenios.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Convenios</a>
+        <a href="contacto.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Contacto</a>
+        <a href="calificaciones.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Calificaciones</a>
+      </nav>
+      <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
+    </div>
+  </div>
+</footer>
+<script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
 
 <script>
   (async function(){
