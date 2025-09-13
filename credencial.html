@@ -95,7 +95,7 @@
     .credential-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="waves" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M0,20 Q10,0 20,20 T40,20" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23waves)"/></svg>') repeat;opacity:0.3}
     
     .credential-logos{display:flex;justify-content:space-between;align-items:center;padding:20px;position:relative;z-index:2;height:100%}
-    .credential-logo-img{width:60px;height:60px;object-fit:contain;background:#fff;border-radius:12px;box-shadow:var(--shadow-lg);border:4px solid #fff}
+    .credential-logo-img{width:60px;height:60px;object-fit:contain;background:transparent;border-radius:12px;box-shadow:var(--shadow-lg);border:0}
     
     .credential-photo{display:flex;justify-content:center;margin:20px 0}
     .photo-frame{width:120px;height:150px;border:4px solid #3b82f6;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-lg);background:#fff}
@@ -350,11 +350,42 @@
       const logos = getBranding();
       const left = document.getElementById('brandLogoLeft');
       const right = document.getElementById('brandLogoRight');
-      if (left) left.src = logos.logoLeftUrl;
-      if (right) right.src = logos.logoRightUrl;
+      if (left){ left.src = logos.logoLeftUrl; left.style.background = 'transparent'; left.style.border = '0'; }
+      if (right){ right.src = logos.logoRightUrl; right.style.background = 'transparent'; right.style.border = '0'; }
     }
 
-    document.addEventListener('DOMContentLoaded', ()=>{ applyBranding(); loadCredential(); });
+    function readQueryId(){
+      try{ const u=new URL(location.href); return u.searchParams.get('id')||null; }catch{ return null; }
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      applyBranding();
+      const forcedId = readQueryId();
+      if (forcedId){
+        // Modo admin: forzar credencial de un alumno específico
+        try{
+          const stu = (window.__studentsModuleCache || null) || null;
+        }catch{}
+        // Cargar usando students.js directamente
+        try{
+          import('./students.js').then(mod=>{
+            const s = mod.getStudent && mod.getStudent(forcedId);
+            if (s){
+              // Rellenar vista sin depender de sesión
+              const q = (sel)=>document.querySelector(sel);
+              q('#studentName').textContent = (s.nombre||'ESTUDIANTE').toUpperCase();
+              q('#studentRun').textContent = `RUN: ${s.run||'No disponible'}`;
+              q('#studentProgram').textContent = `ESTUDIANTE TÉCNICO DE NIVEL MEDIO EN ${(s.programa||'ENFERMERÍA').toUpperCase()}`;
+              if (s.avatarUrl) q('#studentPhoto').src = s.avatarUrl;
+              const runNumber = (s.run||'12345678').replace(/[^0-9]/g,'').slice(0,10);
+              q('#barcodeNumber').textContent = runNumber.padEnd(10,'0');
+            }
+          });
+        }catch{}
+      } else {
+        loadCredential();
+      }
+    });
   </script>
 
   <script type="module">
