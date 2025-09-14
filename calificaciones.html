@@ -77,7 +77,7 @@
     #nav-user .submenu{right:0;left:auto;top:32px}
 
     @media(max-width:900px){ .logo img{height:96px;width:96px} .header-spacer{height:148px} }
-    @media(max-width:720px){
+    @media(max-width:800px){
       .navbar{grid-template-columns:auto 1fr auto}
       .hamb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;cursor:pointer}
       .menu{display:none;position:absolute;top:124px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px;flex-direction:column;gap:12px;z-index:3050}
@@ -169,7 +169,7 @@
       .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
       .menu.open{ display:flex !important; }
     }
-    @media (max-width: 720px){
+    @media (max-width: 800px){
       #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; }
     }
   </style>
@@ -199,8 +199,9 @@
     }
     document.addEventListener('DOMContentLoaded',setupHeader);
   </script>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
+<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
 
   <!-- Header integrado -->
   <div class="site-header">
@@ -451,7 +452,7 @@
     initAuthUI();
   </script>
 
-<footer style="background:#fff;border-top:1px solid #e2e8f0;margin-top:40px">
+<!-- manual footer removed; keep only partial include -->
   <div style="max-width:1200px;margin:0 auto;padding:20px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
       <div style="display:flex;gap:12px;align-items:center">
@@ -472,7 +473,11 @@
       <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
     </div>
   </div>
-</footer>
+-->
 <script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
+</div><div data-include="footer"></div></div>
+<script src="assets/include.js"></script>
+<script type="module" src="assets/live-sync-init.js"></script>
 </body>
 </html>
+

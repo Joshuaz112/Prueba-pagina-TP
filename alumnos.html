@@ -67,7 +67,7 @@
     .nav-item>a,.nav-item>button{all:unset;cursor:pointer;color:var(--primary-700);font-weight:700;padding:6px 0}
     .nav-item.has-sub>button .chev{display:inline-block;transform:rotate(0deg);transition:transform .18s ease}
     .nav-item.has-sub.open>button .chev{transform:rotate(90deg)}
-    .submenu{display:none;position:absolute;top:32px;left:0;background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px rgba(2,6,23,.12);border-radius:12px;padding:8px;min-width:220px;z-index:5000}
+    .submenu{display:none;position:absolute;top:32px;left:0;background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px rgba(2,6,23,.12);border-radius:12px;padding:8px;min-width:220px;z-index:9999}
     .submenu a{display:block;padding:8px 10px;border-radius:8px;color:#0f172a;text-decoration:none}
     .submenu a:hover{background:#f1f5f9}
     .nav-item.has-sub.open>.submenu{display:block}
@@ -77,7 +77,7 @@
     #nav-user .submenu{right:0;left:auto;top:32px}
 
     @media(max-width:900px){ .logo img{height:96px;width:96px} .header-spacer{height:148px} }
-    @media(max-width:720px){
+    @media(max-width:800px){
       .navbar{grid-template-columns:auto 1fr auto}
       .hamb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;cursor:pointer}
       .menu{display:none;position:absolute;top:124px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px;flex-direction:column;gap:12px;z-index:3050}
@@ -119,7 +119,7 @@
       .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
       .menu.open{ display:flex !important; }
     }
-    @media (max-width: 720px){ #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; } }
+    @media (max-width: 800px){ #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; } }
 
     /* === TARJETAS DE ALUMNOS (pequeñas) === */
     .card--grid{background:transparent;border:0;box-shadow:none;padding:0}
@@ -152,25 +152,50 @@
       if(hamb&&navMenu){
         hamb.addEventListener('click',(e)=>{e.stopPropagation();navMenu.classList.toggle('open');});
       }
-      // Desplegables
+      // Desplegables robusto: escucha en el contenedor y en el trigger
       const dropdowns=document.querySelectorAll('.nav-item.has-sub');
       dropdowns.forEach(drop=>{
-        const btn=drop.querySelector('button');
-        if(btn){
-          btn.addEventListener('click',(e)=>{
-            e.stopPropagation();
-            const wasOpen=drop.classList.contains('open');
+        const toggle=(e)=>{
+          // Si el click proviene de un enlace dentro del submenu, permitir navegación
+          if (e.target && e.target.closest && e.target.closest('.submenu a')) return;
+          e.preventDefault();
+          e.stopPropagation();
+          const wasOpen=drop.classList.contains('open');
+          dropdowns.forEach(d=>d.classList.remove('open'));
+          if(!wasOpen) drop.classList.add('open');
+        };
+        drop.addEventListener('click',toggle);
+        const btn=drop.querySelector('button, a');
+        if(btn) btn.addEventListener('click',toggle);
+
+        // Hover en desktop: abre/cierra sin clicks
+        drop.addEventListener('mouseenter',()=>{
+          if(window.matchMedia('(hover:hover)').matches){
             dropdowns.forEach(d=>d.classList.remove('open'));
-            if(!wasOpen) drop.classList.add('open');
-          });
-        }
+            drop.classList.add('open');
+          }
+        });
+        drop.addEventListener('mouseleave',()=>{
+          if(window.matchMedia('(hover:hover)').matches){
+            drop.classList.remove('open');
+          }
+        });
+      });
+
+      // Permitir navegación en los enlaces del submenu y cerrar menús
+      const submenuLinks=document.querySelectorAll('.nav-item.has-sub .submenu a');
+      submenuLinks.forEach(a=>{
+        a.addEventListener('click',()=>{
+          dropdowns.forEach(d=>d.classList.remove('open'));
+        });
       });
       document.addEventListener('click',()=>{ if(navMenu) navMenu.classList.remove('open'); dropdowns.forEach(d=>d.classList.remove('open')); });
     }
     document.addEventListener('DOMContentLoaded',setupHeader);
   </script>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
+<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
 
   <!-- Header integrado -->
   <div class="site-header">
@@ -292,27 +317,22 @@
     initAuthUI();
   </script>
   -->
+</div><div data-include="footer"></div></div>
+<script src="assets/include.js"></script>
+<script type="module" src="assets/live-sync-init.js"></script>
+<!-- Asegura inicialización tardía del menú de Cuenta -->
+<script type="module">
+  import { initAuthUI } from './auth.js';
+  window.addEventListener('DOMContentLoaded', () => setTimeout(initAuthUI, 0));
+  // fallback por si el include del header se inyecta un poco después
+  setTimeout(initAuthUI, 250);
+  setTimeout(initAuthUI, 800);
+  document.addEventListener('readystatechange', () => {
+    if (document.readyState === 'complete') initAuthUI();
+  });
+  window.addEventListener('load', initAuthUI);
+  
+</script>
 </body>
-<footer style="background:#fff;border-top:1px solid #e2e8f0;margin-top:40px">
-  <div style="max-width:1200px;margin:0 auto;padding:20px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="logo-tp.webp" alt="TP" style="height:40px;width:40px;border-radius:8px;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.05)"/>
-        <div style="color:#64748b;font-size:.9rem">
-          <strong style="color:#0f172a">Liceo TP Enfermería</strong><br>
-          Comprometidos con la excelencia y la formación integral.
-        </div>
-      </div>
-      <nav>
-        <a href="index.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Inicio</a>
-        <a href="nosotros.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Nosotros</a>
-        <a href="programa.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Programa</a>
-        <a href="convenios.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Convenios</a>
-        <a href="contacto.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Contacto</a>
-        <a href="calificaciones.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Calificaciones</a>
-      </nav>
-      <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
-    </div>
-  </div>
-</footer>
 <script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
+

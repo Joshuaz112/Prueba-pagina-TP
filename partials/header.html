@@ -1,0 +1,31 @@
+<header class="topbar" role="banner">
+  <nav class="nav" aria-label="Principal">
+    <a href="index.html" class="brand">
+      <img src="logo-tp.webp" alt="TP Enfermería">
+      <strong>TP Enfermería</strong>
+    </a>
+    <div class="spacer"></div>
+    <div class="links" role="navigation">
+      <a class="link" href="nosotros.html">Nosotros</a>
+      <a class="link" href="programa.html">Programa</a>
+      <a class="link" href="convenios.html">Convenios</a>
+      <a class="link" href="contacto.html">Contacto</a>
+      <a class="link" href="alumnos.html">Alumnos</a>
+      <a class="link" href="exalumnos.html">Exalumnos</a>
+      <a class="link" href="docentes.html">Docentes</a>
+      <a class="link" href="calificaciones.html">Calificaciones</a>
+      <a id="nav-admin" class="cta" style="display:none" href="admin.html">Admin</a>
+    </div>
+  </nav>
+<!-- Firebase SDK (opcional: remueve si no usarás sync) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+<script>
+  try{
+    var el = document.getElementById('nav-admin');
+    if (sessionStorage.getItem('tp_admin') === '1' && el) {
+      el.style.display = 'inline-flex';
+    }
+  }catch(e){}
+</script>
+</header>

@@ -70,7 +70,7 @@
     #nav-user .submenu{right:0;left:auto;top:32px}
 
     @media(max-width:900px){ .logo img{height:96px;width:96px} .header-spacer{height:148px} }
-    @media(max-width:720px){
+    @media(max-width:800px){
       .navbar{grid-template-columns:auto 1fr auto}
       .hamb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;cursor:pointer}
       .menu{display:none;position:absolute;top:124px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px;flex-direction:column;gap:12px;z-index:3050}
@@ -155,8 +155,9 @@
     }
     document.addEventListener('DOMContentLoaded',setupHeader);
   </script>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
+<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
 
   <div class="site-header">
     <div class="topbar">
@@ -395,5 +396,9 @@
     initAuthUI();
   </script>
 
+</div><div data-include="footer"></div></div>
+<script src="assets/include.js"></script>
+<script type="module" src="assets/live-sync-init.js"></script>
 </body>
 </html>
+

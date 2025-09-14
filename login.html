@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Iniciar sesión | TP Enfermería</title>
+  <title>Inicio | TP Enfermería</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -97,7 +97,7 @@
 
     /* Mobile */
     @media(max-width:900px){ .logo img{height:96px;width:96px} .header-spacer{height:148px} }
-    @media(max-width:720px){
+    @media(max-width:800px){
       .navbar{grid-template-columns:auto 1fr auto}
       .hamb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff;cursor:pointer}
       .menu{display:none;position:absolute;top:124px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px;flex-direction:column;gap:12px;z-index:3050}
@@ -131,7 +131,7 @@
       .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
       .menu.open{ display:flex !important; }
     }
-    @media (max-width: 720px){
+    @media (max-width: 800px){
       #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; }
     }
         
@@ -169,8 +169,9 @@
     }
     document.addEventListener('DOMContentLoaded',setupHeader);
   </script>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
+<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
 
   <div class="site-header">
     <div class="topbar">
@@ -288,5 +289,20 @@
   </script>
 
 <script type="module">import { initAuthUI } from "./auth.js"; document.addEventListener("DOMContentLoaded", initAuthUI);</script>
+</div><div data-include="footer"></div></div>
+<script src="assets/include.js"></script>
+<script type="module" src="assets/live-sync-init.js"></script>
+<!-- Asegura inicialización tardía del menú de Cuenta -->
+<script type="module">
+  import { initAuthUI } from './auth.js';
+  window.addEventListener('DOMContentLoaded', () => setTimeout(initAuthUI, 0));
+  setTimeout(initAuthUI, 250);
+  setTimeout(initAuthUI, 800);
+  document.addEventListener('readystatechange', () => {
+    if (document.readyState === 'complete') initAuthUI();
+  });
+  window.addEventListener('load', initAuthUI);
+</script>
 </body>
 </html>
+

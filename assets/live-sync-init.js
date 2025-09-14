@@ -1,0 +1,1 @@
+(async()=>{try{const m=await import('../branding-sync.js');if(m&&typeof m.startBrandingLiveSync==='function'){m.startBrandingLiveSync()}}catch(e){}})();

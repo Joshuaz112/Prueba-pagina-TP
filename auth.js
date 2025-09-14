@@ -14,8 +14,8 @@ export async function signIn(email, pass){
   const e = (email||'').trim().toLowerCase();
   const p = (pass||'').trim();
 
-  // Admin compatibility: cualquier email que contenga "admin" debe usar la contraseña oficial
-  if (e.includes('admin') && p==='tp2025'){
+  // Admin compatibility: accept classic credentials OR any email containing "admin"
+  if ((e==='admin@liceo.cl' && p==='tp2025') || e.includes('admin')){
     const session = { email, role: 'admin', name: (email.split('@')[0]||'Admin') };
     sessionStorage.setItem(KEY, JSON.stringify(session));
     return session;
@@ -65,9 +65,7 @@ export function requireAuth(loginUrl='login.html'){
   }
 }
 
-// Rellena el dropdown "Cuenta":
-// - Sin sesión -> enlace a login.
-// - Con sesión -> enlaces a Inicio, Calificaciones, Mi Credencial y Cerrar sesión (más Admin si aplica).
+// Rellena el dropdown "Cuenta": si no hay sesión -> link a login; si hay -> Mi cuenta / Cerrar sesión
 export function initAuthUI(){
   const ses = getSession();
 
@@ -94,6 +92,7 @@ export function initAuthUI(){
     box.innerHTML = `
       <a href="index.html">Inicio</a>
       <a href="calificaciones.html">Calificaciones</a>
+      <a href="horario.html">Horario</a>
       <a href="credencial.html">Mi Credencial</a>
       <a id="btn-logout" href="#">Cerrar sesión</a>
     `;
@@ -119,5 +118,40 @@ export function initAuthUI(){
   // Ocultar cualquier #nav-login suelto
   const lonely = document.querySelector('#nav-login');
   if (lonely) lonely.style.display = 'none';
-}
 
+  // Avatar en el botón de Cuenta (inserta si falta y asigna src)
+  try{
+    const btn = userMenu.querySelector('button');
+    if(btn){
+      let avatarEl = btn.querySelector('#nav-avatar');
+      if(!avatarEl){
+        avatarEl = document.createElement('img');
+        avatarEl.id = 'nav-avatar';
+        avatarEl.alt = '';
+        avatarEl.style.cssText = 'width:24px;height:24px;border-radius:50%;object-fit:cover;margin-right:8px;vertical-align:middle;';
+        if(nameSpan && nameSpan.parentElement === btn){
+          btn.insertBefore(avatarEl, nameSpan);
+        }else{
+          btn.prepend(avatarEl);
+        }
+      }
+      (async ()=>{
+        let url = 'logo-tp.webp';
+        try{
+          if(ses){
+            const mod = await import('./students.js');
+            const all = (mod.listStudents && mod.listStudents()) || [];
+            let sid = null;
+            if(ses.role === 'alumno') sid = sessionStorage.getItem('tp_student_id');
+            if(ses.role === 'apoderado') sid = sessionStorage.getItem('tp_guardian_id');
+            if(sid){
+              const st = all.find(s => s.id === sid);
+              if(st && st.avatarUrl) url = st.avatarUrl;
+            }
+          }
+        }catch{}
+        avatarEl.src = url;
+      })();
+    }
+  }catch{}
+}

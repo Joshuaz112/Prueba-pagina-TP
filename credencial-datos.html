@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Datos de Credencial | TP Enfermería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo-tp.webp">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="site-wrap">
+  <div data-include="header"></div>
+  <main class="site-main">
+    <section class="page-hero" style="padding:28px 16px;background:linear-gradient(135deg,#f8fafc,#e2e8f0)">
+      <div style="max-width:1200px;margin:0 auto">
+        <h1 style="margin:0 0 8px 0;font-size:clamp(24px,3vw,36px)">Datos de Credencial</h1>
+        <p style="margin:0;color:#64748b">Completa los datos y genera la credencial con código QR.</p>
+      </div>
+    </section>
+    <section style="max-width:1200px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:1.1fr 1fr;gap:20px">
+      <form id="form" style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label>Nombre<input name="nombre" required placeholder="Nombre Apellido" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"></label>
+          <label>RUN<input name="run" required placeholder="12.345.678-9" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"></label>
+          <label>Curso<input name="curso" required placeholder="4° Medio A" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"></label>
+          <label>Programa<input name="programa" required placeholder="Técnico en Enfermería" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"></label>
+          <label>Válido hasta<input name="valido" type="date" required style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"></label>
+          <label>Avatar (URL)<input name="avatarUrl" placeholder="https://..." style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px"></label>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center">
+          <button type="submit" class="btn" style="background:#0b6bcb;color:#fff;border:0;padding:10px 14px;border-radius:12px;cursor:pointer">Generar QR</button>
+          <button type="button" id="btn-download" class="btn" style="background:#111827;color:#fff;border:0;padding:10px 14px;border-radius:12px;cursor:pointer">Descargar credencial (PNG)</button>
+          <label style="display:inline-flex;align-items:center;gap:8px;margin-left:8px">
+            <input id="use-api" type="checkbox">
+            <span class="muted">Usar API externa para QR</span>
+          </label>
+        </div>
+      </form>
+      <div id="preview" style="display:flex;flex-direction:column;gap:12px">
+        <div id="card" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.06);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center">
+          <div style="display:flex;gap:12px;align-items:center">
+            <img id="avatar" src="logo-liceo.webp" alt="Avatar" style="width:56px;height:56px;border-radius:12px;object-fit:cover;border:1px solid var(--line)">
+            <div>
+              <div id="p-nombre" style="font-weight:800">Nombre Apellido</div>
+              <div id="p-det" class="muted" style="color:#64748b">RUN • Curso • Programa</div>
+              <div class="muted" id="p-val" style="font-size:.9rem;color:#64748b">Válido hasta: —</div>
+            </div>
+          </div>
+          <div id="qrcode" style="width:110px;height:110px;border:1px dashed var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center">QR</div>
+        </div>
+        <small class="muted" style="color:#64748b">El QR contiene un JSON con nombre, run, curso, programa y vigencia.</small>
+      </div>
+    </section>
+  </main>`r`n    <div data-include=footer></div>
+  <div data-include="footer"></div>
+</div>
+<script src="assets/include.js"></script>
+<script type="module" src="assets/live-sync-init.js"></script>
+<!-- Librería QR (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script type="module">
+  const form = document.getElementById('form');
+  const card = document.getElementById('card');
+  const avatar = document.getElementById('avatar');
+  const pNombre = document.getElementById('p-nombre');
+  const pDet = document.getElementById('p-det');
+  const pVal = document.getElementById('p-val');
+  const qrBox = document.getElementById('qrcode');
+  const btnDownload = document.getElementById('btn-download');
+  const useApi = document.getElementById('use-api');
+
+  function renderPreview(data){
+    avatar.src = data.avatarUrl || 'logo-liceo.webp';
+    pNombre.textContent = data.nombre || '—';
+    pDet.textContent = [data.run, data.curso, data.programa].filter(Boolean).join(' • ');
+    pVal.textContent = 'Válido hasta: ' + (data.valido || '—');
+
+    // Generar QR
+    qrBox.innerHTML = '';
+    const payload = JSON.stringify({
+      t: 'tp-credencial', v: 1,
+      nombre: data.nombre, run: data.run,
+      curso: data.curso, programa: data.programa,
+      valido: data.valido
+    });
+    // Si se marca "Usar API", consumimos el servicio público (devuelve una imagen PNG del QR)
+    if (useApi && useApi.checked){
+      const url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(payload);
+      const img = new Image();
+      img.alt = 'QR';
+      img.width = 108; img.height = 108;
+      img.referrerPolicy = 'no-referrer';
+      img.onload = ()=> qrBox.appendChild(img);
+      img.onerror = ()=> { qrBox.textContent = 'Error QR (API)'; };
+      img.src = url;
+    } else {
+      // Método local con la librería QRCode (sin depender de la red)
+      QRCode.toCanvas(payload, { width: 108, margin: 1 }, (err, canvas)=>{
+        if(err){ qrBox.textContent = 'Error QR'; return; }
+        qrBox.appendChild(canvas);
+      });
+    }
+  }
+
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const fd = new FormData(form);
+    const data = Object.fromEntries(fd.entries());
+    renderPreview(data);
+    // También podrías guardar en Firestore aquí si ya configuraste remote-sync.js
+    // import('./assets/remote-sync.js').then(m=>m.saveGlobalSettings({credSample:data}));
+  });
+
+  btnDownload.addEventListener('click', ()=>{
+    // Exportar la tarjeta como PNG
+    const s = window.scrollY;
+    window.scrollTo(0,0);
+    html2canvas(card).then(canvas=>{
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'credencial.png';
+      a.click();
+      window.scrollTo(0,s);
+    });
+  });
+
+</script>
+<!-- html2canvas (para exportar PNG) -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</body>
+</html>
+
+
