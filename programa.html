@@ -4,10 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Programa | TP Enfermería</title>
-  <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="icon" href="logo-tp.webp">
@@ -157,72 +154,198 @@
     }
     document.addEventListener('DOMContentLoaded',setupHeader);
   </script>
+  <style>
+    /* Module cards styling */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+    
+    .module-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .module-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .module-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--success));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .module-card:hover::before {
+      opacity: 1;
+    }
+    
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .module-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--success));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+    
+    .module-card:hover .module-icon {
+      transform: scale(1.1);
+    }
+    
+    .module-title {
+      margin: 0;
+      color: var(--primary-700);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    
+    .module-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .cards {
+      display: grid;
+      gap: 12px;
+    }
+    
+    .cards article {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      transition: all 0.2s ease;
+    }
+    
+    .cards article:hover {
+      background: #f1f5f9;
+      transform: translateX(4px);
+    }
+    
+    .program-section {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+    }
+    
+    .program-section h2 {
+      margin: 0 0 16px 0;
+      color: var(--primary-700);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .program-section p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .modules-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .module-card {
+        padding: 20px;
+      }
+      
+      .module-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+    }
+  </style>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
-  <section class="page-hero" style="padding:28px 16px;background:linear-gradient(135deg,#f8fafc,#e2e8f0)">
-    <div style="max-width:1200px;margin:0 auto">
-      <h1 style="margin:0 0 8px 0;font-size:clamp(24px,3vw,36px)">Programa de Estudios</h1>
-      <p style="margin:0;color:#64748b">Información clave presentada de forma clara y moderna.</p>
+<body>
+<div class="site-header">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="hamb" id="hamb" aria-label="Abrir menú">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
+      </button>
     </div>
-  </section>
-  <section class="page-grid" style="max-width:1200px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+    <div class="topbar-right">
+      <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
+      <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
+      <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
+      <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
 
-
-  <div class="site-header">
-    <div class="topbar">
-      <div class="topbar-left">
-        <button class="hamb" id="hamb" aria-label="Abrir menú">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
-        </button>
+      <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
+      <div id="nav-user" class="nav-item has-sub">
+        <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
+        <div class="submenu" id="accountMenu" style="min-width:200px"></div>
       </div>
-      <div class="topbar-right">
-        <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
-        <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
-        <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
-        <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
-
-        <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
-        <div id="nav-user" class="nav-item has-sub">
-          <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
-          <div class="submenu" id="accountMenu" style="min-width:200px"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar">
-      <nav id="mainMenu" class="menu">
-        <a href="index.html">Inicio</a>
-        <div class="nav-item has-sub">
-          <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="programa.html">Programa</a>
-            <a href="convenios.html">Convenios</a>
-            <a href="contacto.html">Contacto</a>
-          </div>
-        </div>
-        <a href="docentes.html">Docentes</a>
-        <a id="nav-calif" href="calificaciones.html" style="display:none">Calificaciones</a>
-         <div class="nav-item has-sub">
-          <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="alumnos.html">Alumnos</a>
-            <a href="exalumnos.html">Exalumnos</a>
-          </div>
-        </div>
-              <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
-      </nav>
-      <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
-      <div></div>
     </div>
   </div>
 
-  <div class="header-spacer"></div>
+  <div class="navbar">
+    <nav id="mainMenu" class="menu">
+      <a href="index.html">Inicio</a>
+      <div class="nav-item has-sub">
+        <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
+        <div class="submenu">
+          <a href="nosotros.html">Nosotros</a>
+          <a href="programa.html">Programa</a>
+          <a href="convenios.html">Convenios</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <a href="docentes.html">Docentes</a>
+       <div class="nav-item has-sub">
+        <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
+        <div class="submenu">
+          <a href="alumnos.html">Alumnos</a>
+          <a href="exalumnos.html">Exalumnos</a>
+        </div>
+      </div>
+            <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
+    </nav>
+    <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
+    <div></div>
+  </div>
+</div>
+
+<div class="header-spacer"></div>
+
+<main class="site-main">
 
 <header class="hero">
   <h1>Programa Académico</h1>
-  <p>Técnico en Enfermería - Formación integral para el sector salud</p>
+  <p>Técnico Paramédico - Formación integral para el sector salud</p>
   <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
       <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
@@ -241,173 +364,53 @@
 
 <div class="container">
   <div class="program-section">
-    <h2>Plan de Estudios</h2>
-    <p>Nuestro programa de Técnico en Enfermería está diseñado para proporcionar una formación integral que combina conocimientos teóricos sólidos con experiencia práctica, preparando a nuestros estudiantes para enfrentar los desafíos del sector salud con profesionalismo y competencia técnica.</p>
+    <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg)">
+      <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+    </div>
+    <h2 style="text-align:center;">Plan de Estudios</h2>
+    <p style="text-align:center;">Nuestro programa de Técnico Paramédico consta de <strong>2 cursos académicos (Tercero y Cuarto medio) más 6,5 meses de práctica profesional</strong>. Combina materias base del currículum nacional con formación técnica especializada, preparando estudiantes para el sector salud con sólida base académica y competencia técnica.</p>
   </div>
   
   <div class="modules-grid">
     <div class="module-card">
       <div class="module-header">
         <div class="module-icon">
-          <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-8A5.5 5.5 0 0 1 12 5.1 5.5 5.5 0 0 1 21.3 13c-2.3 3.6-9.3 8-9.3 8zm1-12h2v2h2v2h-2v2h-2v-2h-2v-2h2z"/></svg></span>
+          <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l1.09 3.26L17 6l-2.91 2.84L15 12l-3-1.54L9 12l.91-3.16L7 6l3.91-.74L12 3z"/></svg></span>
         </div>
-        <h3 class="module-title">Fundamentos de Enfermería</h3>
+        <h3 class="module-title">Tercer Año Medio</h3>
       </div>
-      <p class="module-description">Introducción a los conceptos básicos de la enfermería, ética profesional y principios fundamentales del cuidado de la salud.</p>
+      <p class="module-description">Primer año del programa técnico que combina materias base del currículum nacional con introducción a la formación paramédica.</p>
       <div class="cards">
-        <li>Historia y evolución de la enfermería</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Ética y deontología profesional</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Proceso de atención de enfermería</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Comunicación terapéutica</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Documentación en enfermería</div>
-  </div>
-</article>
-      </div>
-    </div>
-    
-    <div class="module-card">
-      <div class="module-header">
-        <div class="module-icon">
-          <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v2a8 8 0 1 1-8 8H2A10 10 0 1 0 12 2zm0 4v2a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6zm0 4a2 2 0 1 0 2 2 2 2 0 0 0-2-2z"/></svg></span>
-        </div>
-        <h3 class="module-title">Anatomía y Fisiología</h3>
-      </div>
-      <p class="module-description">Estudio detallado de la estructura y funcionamiento del cuerpo humano, esencial para la práctica de enfermería.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Sistema cardiovascular y respiratorio</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Sistema digestivo y urinario</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Sistema nervioso y endocrino</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Sistema musculoesquelético</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Fisiología del envejecimiento</div>
-  </div>
-</article>
-      </div>
-    </div>
-    
-    <div class="module-card">
-      <div class="module-header">
-        <div class="module-icon">
-          <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 13.5 10 11l2 2 3-3 4 4-2 2-1-1-3 3a3 3 0 0 1-4.2 0L8 16l-2 2-4-4 2-2 3.5 1.5zM14 7l-2-2-3 3 2 2 3-3z"/></svg></span>
-        </div>
-        <h3 class="module-title">Farmacología</h3>
-      </div>
-      <p class="module-description">Conocimientos sobre medicamentos, su administración segura y el manejo de efectos adversos.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Clasificación de medicamentos</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Vías de administración</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Cálculo de dosis</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Interacciones medicamentosas</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Manejo de efectos adversos</div>
-  </div>
-</article>
-      </div>
-    </div>
-    
-    <div class="module-card">
-      <div class="module-header">
-        <div class="module-icon">
-          <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg></span>
-        </div>
-        <h3 class="module-title">Enfermería Clínica</h3>
-      </div>
-      <p class="module-description">Aplicación práctica de técnicas de enfermería en diferentes contextos clínicos y hospitalarios.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Técnicas de asepsia y antisepsia</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Administración de medicamentos</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Cuidados de heridas</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Monitoreo de signos vitales</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Procedimientos de emergencia</div>
-  </div>
-</article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">📚</div>
+            <div style="line-height:1.5"><strong>Materias Base:</strong> Lenguaje, Inglés, Matemáticas, Historia</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🩺</div>
+            <div style="line-height:1.5">Fundamentos de Enfermería</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🫀</div>
+            <div style="line-height:1.5">Anatomía y Fisiología Básica</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🧬</div>
+            <div style="line-height:1.5">Microbiología y Bioseguridad</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">⚕️</div>
+            <div style="line-height:1.5">Ética y Comunicación en Salud</div>
+          </div>
+        </article>
       </div>
     </div>
     
@@ -416,40 +419,40 @@
         <div class="module-icon">
           <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
         </div>
-        <h3 class="module-title">Enfermería Comunitaria</h3>
+        <h3 class="module-title">Cuarto Año Medio</h3>
       </div>
-      <p class="module-description">Atención de enfermería en el ámbito comunitario, promoción de la salud y prevención de enfermedades.</p>
+      <p class="module-description">Segundo año del programa técnico que profundiza en la formación especializada y prepara para la práctica profesional.</p>
       <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Promoción de la salud</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Prevención de enfermedades</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Educación para la salud</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Salud familiar</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Programas comunitarios</div>
-  </div>
-</article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">📚</div>
+            <div style="line-height:1.5"><strong>Materias Base:</strong> Lenguaje, Inglés, Matemáticas, Historia</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">💊</div>
+            <div style="line-height:1.5">Farmacología y Administración de Medicamentos</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🏥</div>
+            <div style="line-height:1.5">Enfermería Clínica Avanzada</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🚑</div>
+            <div style="line-height:1.5">Atención de Emergencias</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">👥</div>
+            <div style="line-height:1.5">Enfermería Comunitaria y Salud Pública</div>
+          </div>
+        </article>
       </div>
     </div>
     
@@ -460,255 +463,72 @@
         </div>
         <h3 class="module-title">Práctica Profesional</h3>
       </div>
-      <p class="module-description">Experiencia práctica supervisada en centros de salud, aplicando todos los conocimientos adquiridos.</p>
+      <p class="module-description"><strong>6,5 meses de práctica supervisada</strong> en centros de salud reales, aplicando todos los conocimientos adquiridos durante los dos años académicos.</p>
       <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Rotaciones clínicas</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Supervisión profesional</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Casos clínicos reales</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Evaluación de competencias</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Portafolio profesional</div>
-  </div>
-</article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🏥</div>
+            <div style="line-height:1.5">Rotaciones en hospitales y clínicas</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">👨‍⚕️</div>
+            <div style="line-height:1.5">Supervisión profesional constante</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">📋</div>
+            <div style="line-height:1.5">Casos clínicos reales</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">✅</div>
+            <div style="line-height:1.5">Evaluación continua de competencias</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">📁</div>
+            <div style="line-height:1.5">Desarrollo de portafolio profesional</div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
   
   <div class="program-section">
     <h2>Duración y Modalidad</h2>
-    <p><strong>Duración:</strong> 2 años académicos (4 semestres)<br>
-    <strong>Modalidad:</strong> Presencial con prácticas clínicas<br>
+    <p><strong>Duración:</strong> 2 cursos académicos (Tercero y Cuarto medio) + 6,5 meses de práctica profesional<br>
+    <strong>Modalidad:</strong> Presencial con prácticas clínicas supervisadas<br>
     <strong>Horario:</strong> Diurno (8:00 - 17:00 hrs)<br>
-    <strong>Requisitos:</strong> Licencia de Enseñanza Media completa</p>
+    <strong>Materias Base:</strong> Lenguaje, Inglés, Matemáticas e Historia en ambos cursos</p>
+  </div>
+  
+  <div class="program-section">
+    <h2>Requisitos de Admisión</h2>
+    <p><strong>Requisitos para postular al Técnico Paramédico:</strong></p>
+    <ul style="margin: 16px 0; padding-left: 24px; line-height: 1.7;">
+      <li><strong>Matrícula vigente:</strong> Estar matriculado en el Liceo Bicentenario Hermanos Sotomayor Baeza</li>
+      <li><strong>Entrevista personal:</strong> Participar en una entrevista con el equipo académico del programa</li>
+      <li><strong>Carta de recomendación:</strong> Presentar una carta de los padres explicando los motivos por los cuales el estudiante desea ingresar al programa Técnico Paramédico</li>
+    </ul>
+    <p style="color: var(--muted); font-style: italic; margin-top: 20px;">El proceso de selección busca identificar estudiantes comprometidos con la formación en salud y con el apoyo familiar necesario para completar exitosamente el programa.</p>
   </div>
   
   <div class="program-section">
     <h2>Certificación</h2>
-    <p>Al completar exitosamente el programa, los estudiantes obtienen el título de <strong>Técnico en Enfermería</strong>, certificado por el Ministerio de Educación, que los habilita para ejercer profesionalmente en el sector salud tanto en el ámbito público como privado.</p>
+    <p>Al completar exitosamente el programa, los estudiantes obtienen el <strong>Título de Técnico Paramédico de Nivel Medio</strong> otorgado por el Ministerio de Educación y el <strong>certificado de competencia</strong> entregado por el Ministerio de Salud, que los habilita para ejercer profesionalmente en hospitales, clínicas, hogares de ancianos, consultorios, consultas particulares, atención de enfermos a domicilio y otros centros de salud.</p>
   </div>
 </div>
- 
-<!-- manual footer removed; keep only partial include -->
-  <div style="max-width:1200px;margin:0 auto;padding:20px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="logo-tp.webp" alt="TP" style="height:40px;width:40px;border-radius:8px;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.05)"/>
-        <div style="color:#64748b;font-size:.9rem">
-          <strong style="color:#0f172a">Liceo TP Enfermería</strong><br>
-          Comprometidos con la excelencia y la formación integral.
-        </div>
-      </div>
-      <nav>
-        <a href="index.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Inicio</a>
-        <a href="nosotros.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Nosotros</a>
-        <a href="programa.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Programa</a>
-        <a href="convenios.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Convenios</a>
-        <a href="contacto.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Contacto</a>
-        <a href="calificaciones.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Calificaciones</a>
-      </nav>
-      <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
-    </div>
-  </div>
--->
-<script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
 
-<script>
-  (async function(){
-    const lbl = document.getElementById('cuentaLabel');
-    const menu = document.getElementById('cuentaMenu');
-    if(!lbl || !menu) return;
-    let mod=null; try{ mod = await import('./students.js'); }catch(e){}
-    const getStudent = mod && mod.getStudent ? mod.getStudent : (id)=>null;
-    function roleInfo(){ if(sessionStorage.getItem('tp_admin')==='1') return {role:'admin'};
-      const sid=sessionStorage.getItem('tp_student_id'); if(sid) return {role:'alumno', id:sid};
-      const gid=sessionStorage.getItem('tp_guardian_id'); if(gid) return {role:'apoderado', id:gid}; return {role:null}; }
-    function myAccountHref(info){ if(info.role==='admin') return 'admin.html'; if(info.role) return 'calificaciones.html'; return 'admin.html'; }
-    function render(){
-      const info=roleInfo(); menu.innerHTML='';
-      const base = `<a href="${myAccountHref(info)}"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg></span> Mi cuenta</a>`;
-      if(info.role==='admin'){ lbl.textContent='Admin ▾'; menu.innerHTML = base + `<button id='logoutBtn'><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 17v-2h4v-2h-4V9L6 12l4 3zm2 3H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5V2H7a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h5z"/></svg></span> Cerrar sesión</button>`; }
-      else if(info.role){ const s=getStudent(info.id); const nombre=(s&&s.nombre)?s.nombre.split(' ')[0]:'Cuenta'; lbl.textContent=nombre+' ▾'; menu.innerHTML = base + `<button id='logoutBtn'><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 17v-2h4v-2h-4V9L6 12l4 3zm2 3H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5V2H7a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h5z"/></svg></span> Cerrar sesión</button>`; }
-      else { lbl.textContent='Cuenta ▾'; menu.innerHTML = base; }
-      const btn=document.getElementById('logoutBtn'); if(btn) btn.onclick=()=>{ sessionStorage.removeItem('tp_admin'); sessionStorage.removeItem('tp_student_id'); sessionStorage.removeItem('tp_guardian_id'); render(); location.href='index.html'; };
-      window.tpUpdateCuenta = render;
-    }
-    render();
-  })();
-</script>
+<div data-include="footer"></div>
+</main>
 
-
-
-<script>/* submenu-behavior: hover intent + mobile memory */
-document.addEventListener('DOMContentLoaded', function(){
-  try{
-    var KEY = 'open_menus';
-    var openSet = new Set(JSON.parse(sessionStorage.getItem(KEY) || '[]'));
-    var items = document.querySelectorAll('.nav-item.has-sub');
-    items.forEach(function(item){
-      var btn = item.querySelector('button[data-menu-id]');
-      var arrow = btn ? btn.querySelector('.chev') : null;
-      if(!btn) return;
-      var id = btn.getAttribute('data-menu-id') || 'menu-' + Math.random().toString(36).slice(2);
-
-      // Restaurar en móvil
-      var isMobile = window.matchMedia('(max-width:800px)').matches;
-      if(isMobile && openSet.has(id)) item.classList.add('open');
-      if(arrow){ arrow.textContent = item.classList.contains('open') ? '▾' : '▸'; }
-
-      // Móvil: toggle por toque + memoria
-      btn.addEventListener('click', function(e){
-        var isMobileNow = window.matchMedia('(max-width:800px)').matches;
-        if(isMobileNow){
-          e.preventDefault();
-          item.classList.toggle('open');
-          if(item.classList.contains('open')) openSet.add(id); else openSet.delete(id);
-          sessionStorage.setItem(KEY, JSON.stringify(Array.from(openSet)));
-          if(arrow){ arrow.textContent = item.classList.contains('open') ? '▾' : '▸'; }
-        }
-      });
-
-      // Desktop: hover-intent (retardos)
-      var overTimer = null, outTimer = null;
-      function openMenu(){ item.classList.add('open'); if(arrow) arrow.textContent='▾'; }
-      function closeMenu(){ item.classList.remove('open'); if(arrow) arrow.textContent='▸'; }
-      function isDesktop(){ return window.matchMedia('(min-width:801px)').matches; }
-
-      item.addEventListener('mouseenter', function(){
-        if(!isDesktop()) return;
-        clearTimeout(outTimer);
-        overTimer = setTimeout(openMenu, 120);
-      });
-      item.addEventListener('mouseleave', function(){
-        if(!isDesktop()) return;
-        clearTimeout(overTimer);
-        outTimer = setTimeout(closeMenu, 260);
-      });
-    });
-  }catch(e){ /* no-op */ }
-});
-</script>
-
-
-<script>
-// add-enter-key: generic handler for login inputs
-document.addEventListener('DOMContentLoaded', function(){
-  function wireEnter(emailSel, passSel, btnSel){
-    var email = document.querySelector(emailSel);
-    var pass = document.querySelector(passSel);
-    var btn  = document.querySelector(btnSel);
-    if(!email || !pass || !btn) return;
-    function handler(e){
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        btn.click();
-      }
-    }
-    email.addEventListener('keydown', handler);
-    pass.addEventListener('keydown', handler);
-  }
-  // Common patterns
-  wireEnter('#email', '#pass', '#enter');     // alumno/apoderado, privado
-  wireEnter('#email', '#pass', '#btnLogin');  // admin
-});
-</script>
-
-
-<script type="module">
-  import { initAuthUI } from './auth.js';
-  initAuthUI();
-</script>
-
-<script>
-// HAMB_PATCH
-document.addEventListener('DOMContentLoaded', function(){
-  const hamb = document.getElementById('hamb');
-  const navMenu = document.getElementById('mainMenu');
-  if(hamb && navMenu){
-    hamb.addEventListener('click', function(e){
-      e.stopPropagation();
-      navMenu.classList.toggle('open');
-    });
-    document.addEventListener('click', function(){ navMenu.classList.remove('open'); });
-  }
-});
-</script>
-
-
-<script>
-// FILTER & RNPI PATCH
-document.addEventListener('DOMContentLoaded', function(){
-  // --- Filtro por nombre/curso ---
-  var filterInput = document.getElementById('filterInput');
-  if(filterInput){
-    var grid = document.querySelector('.cards-grid') || document.querySelector('[data-grid="cards"]');
-    function normalize(t){ return (t||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
-    function doFilter(){
-      var q = normalize(filterInput.value);
-      var cards = document.querySelectorAll('.student-card, .alumno-card, .exalumno-card');
-      cards.forEach(function(card){
-        var text = normalize(card.textContent);
-        card.style.display = (!q || text.indexOf(q) !== -1) ? '' : 'none';
-      });
-    }
-    filterInput.addEventListener('input', doFilter);
-  }
-
-  // --- Botones RNPI en exalumnos ---
-  var exCards = document.querySelectorAll('.exalumno-card');
-  exCards.forEach(function(card){
-    // Evitar duplicar
-    if(card.querySelector('.btn-rnpi')) return;
-    var footer = card.querySelector('.card-footer');
-    if(!footer){
-      footer = document.createElement('div');
-      footer.className = 'card-footer';
-      card.appendChild(footer);
-    }
-    var btn = document.createElement('a');
-    btn.className = 'btn-rnpi';
-    btn.target = '_blank';
-    btn.rel = 'noopener';
-    btn.href = 'https://rnpi.superdesalud.gob.cl/#';
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 1 5 5v1h1a4 4 0 1 1 0 8h-1v1a5 5 0 1 1-10 0v-1H6a4 4 0 1 1 0-8h1V7a5 5 0 0 1 5-5zm-3 14v1a3 3 0 1 0 6 0v-1H9zm9-2a2 2 0 0 0 0-4h-1v4h1zM7 14v-4H6a2 2 0 1 0 0 4h1zm3-7a3 3 0 1 0 6 0V7a3 3 0 1 0-6 0V7z"/></svg> RNPI';
-    btn.addEventListener('click', function(){
-      var rut = card.getAttribute('data-rut') || card.getAttribute('data-run') || '';
-      if(navigator.clipboard && rut){
-        navigator.clipboard.writeText(rut).catch(function(){});
-      }
-      // No podemos prellenar RNPI (SPA), abrimos home y dejamos RUT en portapapeles si existía
-    });
-    footer.appendChild(btn);
-  });
-});
-</script>
-
-</div></section><!--grid-end-->
-<div data-include="footer"></div></div>
 <script src="assets/include.js"></script>
 <script type="module" src="assets/live-sync-init.js"></script>
-<!-- Asegura inicialización tardía del menú de Cuenta -->
 <script type="module">
   import { initAuthUI } from './auth.js';
   window.addEventListener('DOMContentLoaded', () => setTimeout(initAuthUI, 0));
@@ -719,7 +539,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
   window.addEventListener('load', initAuthUI);
 </script>
-</body></html>
-
-
-
+</body>
+</html>
+         

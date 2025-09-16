@@ -66,9 +66,31 @@ export function importCSV(studentId, csvText){
 // Seed demo
 (function seed(){
   if(listStudents().length===0){
-    addStudent({ nombre:'Valentina Hurtado Ruminao', run:'23.031.375-K', curso:'2° Medio', programa:'Enfermería', avatarUrl:'',
-      publico:{correo:'valentina.hurtado@colegio.cl'}, privado:{telefono:'+56911112222', direccion:'Calle Ficticia 123', certificadoUrl:'https://drive.google.com/your-certificado-id'},
+    // Estudiante activo
+    addStudent({ 
+      nombre:'Valentina Hurtado Ruminao', 
+      run:'23.031.375-K', 
+      curso:'2° Medio', 
+      programa:'Enfermería', 
+      avatarUrl:'',
+      publico:{correo:'valentina.hurtado@colegio.cl'}, 
+      privado:{telefono:'+56911112222', direccion:'Calle Ficticia 123', certificadoUrl:'https://drive.google.com/your-certificado-id'},
       cuentas:{ alumno:{user:'valentina@alumnos.cl', pass:'1234'}, apoderado:{user:'apoderado.valentina@correo.cl', pass:'1234'} }
+    });
+    
+    // Estudiante egresado para pruebas del perfil QR
+    addStudent({ 
+      nombre:'María González Pérez', 
+      run:'12.345.678-9', 
+      curso:'4° Medio A', 
+      programa:'Enfermería', 
+      avatarUrl:'',
+      egreso: '2023',
+      graduado: true,
+      publico:{correo:'maria.gonzalez@email.com'}, 
+      privado:{telefono:'+56922334455', direccion:'Av. Principal 456'},
+      cuentas:{ alumno:{user:'maria@alumnos.cl', pass:'1234'}, apoderado:{user:'apoderado.maria@correo.cl', pass:'1234'} },
+      rnpi: { numero: 'RNPI-2023-001234', url: 'https://emisorcertificados.superdesalud.gob.cl/ValidacionCertificados/' }
     });
   }
   if(listSubjects().length===0){
@@ -109,8 +131,24 @@ export function setStudentAccounts(id, cuentas){
 
 // Alumni (Exalumnos)
 export const listAlumniPublic=()=>{
-  // Datos de ejemplo de exalumnos con información del RNPIS
-  return [
+  // Obtener estudiantes graduados de la base de datos
+  const allStudents = listStudents();
+  const graduatedStudents = allStudents.filter(s => s.egreso || s.graduado);
+  
+  // Combinar con datos de ejemplo si no hay graduados reales
+  const realAlumni = graduatedStudents.map(s => ({
+    id: s.id,
+    nombre: s.nombre,
+    run: s.run,
+    egreso: s.egreso,
+    programa: s.programa || 'Enfermería',
+    avatarUrl: s.avatarUrl || '',
+    publico: s.publico || { correo: s.cuentas?.alumno?.user || '' },
+    rnpi: s.rnpi || { numero: '', url: '' }
+  }));
+  
+  // Datos de ejemplo (solo si no hay graduados reales)
+  const exampleAlumni = realAlumni.length > 0 ? [] : [
     {
       id: 'alumni-1',
       nombre: 'María González Pérez',
@@ -164,4 +202,14 @@ export const listAlumniPublic=()=>{
       }
     }
   ];
+  
+  return [...realAlumni, ...exampleAlumni];
 };
+
+// Función para construir URL del perfil QR
+export function buildPerfilURL(rut){
+  // Construye URL absoluta en producción o relativa en dev
+  const base = location.origin + location.pathname.replace(/\/[^\/]*$/, "/");
+  // Resultado: .../perfil-alumno.html?rut=RUT
+  return base + "perfil-alumno.html?rut=" + encodeURIComponent(rut);
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Perfil de Alumno | TP Enfermería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo-tp.webp">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/perfil-alumno.css">
+</head>
+<body>
+  <div data-include="header"></div>
+  <div class="header-spacer"></div>
+
+  <main class="site-main" id="app">
+    <section class="page-hero">
+      <div class="container">
+        <h1 class="page-title" id="alumno-nombre">Perfil de Alumno</h1>
+        <p class="page-subtitle">Información verificada de matrícula y estado académico.</p>
+        <div class="chip-row">
+          <span class="chip">Identidad</span>
+          <span class="chip">Estado</span>
+          <span class="chip">Curso</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="perfil-section container section-content" id="perfil">
+      <!-- Tarjeta -->
+      <article class="perfil-card">
+        <div class="perfil-foto">
+          <img id="alumno-foto" alt="Foto del alumno" />
+        </div>
+        <div class="perfil-datos">
+          <div class="dato"><span>Nombre:</span> <strong id="alumno-nombre-txt"></strong></div>
+          <div class="dato"><span>RUT:</span> <strong id="alumno-rut"></strong></div>
+          <div class="dato"><span>Curso:</span> <strong id="alumno-curso"></strong></div>
+          <div class="dato"><span>Estado:</span> <strong id="alumno-estado"></strong></div>
+          <div class="dato rnpi" id="rnpi-row" style="display:none;">
+            <span>RNPI:</span> <strong id="alumno-rnpi"></strong>
+          </div>
+        </div>
+      </article>
+
+      <div class="perfil-actions">
+        <a class="btn btn-outline" href="index.html">Volver al inicio</a>
+      </div>
+
+      <div class="perfil-alert" id="alerta-no-encontrado" style="display:none;">
+        <p>No encontramos un alumno con ese RUT. Verifica el código o contacta a soporte.</p>
+        <a class="btn btn-primary" href="index.html">Volver al inicio</a>
+      </div>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+
+  <script type="module" src="students.js"></script>
+  <script src="assets/include.js"></script>
+  <script src="assets/perfil-alumno.js"></script>
+</body>
+</html>

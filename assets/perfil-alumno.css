@@ -1,0 +1,316 @@
+/* Perfil de Alumno - Estilos específicos */
+
+.page-hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--success) 50%, var(--warning) 100%);
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+  opacity: 0.3;
+}
+
+.page-title {
+  position: relative;
+  z-index: 1;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.page-subtitle {
+  position: relative;
+  z-index: 1;
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 12px 0 24px 0;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.chip-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.chip {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.perfil-section {
+  padding: 24px 20px 56px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.perfil-card {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 6px 30px rgba(2, 6, 23, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.perfil-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+}
+
+.perfil-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(2, 6, 23, 0.1);
+}
+
+.perfil-foto img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 3px solid #fff;
+  background: #f3f4f6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.perfil-foto img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.perfil-datos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.perfil-datos .dato {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: var(--text);
+  font-size: 1.1rem;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.perfil-datos .dato:last-child {
+  border-bottom: none;
+}
+
+.perfil-datos .dato span {
+  color: var(--muted);
+  margin-right: 12px;
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.perfil-datos .dato strong {
+  color: var(--primary-700);
+  font-weight: 700;
+}
+
+.perfil-datos .dato.rnpi {
+  background: var(--primary-50);
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--primary-200);
+  margin-top: 8px;
+}
+
+.perfil-datos .dato.rnpi strong {
+  color: var(--success);
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+}
+
+.perfil-actions {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-700));
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-700), #1e40af);
+  color: #fff;
+}
+
+.btn-outline {
+  background: #fff;
+  color: var(--primary-700);
+  border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.perfil-alert {
+  margin-top: 24px;
+  color: #b91c1c;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(185, 28, 28, 0.1);
+}
+
+.perfil-alert p {
+  margin: 0 0 16px 0;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 720px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .chip-row {
+    gap: 8px;
+  }
+  
+  .chip {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+  
+  .perfil-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .perfil-foto {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .perfil-foto img {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .perfil-datos .dato {
+    justify-content: space-between;
+    font-size: 1rem;
+  }
+  
+  .perfil-datos .dato span {
+    min-width: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-section {
+    padding: 20px 16px 40px;
+  }
+  
+  .perfil-card {
+    padding: 16px;
+  }
+  
+  .perfil-foto img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .perfil-datos .dato {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .perfil-datos .dato span {
+    margin-right: 0;
+    min-width: auto;
+  }
+}

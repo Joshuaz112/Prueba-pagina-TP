@@ -90,27 +90,28 @@
 
     /* Estilos para la credencial */
     .credential-container{display:flex;justify-content:center;margin:40px 0}
-    .credential-card{width:400px;height:600px;background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);border-radius:20px;box-shadow:var(--shadow-xl);overflow:hidden;position:relative;border:2px solid #fff}
+    .credential-card{width:480px;height:680px;background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);border-radius:20px;box-shadow:var(--shadow-xl);overflow:hidden;position:relative;border:2px solid #fff;display:flex;flex-direction:column}
     
-    .credential-header{height:120px;background:linear-gradient(135deg,#1e40af 0%,#3b82f6 100%);position:relative;overflow:hidden}
+    .credential-header{height:120px;background:linear-gradient(135deg,#1e40af 0%,#3b82f6 100%);position:relative;overflow:hidden;flex-shrink:0}
     .credential-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="waves" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M0,20 Q10,0 20,20 T40,20" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23waves)"/></svg>') repeat;opacity:0.3}
     
-    .credential-logos{display:flex;justify-content:space-between;align-items:center;padding:20px;position:relative;z-index:2;height:100%}
-    .credential-logo-img{width:60px;height:60px;object-fit:contain;background:transparent;border-radius:12px;box-shadow:var(--shadow-lg);border:0}
+    .credential-logos{display:flex;justify-content:space-between;align-items:center;padding:20px 25px;position:relative;z-index:2;height:100%}
+    .credential-logo-img{width:65px;height:65px;object-fit:contain;background:transparent;border-radius:10px;box-shadow:var(--shadow);border:0}
     
-    .credential-photo{display:flex;justify-content:center;margin:20px 0}
-    .photo-frame{width:120px;height:150px;border:4px solid #3b82f6;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-lg);background:#fff}
+    .credential-body{flex:1;display:flex;flex-direction:column;padding:20px 0;position:relative}
+    
+    .credential-photo{display:flex;justify-content:center;margin:0 0 20px 0}
+    .photo-frame{width:140px;height:175px;border:4px solid #3b82f6;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
     .photo-frame img{width:100%;height:100%;object-fit:cover}
     
-    .credential-info{text-align:center;padding:0 30px}
-    .student-name{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:12px 20px;border-radius:12px;margin:20px 0;box-shadow:var(--shadow)}
-    .student-name h2{margin:0;font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
-    .student-run{margin:0;font-size:14px;font-weight:600;opacity:0.9}
-    .student-program{color:#1e40af;font-size:14px;font-weight:700;margin:10px 0;text-transform:uppercase;letter-spacing:0.5px}
+    .credential-info{text-align:center;padding:0 30px;margin-bottom:20px}
+    .student-name{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:12px 16px;border-radius:12px;margin:16px 0;box-shadow:var(--shadow)}
+    .student-name h2{margin:0;font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;line-height:1.2}
+    .student-run{margin:0;font-size:18px;font-weight:600;opacity:0.9;margin-top:6px}
+    .student-program{color:#1e40af;font-size:16px;font-weight:700;margin:16px 0;text-transform:uppercase;letter-spacing:0.3px;line-height:1.3;padding:0 10px}
     
-    .credential-barcode{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);width:200px;height:40px;background:#e2e8f0;border-radius:8px;display:flex;align-items:center;justify-content:center}
-    .barcode{width:180px;height:20px;background:repeating-linear-gradient(90deg,#000 0px,#000 2px,transparent 2px,transparent 4px)}
-    .barcode-number{position:absolute;bottom:-15px;font-size:10px;color:#64748b;font-weight:600}
+    .credential-qr{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);width:120px;height:120px;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);border:2px solid #e2e8f0}
+    .qr-code{width:110px;height:110px}
 
     @media print{ 
       .site-header,.btn,.hamb,.menu{display:none!important}
@@ -121,14 +122,19 @@
     }
 
     @media (max-width: 768px){
-      .credential-card{width:350px;height:525px}
-      .credential-header{height:100px}
-      .credential-logos{padding:15px}
-      .credential-logo-img{width:50px;height:50px}
-      .photo-frame{width:100px;height:125px}
-      .student-name h2{font-size:16px}
-      .student-run{font-size:12px}
-      .student-program{font-size:12px}
+      .credential-card{width:320px;height:460px}
+      .credential-header{height:80px;padding:12px 18px}
+      .credential-logos{gap:12px}
+      .credential-logo-img{width:40px;height:40px}
+      .credential-body{padding:15px 0}
+      .photo-frame{width:90px;height:112px;border-width:3px}
+      .credential-info{padding:0 20px;margin-bottom:15px}
+      .student-name{padding:8px 12px;margin:12px 0}
+      .student-name h2{font-size:18px;letter-spacing:0.4px}
+      .student-run{font-size:14px;margin-top:4px}
+      .student-program{font-size:12px;margin:12px 0;letter-spacing:0.25px;padding:0 8px}
+      .credential-qr{width:85px;height:85px;bottom:10px}
+      .qr-code{width:75px;height:75px}
     }
   </style>
 
@@ -192,7 +198,6 @@
           </div>
         </div>
         <a href="docentes.html">Docentes</a>
-        <a id="nav-calif" href="calificaciones.html" style="display:none">Calificaciones</a>
         <div class="nav-item has-sub">
           <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
           <div class="submenu">
@@ -242,23 +247,24 @@
           </div>
         </div>
         
-        <div class="credential-photo">
-          <div class="photo-frame">
-            <img id="studentPhoto" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='150'><rect width='120' height='150' fill='%23e2e8f0'/><text x='60' y='75' text-anchor='middle' font-family='Arial' font-size='12' fill='%2364748b'>Sin foto</text></svg>" alt="Foto del estudiante">
+        <div class="credential-body">
+          <div class="credential-photo">
+            <div class="photo-frame">
+              <img id="studentPhoto" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='175'><rect width='140' height='175' fill='%23e2e8f0'/><text x='70' y='87' text-anchor='middle' font-family='Arial' font-size='12' fill='%2364748b'>Sin foto</text></svg>" alt="Foto del estudiante">
+            </div>
           </div>
-        </div>
-        
-        <div class="credential-info">
-          <div class="student-name">
-            <h2 id="studentName">NOMBRE DEL ESTUDIANTE</h2>
-            <p class="student-run" id="studentRun">RUN: 12.345.678-9</p>
+          
+          <div class="credential-info">
+            <div class="student-name">
+              <h2 id="studentName">NOMBRE DEL ESTUDIANTE</h2>
+              <p class="student-run" id="studentRun">RUN: 12.345.678-9</p>
+            </div>
+            <div class="student-program" id="studentProgram">ESTUDIANTE TÉCNICO DE NIVEL MEDIO EN ENFERMERÍA</div>
           </div>
-          <div class="student-program" id="studentProgram">ESTUDIANTE TÉCNICO DE NIVEL MEDIO EN ENFERMERÍA</div>
-        </div>
-        
-        <div class="credential-barcode">
-          <div class="barcode"></div>
-          <div class="barcode-number" id="barcodeNumber">0123456789</div>
+          
+          <div class="credential-qr">
+            <div class="qr-code" id="qrCode"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -277,10 +283,11 @@
     </div>
   </div>
 
+
   <script type="module">
     import { requireAuth, getSession } from './auth.js';
     import { getBranding } from './branding.js';
-    import { currentStudentId, getStudent } from './students.js';
+    import { currentStudentId, getStudent, buildPerfilURL } from './students.js';
     
     // Requerir autenticación
     requireAuth('login.html');
@@ -317,13 +324,47 @@
           q('#studentPhoto').src = stu.avatarUrl;
         }
         
-        // Generar número de código de barras basado en el RUN
-        const runNumber = (stu.run || '12345678').replace(/[^0-9]/g, '').slice(0, 10);
-        q('#barcodeNumber').textContent = runNumber.padEnd(10, '0');
+        // Generar QR code que apunta al perfil público
+        const profileURL = buildPerfilURL(stu.run);
+        generateQRCode(profileURL);
       } else {
         q('#studentName').textContent = 'ESTUDIANTE NO ENCONTRADO';
         q('#studentRun').textContent = 'RUN: No disponible';
         q('#studentProgram').textContent = 'PROGRAMA NO DISPONIBLE';
+      }
+    }
+
+    // Función para generar QR code usando API gratuita
+    function generateQRCode(url) {
+      const qrContainer = q('#qrCode');
+      if (qrContainer) {
+        // Limpiar contenido anterior
+        qrContainer.innerHTML = '';
+        
+        try {
+          // Usar API de QR gratuita (qr-server.com)
+          const encodedUrl = encodeURIComponent(url);
+          const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=${encodedUrl}&color=000000&bgcolor=ffffff`;
+          
+          // Crear imagen del QR
+          const qrImg = document.createElement('img');
+          qrImg.src = qrApiUrl;
+          qrImg.alt = 'QR Code - Perfil del estudiante';
+          qrImg.style.width = '110px';
+          qrImg.style.height = '110px';
+          qrImg.style.border = 'none';
+          
+          // Manejar error de carga
+          qrImg.onerror = function() {
+            qrContainer.innerHTML = '<div style="width:100px;height:100px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6b7280;text-align:center;border-radius:4px;">QR no disponible</div>';
+          };
+          
+          qrContainer.appendChild(qrImg);
+          
+        } catch (error) {
+          console.error('Error generating QR code:', error);
+          qrContainer.innerHTML = '<div style="width:100px;height:100px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6b7280;text-align:center;border-radius:4px;">QR no disponible</div>';
+        }
       }
     }
 
@@ -380,8 +421,9 @@
               q('#studentRun').textContent = `RUN: ${s.run||'No disponible'}`;
               q('#studentProgram').textContent = `ESTUDIANTE TÉCNICO DE NIVEL MEDIO EN ${(s.programa||'ENFERMERÍA').toUpperCase()}`;
               if (s.avatarUrl) q('#studentPhoto').src = s.avatarUrl;
-              const runNumber = (s.run||'12345678').replace(/[^0-9]/g,'').slice(0,10);
-              q('#barcodeNumber').textContent = runNumber.padEnd(10,'0');
+              // Generar QR code que apunta al perfil público
+              const profileURL = mod.buildPerfilURL(s.run);
+              generateQRCode(profileURL);
             }
           });
         }catch{}

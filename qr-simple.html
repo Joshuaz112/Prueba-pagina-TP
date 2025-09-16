@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Test Simple</title>
+</head>
+<body>
+    <h2>Test QR Code</h2>
+    <div id="qr"></div>
+    
+    <script>
+        // URL de prueba del perfil
+        const testUrl = "http://localhost:8000/perfil-alumno.html?rut=12.345.678-9";
+        
+        // Generar QR usando API
+        const encodedUrl = encodeURIComponent(testUrl);
+        const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodedUrl}&color=1e40af&bgcolor=ffffff`;
+        
+        // Mostrar información
+        document.body.innerHTML += `
+            <p><strong>URL del perfil:</strong> ${testUrl}</p>
+            <p><strong>API QR URL:</strong> ${qrApiUrl}</p>
+            <img src="${qrApiUrl}" alt="QR Code" style="border: 2px solid #ccc; padding: 10px;">
+            <br><br>
+            <a href="${testUrl}" target="_blank">Probar enlace directo al perfil</a>
+        `;
+    </script>
+</body>
+</html>

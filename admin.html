@@ -52,13 +52,9 @@
     
     table{width:100%;border-collapse:collapse;margin-top:16px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:all 0.3s ease} 
     th,td{border-bottom:1px solid var(--line);padding:16px 20px;transition:all 0.2s ease} 
-    thead th{background:linear-gradient(135deg,#f8fafc,#e2e8f0);color:var(--primary-700);text-transform:uppercase;font-size:.8rem;letter-spacing:.05em;font-weight:700;position:relative}
     thead th::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--success))}
-    tbody tr{transition:all 0.2s ease}
-    tbody tr:hover{background:linear-gradient(135deg,#f8fafc,#eff6ff);transform:scale(1.01)}
     tbody tr:last-child td{border-bottom:none}
     
-    input,select{width:100%;padding:12px 16px;border:2px solid var(--line);border-radius:10px;font-size:14px;transition:all 0.3s ease;background:#fff}
     input:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(59,130,246,0.1);transform:translateY(-1px)}
     input:hover,select:hover{border-color:var(--primary-700)}
     
@@ -67,14 +63,14 @@
     .preview{width:80px;height:80px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);border:4px solid #fff;box-shadow:var(--shadow-lg);transition:all 0.3s ease}
     .preview:hover{transform:scale(1.1);box-shadow:var(--shadow-xl)}
     
-    .admin-tabs{display:flex;gap:4px;margin-bottom:32px;background:linear-gradient(135deg,#f1f5f9,#e2e8f0);padding:6px;border-radius:16px;box-shadow:var(--shadow-sm)}
-    .admin-tabs .tab{border:none;padding:14px 24px;cursor:pointer;font-weight:600;color:var(--muted);background:transparent;border-radius:12px;transition:all 0.3s ease;position:relative;overflow:hidden}
+    .admin-tabs{display:flex;gap:6px;margin-bottom:32px;background:linear-gradient(135deg,#f1f5f9,#e2e8f0);padding:8px;border-radius:16px;box-shadow:var(--shadow);border:2px solid var(--line)}
+    .admin-tabs .tab{border:none;padding:16px 28px;cursor:pointer;font-weight:700;color:var(--muted);background:transparent;border-radius:12px;transition:all 0.3s ease;position:relative;overflow:hidden;font-size:0.95rem}
     .admin-tabs .tab::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,var(--primary),var(--success));opacity:0;transition:opacity 0.3s ease}
-    .admin-tabs .tab.active{background:#fff;color:var(--primary-700);box-shadow:var(--shadow);transform:translateY(-1px)}
-    .admin-tabs .tab.active::before{opacity:0.1}
-    .admin-tabs .tab:hover{transform:translateY(-1px);color:var(--primary-700)}
+    .admin-tabs .tab.active{background:#fff;color:var(--primary-700);box-shadow:var(--shadow-lg);transform:translateY(-2px);border:2px solid var(--primary)}
+    .admin-tabs .tab.active::before{opacity:0.05}
+    .admin-tabs .tab:hover{transform:translateY(-1px);color:var(--primary-700);background:rgba(255,255,255,0.7)}
     
-    .login-box{max-width:420px;margin:0 auto;text-align:center;padding:48px;border-radius:20px;box-shadow:var(--shadow-xl);background:#fff;position:relative;overflow:hidden}
+    .login-box{max-width:420px;margin:0 auto;text-align:center;padding:48px;border-radius:20px;box-shadow:var(--shadow-xl);background:#fff;position:relative;overflow:hidden;border:2px solid var(--line)}
     .login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--primary),var(--success),var(--warning))}
 
     /* Header - Integrado del index.html */
@@ -162,19 +158,19 @@
     .sheet:hover{box-shadow:var(--shadow-lg)}
 
     /* Mejoras visuales para admin */
-    .admin-panel{background:#fff;border-radius:20px;box-shadow:var(--shadow-xl);overflow:hidden;position:relative}
+    .admin-panel{background:#fff;border-radius:20px;box-shadow:var(--shadow-xl);overflow:hidden;position:relative;border:2px solid var(--line)}
     .admin-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--primary),var(--success),var(--warning))}
     
-    .section-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:16px;border-bottom:3px solid var(--primary-50);position:relative}
-    .section-header::after{content:'';position:absolute;bottom:-3px;left:0;width:60px;height:3px;background:linear-gradient(90deg,var(--primary),var(--success))}
-    .section-header h2{margin:0;color:var(--primary-700);font-size:1.75rem;font-weight:700;position:relative}
-    .section-header h2::before{content:'';position:absolute;left:-20px;top:50%;transform:translateY(-50%);width:4px;height:24px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:2px}
-    .section-header p{margin:8px 0 0 0;color:var(--muted);font-size:1rem}
+    .section-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;padding:20px 0 20px 0;border-bottom:3px solid var(--primary-50);position:relative;background:linear-gradient(135deg,#f8fafc,#eff6ff);border-radius:12px;padding:24px;border:2px solid var(--line)}
+    .section-header::after{content:'';position:absolute;bottom:-3px;left:24px;width:80px;height:4px;background:linear-gradient(90deg,var(--primary),var(--success));border-radius:2px}
+    .section-header h2{margin:0;color:var(--primary-700);font-size:1.85rem;font-weight:800;position:relative}
+    .section-header h2::before{content:'';position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:5px;height:28px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:3px}
+    .section-header p{margin:8px 0 0 0;color:var(--muted);font-size:1.05rem;font-weight:500}
     
     .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:32px}
-    .stat-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);padding:24px;border-radius:16px;text-align:center;border:1px solid var(--line);box-shadow:var(--shadow);transition:all 0.3s ease;position:relative;overflow:hidden}
-    .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--success))}
-    .stat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .stat-card{background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);padding:28px;border-radius:16px;text-align:center;border:2px solid var(--line);box-shadow:var(--shadow-lg);transition:all 0.3s ease;position:relative;overflow:hidden}
+    .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--primary),var(--success))}
+    .stat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl);border-color:var(--primary)}
     .stat-number{font-size:2.5rem;font-weight:800;color:var(--primary);margin-bottom:8px;background:linear-gradient(135deg,var(--primary),var(--success));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:countUp 0.8s ease-out}
     .stat-label{color:var(--muted);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:600}
     
@@ -189,8 +185,8 @@
     
     /* Enhanced form elements */
     .form-group{position:relative;margin-bottom:20px}
-    .form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--text);font-size:0.9rem}
-    .form-group input,.form-group select{transition:all 0.3s ease}
+    .form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--primary-700);font-size:0.95rem}
+    .form-group input,.form-group select{transition:all 0.3s ease;width:100%;padding:12px 16px;border-radius:10px;font-size:14px}
     .form-group input:focus,.form-group select:focus{transform:translateY(-2px);box-shadow:0 8px 25px rgba(59,130,246,0.15)}
     
     /* Enhanced buttons */
@@ -210,10 +206,6 @@
     .preview{width:80px;height:80px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);border:4px solid #fff;box-shadow:var(--shadow-lg);transition:all 0.3s ease}
     .preview:hover{transform:scale(1.1);box-shadow:var(--shadow-xl)}
     
-    /* Estilos para secciones del formulario */
-    .form-section{background:#f8fafc;border-radius:12px;border:1px solid var(--line);padding:20px;margin:16px 0}
-    .form-section h4{margin:0 0 16px 0;color:var(--primary-700);font-size:1.1rem;display:flex;align-items:center;gap:8px}
-    .form-section h4::before{content:'';width:4px;height:20px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:2px}
     
     /* Status indicators */
     .status{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
@@ -258,20 +250,94 @@
       .card{padding:16px}
     }
     
-    /* Dark mode support */
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0f172a;
-        --card:#1e293b;
-        --text:#f1f5f9;
-        --muted:#94a3b8;
-        --line:#334155;
-      }
-      .card{background:var(--card);border-color:var(--line)}
-      .btn{background:var(--card);color:var(--text);border-color:var(--line)}
-      input,select{background:var(--card);color:var(--text);border-color:var(--line)}
-      table{background:var(--card)}
-      thead th{background:linear-gradient(135deg,#1e293b,#334155)}
+    /* Improved visibility for all sections */
+    .form-section{
+      background:#f8fafc;
+      border:2px solid var(--line);
+      border-radius:12px;
+      padding:20px;
+      margin:16px 0;
+      box-shadow:var(--shadow);
+    }
+    
+    .form-section h4{
+      margin:0 0 16px 0;
+      color:var(--primary-700);
+      font-size:1.1rem;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:700;
+    }
+    
+    .form-section h4::before{
+      content:'';
+      width:4px;
+      height:20px;
+      background:linear-gradient(135deg,var(--primary),var(--success));
+      border-radius:2px;
+    }
+    
+    /* Enhanced table visibility */
+    thead th{
+      background:linear-gradient(135deg,#f1f5f9,#e2e8f0);
+      color:var(--primary-700);
+      text-transform:uppercase;
+      font-size:.85rem;
+      letter-spacing:.05em;
+      font-weight:700;
+      position:relative;
+      border-bottom:2px solid var(--primary);
+    }
+    
+    tbody tr{
+      background:#fff;
+      transition:all 0.2s ease;
+    }
+    
+    tbody tr:hover{
+      background:linear-gradient(135deg,#f8fafc,#eff6ff);
+      transform:translateY(-1px);
+      box-shadow:var(--shadow-sm);
+    }
+    
+    /* Better contrast for inputs */
+    input, select, textarea{
+      background:#fff;
+      color:var(--text);
+      border:2px solid var(--line);
+      font-weight:500;
+    }
+    
+    input:focus, select:focus, textarea:focus{
+      background:#fff;
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(59,130,246,0.1);
+    }
+    
+    /* Enhanced card visibility */
+    .card{
+      background:#fff;
+      border:2px solid var(--line);
+      box-shadow:var(--shadow-lg);
+    }
+    
+    /* Better button contrast */
+    .btn{
+      font-weight:600;
+      border:2px solid transparent;
+    }
+    
+    .btn:not(.primary):not(.danger):not(.success):not(.warning){
+      background:#fff;
+      color:var(--text);
+      border-color:var(--line);
+    }
+    
+    .btn:not(.primary):not(.danger):not(.success):not(.warning):hover{
+      background:var(--primary-50);
+      border-color:var(--primary);
+      color:var(--primary-700);
     }
   </style>
   <script>
@@ -337,7 +403,6 @@
           </div>
         </div>
         <a href="docentes.html">Docentes</a>
-        <a id="nav-calif" href="calificaciones.html" style="display:none">Calificaciones</a>
          <div class="nav-item has-sub">
           <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
           <div class="submenu">
@@ -727,9 +792,9 @@ import { getBranding, setBranding, resetBranding } from './branding.js';
     let editingId = null;
     // Adaptadores para compatibilidad con el HTML existente
     function getAlumniAll(){
-      // Exalumnos = estudiantes que tienen 'egreso' definido (o true/año)
+      // Exalumnos = estudiantes que tienen 'egreso' definido o están marcados como graduados
       const all = (listStudents && listStudents()) || [];
-      return all.filter(s => s.egreso);
+      return all.filter(s => s.egreso || s.graduado);
     }
     function upsertAlumn(obj){
       if(!obj) return;
@@ -1267,7 +1332,9 @@ import { getBranding, setBranding, resetBranding } from './branding.js';
     }
     function renderStudentsTable(){
       const arr = (listStudents && listStudents()) || [];
-      rowsStu.innerHTML = arr.map(s=>`
+      // Filtrar solo estudiantes activos (no graduados)
+      const activeStudents = arr.filter(s => !s.graduado && !s.egreso);
+      rowsStu.innerHTML = activeStudents.map(s=>`
         <tr>
           <td>${s.nombre||'-'}</td>
           <td>${s.run||'-'}</td>
@@ -1316,8 +1383,33 @@ import { getBranding, setBranding, resetBranding } from './branding.js';
       } else if (act==='cred-stu'){
         window.open('credencial.html?id=' + encodeURIComponent(id), '_blank');
       } else if (act==='grad-stu'){
-        const anio = prompt('Año de egreso', new Date().getFullYear());
-        if (anio){ updateStudent(id, {egreso: anio}); renderStudentsTable(); loadAlumniTable && loadAlumniTable(); renderStudentsTable(); renderSubjectsTable(); fillSelectors(); seedIfEmpty(); updateStats(); alert('Estudiante marcado como egresado.'); }
+        if (confirm('¿Confirmar egreso del estudiante? Esto lo moverá a la sección de Ex-alumnos.')){
+          const student = (listStudents()||[]).find(x=>x.id===id);
+          if (student) {
+            const anio = prompt('Año de egreso', new Date().getFullYear());
+            if (anio) {
+              // Marcar estudiante como egresado (no eliminarlo)
+              const updatedStudent = {
+                ...student,
+                egreso: anio,
+                graduado: true // Marca para identificar ex-alumnos
+              };
+              
+              // Actualizar el estudiante con datos de egreso
+              updateStudent(id, updatedStudent);
+              
+              // Actualizar todas las tablas
+              renderStudentsTable();
+              loadAlumniTable && loadAlumniTable();
+              renderSubjectsTable();
+              fillSelectors();
+              seedIfEmpty();
+              updateStats();
+              
+              alert('Estudiante egresado exitosamente y movido a Ex-alumnos.');
+            }
+          }
+        }
       }
     });
 
@@ -1497,29 +1589,6 @@ import { getBranding, setBranding, resetBranding } from './branding.js';
     initAuthUI();
   });
 </script>
-
-<!-- manual footer removed; keep only partial include -->
-  <div style="max-width:1200px;margin:0 auto;padding:20px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="logo-tp.webp" alt="TP" style="height:40px;width:40px;border-radius:8px;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.05)"/>
-        <div style="color:#64748b;font-size:.9rem">
-          <strong style="color:#0f172a">Liceo TP Enfermería</strong><br>
-          Comprometidos con la excelencia y la formación integral.
-        </div>
-      </div>
-      <nav>
-        <a href="index.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Inicio</a>
-        <a href="nosotros.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Nosotros</a>
-        <a href="programa.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Programa</a>
-        <a href="convenios.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Convenios</a>
-        <a href="contacto.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Contacto</a>
-        <a href="calificaciones.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Calificaciones</a>
-      </nav>
-      <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
-    </div>
-  </div>
--->
 <script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
 </div><div data-include="footer"></div></div>
 <script src="assets/include.js"></script>

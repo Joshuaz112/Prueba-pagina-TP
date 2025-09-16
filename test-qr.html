@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Test QR Code</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .qr-container { 
+      width: 120px; 
+      height: 120px; 
+      border: 2px solid #e2e8f0; 
+      border-radius: 8px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .test-info { 
+      background: #f8fafc; 
+      padding: 15px; 
+      border-radius: 8px; 
+      margin: 10px 0; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Test de Generación QR</h1>
+  
+  <div class="test-info">
+    <h3>Datos de prueba:</h3>
+    <p><strong>Estudiante:</strong> María González Pérez</p>
+    <p><strong>RUT:</strong> 12.345.678-9</p>
+    <p><strong>URL del perfil:</strong> <span id="profileUrl"></span></p>
+  </div>
+
+  <div class="test-info">
+    <h3>QR Code generado:</h3>
+    <div class="qr-container" id="qrContainer">
+      <div>Cargando QR...</div>
+    </div>
+    <p><strong>Estado:</strong> <span id="status">Generando...</span></p>
+  </div>
+
+  <div class="test-info">
+    <h3>Pruebas:</h3>
+    <button onclick="testQR()">Regenerar QR</button>
+    <button onclick="testProfileLink()">Probar enlace del perfil</button>
+  </div>
+
+  <script type="module">
+    import { buildPerfilURL } from './students.js';
+    
+    const testRut = '12.345.678-9';
+    let profileUrl = '';
+    
+    function generateQRCode(url) {
+      const qrContainer = document.getElementById('qrContainer');
+      const statusEl = document.getElementById('status');
+      
+      if (qrContainer) {
+        qrContainer.innerHTML = '<div>Generando QR...</div>';
+        statusEl.textContent = 'Generando...';
+        
+        try {
+          const encodedUrl = encodeURIComponent(url);
+          const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodedUrl}&color=1e40af&bgcolor=ffffff`;
+          
+          console.log('QR API URL:', qrApiUrl);
+          console.log('Profile URL:', url);
+          
+          const qrImg = document.createElement('img');
+          qrImg.src = qrApiUrl;
+          qrImg.alt = 'QR Code - Perfil del estudiante';
+          qrImg.style.width = '100px';
+          qrImg.style.height = '100px';
+          qrImg.style.border = 'none';
+          
+          qrImg.onload = function() {
+            statusEl.textContent = 'QR generado correctamente ✅';
+            statusEl.style.color = 'green';
+          };
+          
+          qrImg.onerror = function() {
+            qrContainer.innerHTML = '<div style="width:100px;height:100px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6b7280;text-align:center;border-radius:4px;">QR no disponible</div>';
+            statusEl.textContent = 'Error al generar QR ❌';
+            statusEl.style.color = 'red';
+          };
+          
+          qrContainer.innerHTML = '';
+          qrContainer.appendChild(qrImg);
+          
+        } catch (error) {
+          console.error('Error generating QR code:', error);
+          qrContainer.innerHTML = '<div style="width:100px;height:100px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6b7280;text-align:center;border-radius:4px;">Error</div>';
+          statusEl.textContent = 'Error: ' + error.message;
+          statusEl.style.color = 'red';
+        }
+      }
+    }
+    
+    window.testQR = function() {
+      generateQRCode(profileUrl);
+    };
+    
+    window.testProfileLink = function() {
+      window.open(profileUrl, '_blank');
+    };
+    
+    // Inicializar prueba
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        profileUrl = buildPerfilURL(testRut);
+        document.getElementById('profileUrl').textContent = profileUrl;
+        generateQRCode(profileUrl);
+      } catch (error) {
+        console.error('Error initializing test:', error);
+        document.getElementById('status').textContent = 'Error de inicialización: ' + error.message;
+        document.getElementById('status').style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>

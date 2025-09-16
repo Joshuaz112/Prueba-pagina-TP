@@ -156,66 +156,58 @@
   </script>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
-  <section class="page-hero" style="padding:28px 16px;background:linear-gradient(135deg,#f8fafc,#e2e8f0)">
-    <div style="max-width:1200px;margin:0 auto">
-      <h1 style="margin:0 0 8px 0;font-size:clamp(24px,3vw,36px)">Equipo Docente</h1>
-      <p style="margin:0;color:#64748b">Información clave presentada de forma clara y moderna.</p>
+<body>
+<div class="site-header">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="hamb" id="hamb" aria-label="Abrir menú">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
+      </button>
     </div>
-  </section>
-  <section class="page-grid" style="max-width:1200px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+    <div class="topbar-right">
+      <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
+      <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
+      <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
+      <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
 
-
-  <div class="site-header">
-    <div class="topbar">
-      <div class="topbar-left">
-        <button class="hamb" id="hamb" aria-label="Abrir menú">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
-        </button>
+      <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
+      <div id="nav-user" class="nav-item has-sub">
+        <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
+        <div class="submenu" id="accountMenu" style="min-width:200px"></div>
       </div>
-      <div class="topbar-right">
-        <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
-        <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
-        <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
-        <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
-
-        <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
-        <div id="nav-user" class="nav-item has-sub">
-          <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
-          <div class="submenu" id="accountMenu" style="min-width:200px"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar">
-      <nav id="mainMenu" class="menu">
-        <a href="index.html">Inicio</a>
-        <div class="nav-item has-sub">
-          <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="programa.html">Programa</a>
-            <a href="convenios.html">Convenios</a>
-            <a href="contacto.html">Contacto</a>
-          </div>
-        </div>
-        <a href="docentes.html">Docentes</a>
-        <a id="nav-calif" href="calificaciones.html" style="display:none">Calificaciones</a>
-         <div class="nav-item has-sub">
-          <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="alumnos.html">Alumnos</a>
-            <a href="exalumnos.html">Exalumnos</a>
-          </div>
-        </div>
-              <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
-      </nav>
-      <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
-      <div></div>
     </div>
   </div>
 
-  <div class="header-spacer"></div>
+  <div class="navbar">
+    <nav id="mainMenu" class="menu">
+      <a href="index.html">Inicio</a>
+      <div class="nav-item has-sub">
+        <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
+        <div class="submenu">
+          <a href="nosotros.html">Nosotros</a>
+          <a href="programa.html">Programa</a>
+          <a href="convenios.html">Convenios</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <a href="docentes.html">Docentes</a>
+       <div class="nav-item has-sub">
+        <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
+        <div class="submenu">
+          <a href="alumnos.html">Alumnos</a>
+          <a href="exalumnos.html">Exalumnos</a>
+        </div>
+      </div>
+            <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
+    </nav>
+    <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
+    <div></div>
+  </div>
+</div>
+
+<div class="header-spacer"></div>
+
+<main class="site-main">
 
 <header class="hero">
   <h1>Nuestros Docentes</h1>
@@ -244,6 +236,7 @@
     <h2 style="margin:0 0 16px 0;color:var(--primary-700);font-size:2rem">Cuerpo Docente</h2>
     <p style="font-size:1.1rem;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.6">Conoce a nuestros profesionales altamente calificados, comprometidos con la formación integral de nuestros estudiantes.</p>
   </div>
+  
   
   <div class="teachers-grid">
     <div class="teacher-card">
@@ -361,29 +354,11 @@
     </div>
   </div>
 </div>
- 
-<!-- manual footer removed; keep only partial include -->
-  <div style="max-width:1200px;margin:0 auto;padding:20px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="logo-tp.webp" alt="TP" style="height:40px;width:40px;border-radius:8px;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.05)"/>
-        <div style="color:#64748b;font-size:.9rem">
-          <strong style="color:#0f172a">Liceo TP Enfermería</strong><br>
-          Comprometidos con la excelencia y la formación integral.
-        </div>
-      </div>
-      <nav>
-        <a href="index.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Inicio</a>
-        <a href="nosotros.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Nosotros</a>
-        <a href="programa.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Programa</a>
-        <a href="convenios.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Convenios</a>
-        <a href="contacto.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Contacto</a>
-        <a href="calificaciones.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Calificaciones</a>
-      </nav>
-      <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
-    </div>
-  </div>
--->
+
+</div><div data-include="footer"></div></div>
+<script src="assets/include.js"></script>
+<script type="module" src="assets/live-sync-init.js"></script>
+
 <script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
 
 <script>

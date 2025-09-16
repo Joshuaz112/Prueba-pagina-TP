@@ -1,47 +1,128 @@
-<footer class="footer" role="contentinfo">
+<footer class="footer footer--modern" role="contentinfo">
+  <!-- Decorative gradient accent -->
+  <div class="footer-accent" aria-hidden="true"></div>
+  
   <div class="footer-wrap">
+    <!-- Main footer content -->
     <div class="footer-grid">
-      <div class="col">
-        <a href="index.html" class="brand">
-          <img src="logo-liceo.webp" alt="Logo Liceo">
-          <div>
-            <strong>Liceo Bicentenario Hermanos Sotomayor Baeza</strong>
-            <div class="muted">Formando profesionales con vocación</div>
+      <!-- Brand section with enhanced styling -->
+      <section class="footer-col footer-brand">
+        <div class="brand-container">
+          <a href="index.html" class="footer-brand-link" aria-label="Ir al inicio">
+            <div class="footer-logo-wrapper">
+              <img src="logo-liceo.webp" alt="Logo Liceo" class="footer-logo" />
+            </div>
+            <div class="brand-text">
+              <h3 class="footer-title">Liceo Bicentenario<br>Hermanos Sotomayor Baeza</h3>
+              <p class="footer-tagline">Formando profesionales con vocación</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="footer-location-wrapper">
+          <a class="footer-location" aria-label="Ubicación: Melipilla, Chile" href="https://maps.app.goo.gl/yQZ457JXDYJcmpAP8" target="_blank" rel="noopener noreferrer">
+            <div class="location-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </div>
+            <span>Melipilla, Chile</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Navigation sections with improved structure -->
+      <nav class="footer-col footer-nav" aria-label="Secciones del sitio">
+        <h4 class="footer-heading">Institución</h4>
+        <ul class="footer-links">
+          <li><a href="nosotros.html" class="footer-link">Nosotros</a></li>
+          <li><a href="programa.html" class="footer-link">Programa</a></li>
+          <li><a href="convenios.html" class="footer-link">Convenios</a></li>
+          <li><a href="contacto.html" class="footer-link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col footer-nav" aria-label="Académico">
+        <h4 class="footer-heading">Académico</h4>
+        <ul class="footer-links">
+          <li><a href="alumnos.html" class="footer-link">Alumnos</a></li>
+          <li><a href="exalumnos.html" class="footer-link">Exalumnos</a></li>
+          <li><a href="docentes.html" class="footer-link">Docentes</a></li>
+          <li><a href="horario.html" class="footer-link">Horario</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact section with enhanced design -->
+      <section class="footer-col footer-contact" aria-label="Contacto">
+        <h4 class="footer-heading">Contáctanos</h4>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <a href="mailto:info@tecnico-paramedico.cl" class="contact-link">info@tecnico-paramedico.cl</a>
           </div>
-        </a>
-        <div class="tag" style="margin-top:12px">
-          <span>📍</span> <span class="muted">Melipilla, Chile</span>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+            </div>
+            <a href="tel:+56932000000" class="contact-link">+56 9 3200 0000</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+              </svg>
+            </div>
+            <a href="https://wa.me/56932000000" class="contact-link" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
         </div>
-      </div>
-      <div class="col">
-        <h4>Secciones</h4>
-        <div><a href="nosotros.html">Nosotros</a></div>
-        <div><a href="programa.html">Programa</a></div>
-        <div><a href="convenios.html">Convenios</a></div>
-        <div><a href="contacto.html">Contacto</a></div>
-      </div>
-      <div class="col">
-        <h4>Académico</h4>
-        <div><a href="alumnos.html">Alumnos</a></div>
-        <div><a href="exalumnos.html">Exalumnos</a></div>
-        <div><a href="docentes.html">Docentes</a></div>
-        <div><a href="horario.html">Horario</a></div>
-        <!-- Quitamos duplicación visible de "Calificaciones" para que sólo esté en el header -->
-      </div>
-      <div class="col">
-        <h4>Contacto</h4>
-        <div class="muted">Correo: contacto@tp-enfermeria.cl</div>
-        <div class="muted">Teléfono: +56 9 1234 5678</div>
-        <div class="social" style="margin-top:8px">
-          <a href="#" aria-label="Instagram">Instagram</a>
-          <a href="#" aria-label="Facebook">Facebook</a>
-          <a href="#" aria-label="YouTube">YouTube</a>
+        
+        <!-- Social media with enhanced styling -->
+        <div class="footer-social-section">
+          <h5 class="social-heading">Síguenos</h5>
+          <div class="footer-social" aria-label="Redes sociales">
+            <a class="social-btn social-instagram" href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/>
+              </svg>
+            </a>
+            <a class="social-btn social-facebook" href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/>
+              </svg>
+            </a>
+            <a class="social-btn social-youtube" href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.3 3.5 12 3.5 12 3.5s-7.3 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c2.1.6 9.4.6 9.4.6s7.3 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.5 15.5v-7l6 3.5-6 3.5z"/>
+              </svg>
+            </a>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
+
+    <!-- Enhanced separator -->
+    <div class="footer-separator" aria-hidden="true"></div>
+
+    <!-- Bottom section with improved layout -->
     <div class="footer-bottom">
-      <div class="muted">© <span id="fy"></span> Liceo Bicentenario Hermanos Sotomayor Baeza — Todos los derechos reservados.</div>
-      <div class="muted">Hecho con ❤️ para la comunidad</div>
+      <div class="footer-bottom-content">
+        <div class="copyright">
+          <span>© <span id="fy"></span> Liceo Bicentenario Hermanos Sotomayor Baeza</span>
+          <span class="separator">•</span>
+          <span>Todos los derechos reservados</span>
+        </div>
+        <div class="footer-love">
+          <span>Hecho con </span>
+          <span class="heart" aria-hidden="true">❤️</span>
+          <span> para la comunidad</span>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

@@ -4,10 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Convenios | TP Enfermería</title>
-  <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="icon" href="logo-tp.webp">
@@ -32,17 +28,122 @@
     *{box-sizing:border-box}
     html,body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);min-height:100vh}
     .container{max-width:1200px;margin:20px auto;padding:0 20px}
-    .card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:24px;transition:all 0.3s ease;position:relative;overflow:hidden}
-    .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--success));opacity:0;transition:opacity 0.3s ease}
-    .card:hover::before{opacity:1}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border:none;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600;background:#fff;cursor:pointer;transition:all 0.3s ease;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
-    .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
-    .btn:hover::before{left:100%}
-    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-    .btn.primary{background:linear-gradient(135deg,var(--primary),var(--primary-700));color:#fff;box-shadow:var(--shadow)}
-    .btn.primary:hover{background:linear-gradient(135deg,var(--primary-700),#1e40af);box-shadow:var(--shadow-lg)}
-    .muted{color:var(--muted)}
+    
+    /* Convenios Grid */
+    .convenios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+    
+    .convenio-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .convenio-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .convenio-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--success));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .convenio-card:hover::before {
+      opacity: 1;
+    }
+    
+    .convenio-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .convenio-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--success));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+    
+    .convenio-card:hover .convenio-icon {
+      transform: scale(1.1);
+    }
+    
+    .convenio-title {
+      margin: 0;
+      color: var(--primary-700);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    
+    .convenio-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .convenio-benefits {
+      display: grid;
+      gap: 12px;
+    }
+    
+    .convenio-benefits article {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      transition: all 0.2s ease;
+    }
+    
+    .convenio-benefits article:hover {
+      background: #f1f5f9;
+      transform: translateX(4px);
+    }
+    
+    .convenios-section {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 24px 0;
+      box-shadow: var(--shadow);
+    }
+    
+    .convenios-section h2 {
+      margin: 0 0 16px 0;
+      color: var(--primary-700);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .convenios-section p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
 
     /* Header */
     .site-header{position:fixed;top:0;left:0;right:0;z-index:3000;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm)}
@@ -102,123 +203,78 @@
     header.hero h1{position:relative;z-index:1;font-size:3rem;font-weight:800;margin:0;text-shadow:0 2px 4px rgba(0,0,0,0.1);animation:fadeInUp 0.8s ease-out}
     header.hero p{position:relative;z-index:1;font-size:1.3rem;opacity:0.9;margin:16px 0 0 0;max-width:600px;margin-left:auto;margin-right:auto;animation:fadeInUp 0.8s ease-out 0.2s both}
     @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-    @media print{ .site-header,.btn,.hamb,.menu{display:none!important}; .card{box-shadow:none;border:0} header.hero{background:#fff;color:#000;border-bottom:2px solid #e5e7eb} }
-  
-    /* RESPONSIVE PATCH */
-    .topbar-right{ position:relative; overflow:visible; }
-    #nav-user{ position:relative; }
-    #nav-user .submenu{ right:0; left:auto; top:32px; z-index:5000; }
-    @media (max-width: 1200px){
-      .navbar{ grid-template-columns: auto 1fr auto !important; }
-    }
-    @media (max-width: 1024px){
-      .logo img{ height:96px; width:96px; }
-      .header-spacer{ height:148px; }
-    }
-    @media (max-width: 900px){
-      .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
-      .menu.open{ display:flex !important; }
-    }
-    @media (max-width: 800px){
-      #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; }
-    }
-        
-
-/* SEARCH & RNPI PATCH */
-.search-bar{display:flex;gap:8px;align-items:center;margin:10px 0 14px 0}
-.search-bar input[type="search"]{flex:1;min-width:220px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px}
-.btn-rnpi{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;text-decoration:none;color:#0f172a;font-weight:700}
-.btn-rnpi svg{width:16px;height:16px}
-.card-footer{margin-top:8px}
-
-</style>
-  <script>
-    function setupHeader(){
-      // Menú hamburguesa
-      const hamb=document.getElementById('hamb');
-      const navMenu=document.getElementById('mainMenu');
-      if(hamb&&navMenu){
-        hamb.addEventListener('click',(e)=>{e.stopPropagation();navMenu.classList.toggle('open');});
+    
+    @media (max-width: 768px) {
+      .convenios-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
-      // Desplegables
-      const dropdowns=document.querySelectorAll('.nav-item.has-sub');
-      dropdowns.forEach(drop=>{
-        const btn=drop.querySelector('button');
-        if(btn){
-          btn.addEventListener('click',(e)=>{
-            e.stopPropagation();
-            const wasOpen=drop.classList.contains('open');
-            dropdowns.forEach(d=>d.classList.remove('open'));
-            if(!wasOpen) drop.classList.add('open');
-          });
-        }
-      });
-      document.addEventListener('click',()=>{ if(navMenu) navMenu.classList.remove('open'); dropdowns.forEach(d=>d.classList.remove('open')); });
+      
+      .convenio-card {
+        padding: 20px;
+      }
+      
+      .convenio-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
     }
-    document.addEventListener('DOMContentLoaded',setupHeader);
-  </script>
+  </style>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
-  <section class="page-hero" style="padding:28px 16px;background:linear-gradient(135deg,#f8fafc,#e2e8f0)">
-    <div style="max-width:1200px;margin:0 auto">
-      <h1 style="margin:0 0 8px 0;font-size:clamp(24px,3vw,36px)">Convenios y Prácticas</h1>
-      <p style="margin:0;color:#64748b">Información clave presentada de forma clara y moderna.</p>
+<body>
+<div class="site-header">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="hamb" id="hamb" aria-label="Abrir menú">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
+      </button>
     </div>
-  </section>
-  <section class="page-grid" style="max-width:1200px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+    <div class="topbar-right">
+      <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
+      <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
+      <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
+      <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
 
-
-  <div class="site-header">
-    <div class="topbar">
-      <div class="topbar-left">
-        <button class="hamb" id="hamb" aria-label="Abrir menú">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
-        </button>
+      <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
+      <div id="nav-user" class="nav-item has-sub">
+        <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
+        <div class="submenu" id="accountMenu" style="min-width:200px"></div>
       </div>
-      <div class="topbar-right">
-        <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
-        <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
-        <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
-        <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
-
-        <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
-        <div id="nav-user" class="nav-item has-sub">
-          <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
-          <div class="submenu" id="accountMenu" style="min-width:200px"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar">
-      <nav id="mainMenu" class="menu">
-        <a href="index.html">Inicio</a>
-        <div class="nav-item has-sub">
-          <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="programa.html">Programa</a>
-            <a href="convenios.html">Convenios</a>
-            <a href="contacto.html">Contacto</a>
-          </div>
-        </div>
-        <a href="docentes.html">Docentes</a>
-        <a id="nav-calif" href="calificaciones.html" style="display:none">Calificaciones</a>
-         <div class="nav-item has-sub">
-          <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="alumnos.html">Alumnos</a>
-            <a href="exalumnos.html">Exalumnos</a>
-          </div>
-        </div>
-              <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
-      </nav>
-      <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
-      <div></div>
     </div>
   </div>
 
-  <div class="header-spacer"></div>
+  <div class="navbar">
+    <nav id="mainMenu" class="menu">
+      <a href="index.html">Inicio</a>
+      <div class="nav-item has-sub">
+        <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
+        <div class="submenu">
+          <a href="nosotros.html">Nosotros</a>
+          <a href="programa.html">Programa</a>
+          <a href="convenios.html">Convenios</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+      </div>
+      <a href="docentes.html">Docentes</a>
+       <div class="nav-item has-sub">
+        <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
+        <div class="submenu">
+          <a href="alumnos.html">Alumnos</a>
+          <a href="exalumnos.html">Exalumnos</a>
+        </div>
+      </div>
+            <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
+    </nav>
+    <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
+    <div></div>
+  </div>
+</div>
+
+<div class="header-spacer"></div>
+
+<main class="site-main">
 
 <header class="hero">
   <h1>Convenios Institucionales</h1>
@@ -240,467 +296,207 @@
 </header>
 
 <div class="container">
-  <div class="agreements-section">
-    <h2>Nuestros Convenios</h2>
-    <p>Mantenemos alianzas estratégicas con instituciones del sector salud, tanto públicas como privadas, que nos permiten ofrecer a nuestros estudiantes experiencias de práctica clínica de alta calidad y oportunidades de inserción laboral.</p>
+  <div class="convenios-section">
+    <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg)">
+      <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+    </div>
+    <h2 style="text-align:center;">Nuestros Convenios</h2>
+    <p style="text-align:center;">Mantenemos alianzas estratégicas con instituciones del sector salud, tanto públicas como privadas, que nos permiten ofrecer a nuestros estudiantes experiencias de práctica clínica de alta calidad y oportunidades de inserción laboral durante sus <strong>6,5 meses de práctica profesional</strong>.</p>
   </div>
   
-  <div class="agreements-grid">
-    <div class="agreement-card">
-      <div class="agreement-header">
-        <div class="agreement-icon">
+  <div class="convenios-grid">
+    <div class="convenio-card">
+      <div class="convenio-header">
+        <div class="convenio-icon">
           <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-8A5.5 5.5 0 0 1 12 5.1 5.5 5.5 0 0 1 21.3 13c-2.3 3.6-9.3 8-9.3 8zm1-12h2v2h2v2h-2v2h-2v-2h-2v-2h2z"/></svg></span>
         </div>
-        <h3 class="agreement-title">Hospital Regional</h3>
+        <h3 class="convenio-title">Hospital Regional</h3>
       </div>
-      <p class="agreement-description">Convenio de colaboración para prácticas clínicas en el Hospital Regional, proporcionando a nuestros estudiantes experiencia en atención hospitalaria de alta complejidad.</p>
-      <div class="cards">
-        <li>Prácticas clínicas supervisadas</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Rotaciones por diferentes servicios</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Acceso a tecnología médica avanzada</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Mentoría de profesionales especializados</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Oportunidades de empleo post-graduación</div>
-  </div>
-</article>
+      <p class="convenio-description">Convenio de colaboración para prácticas clínicas en el Hospital Regional, proporcionando experiencia en atención hospitalaria de alta complejidad.</p>
+      <div class="convenio-benefits">
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🏥</div>
+            <div style="line-height:1.5">Prácticas clínicas supervisadas</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🔄</div>
+            <div style="line-height:1.5">Rotaciones por diferentes servicios</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">⚕️</div>
+            <div style="line-height:1.5">Acceso a tecnología médica avanzada</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">👨‍⚕️</div>
+            <div style="line-height:1.5">Mentoría de profesionales especializados</div>
+          </div>
+        </article>
       </div>
     </div>
     
-    <div class="agreement-card">
-      <div class="agreement-header">
-        <div class="agreement-icon">
+    <div class="convenio-card">
+      <div class="convenio-header">
+        <div class="convenio-icon">
           <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2v2a8 8 0 1 1-8 8H2A10 10 0 1 0 12 2zm0 4v2a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6zm0 4a2 2 0 1 0 2 2 2 2 0 0 0-2-2z"/></svg></span>
         </div>
-        <h3 class="agreement-title">Clínica Privada</h3>
+        <h3 class="convenio-title">Clínicas Privadas</h3>
       </div>
-      <p class="agreement-description">Alianza estratégica con una clínica privada de reconocido prestigio, ofreciendo experiencias de práctica en un entorno de atención especializada.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Prácticas en servicios especializados</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Formación en atención ambulatoria</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Experiencia en gestión de calidad</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Desarrollo de competencias técnicas</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Red de contactos profesionales</div>
-  </div>
-</article>
+      <p class="convenio-description">Alianza estratégica con clínicas privadas de reconocido prestigio, ofreciendo experiencias de práctica en entornos de atención especializada.</p>
+      <div class="convenio-benefits">
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🏥</div>
+            <div style="line-height:1.5">Prácticas en servicios especializados</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🚶‍♂️</div>
+            <div style="line-height:1.5">Formación en atención ambulatoria</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">✅</div>
+            <div style="line-height:1.5">Experiencia en gestión de calidad</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🤝</div>
+            <div style="line-height:1.5">Red de contactos profesionales</div>
+          </div>
+        </article>
       </div>
     </div>
     
-    <div class="agreement-card">
-      <div class="agreement-header">
-        <div class="agreement-icon">
+    <div class="convenio-card">
+      <div class="convenio-header">
+        <div class="convenio-icon">
           <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 13.5 10 11l2 2 3-3 4 4-2 2-1-1-3 3a3 3 0 0 1-4.2 0L8 16l-2 2-4-4 2-2 3.5 1.5zM14 7l-2-2-3 3 2 2 3-3z"/></svg></span>
         </div>
-        <h3 class="agreement-title">Centro de Salud Familiar</h3>
+        <h3 class="convenio-title">Centros de Salud Familiar (CESFAM)</h3>
       </div>
-      <p class="agreement-description">Convenio con CESFAM para prácticas en atención primaria de salud, enfocándose en la promoción, prevención y atención comunitaria.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Prácticas en atención primaria</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Programas de promoción de salud</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Atención familiar y comunitaria</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Prevención de enfermedades</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Educación para la salud</div>
-  </div>
-</article>
+      <p class="convenio-description">Convenio con CESFAM para prácticas en atención primaria de salud, enfocándose en promoción, prevención y atención comunitaria.</p>
+      <div class="convenio-benefits">
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🏥</div>
+            <div style="line-height:1.5">Prácticas en atención primaria</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">📈</div>
+            <div style="line-height:1.5">Programas de promoción de salud</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">👨‍👩‍👧‍👦</div>
+            <div style="line-height:1.5">Atención familiar y comunitaria</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🛡️</div>
+            <div style="line-height:1.5">Prevención de enfermedades</div>
+          </div>
+        </article>
       </div>
     </div>
     
-    <div class="agreement-card">
-      <div class="agreement-header">
-        <div class="agreement-icon">
+    <div class="convenio-card">
+      <div class="convenio-header">
+        <div class="convenio-icon">
           <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg></span>
         </div>
-        <h3 class="agreement-title">Hogar de Ancianos</h3>
+        <h3 class="convenio-title">Hogares de Ancianos</h3>
       </div>
-      <p class="agreement-description">Colaboración con hogares de ancianos para prácticas en geriatría y cuidados de larga duración, desarrollando competencias en atención especializada.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Cuidados geriátricos especializados</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Atención de larga duración</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Manejo de enfermedades crónicas</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Apoyo familiar y emocional</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Rehabilitación y terapia ocupacional</div>
-  </div>
-</article>
+      <p class="convenio-description">Colaboración con hogares de ancianos para prácticas en geriatría y cuidados de larga duración, desarrollando competencias en atención especializada.</p>
+      <div class="convenio-benefits">
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">👴</div>
+            <div style="line-height:1.5">Cuidados geriátricos especializados</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">⏰</div>
+            <div style="line-height:1.5">Atención de larga duración</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">💊</div>
+            <div style="line-height:1.5">Manejo de enfermedades crónicas</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">❤️</div>
+            <div style="line-height:1.5">Apoyo familiar y emocional</div>
+          </div>
+        </article>
       </div>
     </div>
     
-    <div class="agreement-card">
-      <div class="agreement-header">
-        <div class="agreement-icon">
+    <div class="convenio-card">
+      <div class="convenio-header">
+        <div class="convenio-icon">
           <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
         </div>
-        <h3 class="agreement-title">Universidad Local</h3>
+        <h3 class="convenio-title">Servicio de Salud Regional</h3>
       </div>
-      <p class="agreement-description">Convenio de colaboración académica con universidad local para intercambio de conocimientos, investigación y desarrollo de proyectos conjuntos.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Intercambio académico</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Proyectos de investigación</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Seminarios y conferencias</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Acceso a biblioteca especializada</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Programas de continuidad de estudios</div>
-  </div>
-</article>
-      </div>
-    </div>
-    
-    <div class="agreement-card">
-      <div class="agreement-header">
-        <div class="agreement-icon">
-          <span class="icon" style="width:30px;height:30px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
-        </div>
-        <h3 class="agreement-title">Servicio de Salud</h3>
-      </div>
-      <p class="agreement-description">Convenio marco con el Servicio de Salud local para prácticas en la red pública de salud, cubriendo diferentes niveles de atención.</p>
-      <div class="cards">
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Prácticas en red pública de salud</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Experiencia en diferentes niveles de atención</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Conocimiento del sistema de salud</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Desarrollo de competencias públicas</div>
-  </div>
-</article>
-        <article style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <div style="font-size:20px">🩺</div>
-    <div style="line-height:1.5">Oportunidades de empleo en sector público</div>
-  </div>
-</article>
+      <p class="convenio-description">Convenio marco con el Servicio de Salud regional para prácticas en la red pública de salud, cubriendo diferentes niveles de atención.</p>
+      <div class="convenio-benefits">
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🏥</div>
+            <div style="line-height:1.5">Prácticas en red pública de salud</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">📊</div>
+            <div style="line-height:1.5">Experiencia en diferentes niveles de atención</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">🔍</div>
+            <div style="line-height:1.5">Conocimiento del sistema de salud</div>
+          </div>
+        </article>
+        <article>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:20px">💼</div>
+            <div style="line-height:1.5">Oportunidades de empleo en sector público</div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
   
-  <div class="agreements-section">
+  <div class="convenios-section">
     <h2>Beneficios de Nuestros Convenios</h2>
-    <p>Estos convenios nos permiten ofrecer a nuestros estudiantes una formación integral que combina la teoría con la práctica real, preparándolos para enfrentar los desafíos del mundo laboral con competencias sólidas y experiencia práctica valiosa.</p>
+    <p>Estos convenios nos permiten ofrecer a nuestros estudiantes una formación integral que combina la teoría con la práctica real, preparándolos para enfrentar los desafíos del mundo laboral con competencias sólidas y experiencia práctica valiosa. Durante los <strong>6,5 meses de práctica profesional</strong>, nuestros estudiantes rotan por diferentes instituciones para obtener una visión completa del sector salud.</p>
   </div>
 </div>
- 
-<!-- manual footer removed; keep only partial include -->
-  <div style="max-width:1200px;margin:0 auto;padding:20px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="logo-tp.webp" alt="TP" style="height:40px;width:40px;border-radius:8px;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.05)"/>
-        <div style="color:#64748b;font-size:.9rem">
-          <strong style="color:#0f172a">Liceo TP Enfermería</strong><br>
-          Comprometidos con la excelencia y la formación integral.
-        </div>
-      </div>
-      <nav>
-        <a href="index.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Inicio</a>
-        <a href="nosotros.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Nosotros</a>
-        <a href="programa.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Programa</a>
-        <a href="convenios.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Convenios</a>
-        <a href="contacto.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Contacto</a>
-        <a href="calificaciones.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Calificaciones</a>
-      </nav>
-      <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
-    </div>
-  </div>
--->
-<script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
 
-<script>
-  (async function(){
-    const lbl = document.getElementById('cuentaLabel');
-    const menu = document.getElementById('cuentaMenu');
-    if(!lbl || !menu) return;
-    let mod=null; try{ mod = await import('./students.js'); }catch(e){}
-    const getStudent = mod && mod.getStudent ? mod.getStudent : (id)=>null;
-    function roleInfo(){ if(sessionStorage.getItem('tp_admin')==='1') return {role:'admin'};
-      const sid=sessionStorage.getItem('tp_student_id'); if(sid) return {role:'alumno', id:sid};
-      const gid=sessionStorage.getItem('tp_guardian_id'); if(gid) return {role:'apoderado', id:gid}; return {role:null}; }
-    function myAccountHref(info){ if(info.role==='admin') return 'admin.html'; if(info.role) return 'calificaciones.html'; return 'admin.html'; }
-    function render(){
-      const info=roleInfo(); menu.innerHTML='';
-      const base = `<a href="${myAccountHref(info)}"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg></span> Mi cuenta</a>`;
-      if(info.role==='admin'){ lbl.textContent='Admin ▾'; menu.innerHTML = base + `<button id='logoutBtn'><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 17v-2h4v-2h-4V9L6 12l4 3zm2 3H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5V2H7a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h5z"/></svg></span> Cerrar sesión</button>`; }
-      else if(info.role){ const s=getStudent(info.id); const nombre=(s&&s.nombre)?s.nombre.split(' ')[0]:'Cuenta'; lbl.textContent=nombre+' ▾'; menu.innerHTML = base + `<button id='logoutBtn'><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 17v-2h4v-2h-4V9L6 12l4 3zm2 3H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5V2H7a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h5z"/></svg></span> Cerrar sesión</button>`; }
-      else { lbl.textContent='Cuenta ▾'; menu.innerHTML = base; }
-      const btn=document.getElementById('logoutBtn'); if(btn) btn.onclick=()=>{ sessionStorage.removeItem('tp_admin'); sessionStorage.removeItem('tp_student_id'); sessionStorage.removeItem('tp_guardian_id'); render(); location.href='index.html'; };
-      window.tpUpdateCuenta = render;
-    }
-    render();
-  })();
-</script>
+<div data-include="footer"></div>
+</main>
 
-
-
-<script>/* submenu-behavior: hover intent + mobile memory */
-document.addEventListener('DOMContentLoaded', function(){
-  try{
-    var KEY = 'open_menus';
-    var openSet = new Set(JSON.parse(sessionStorage.getItem(KEY) || '[]'));
-    var items = document.querySelectorAll('.nav-item.has-sub');
-    items.forEach(function(item){
-      var btn = item.querySelector('button[data-menu-id]');
-      var arrow = btn ? btn.querySelector('.chev') : null;
-      if(!btn) return;
-      var id = btn.getAttribute('data-menu-id') || 'menu-' + Math.random().toString(36).slice(2);
-
-      // Restaurar en móvil
-      var isMobile = window.matchMedia('(max-width:800px)').matches;
-      if(isMobile && openSet.has(id)) item.classList.add('open');
-      if(arrow){ arrow.textContent = item.classList.contains('open') ? '▾' : '▸'; }
-
-      // Móvil: toggle por toque + memoria
-      btn.addEventListener('click', function(e){
-        var isMobileNow = window.matchMedia('(max-width:800px)').matches;
-        if(isMobileNow){
-          e.preventDefault();
-          item.classList.toggle('open');
-          if(item.classList.contains('open')) openSet.add(id); else openSet.delete(id);
-          sessionStorage.setItem(KEY, JSON.stringify(Array.from(openSet)));
-          if(arrow){ arrow.textContent = item.classList.contains('open') ? '▾' : '▸'; }
-        }
-      });
-
-      // Desktop: hover-intent (retardos)
-      var overTimer = null, outTimer = null;
-      function openMenu(){ item.classList.add('open'); if(arrow) arrow.textContent='▾'; }
-      function closeMenu(){ item.classList.remove('open'); if(arrow) arrow.textContent='▸'; }
-      function isDesktop(){ return window.matchMedia('(min-width:801px)').matches; }
-
-      item.addEventListener('mouseenter', function(){
-        if(!isDesktop()) return;
-        clearTimeout(outTimer);
-        overTimer = setTimeout(openMenu, 120);
-      });
-      item.addEventListener('mouseleave', function(){
-        if(!isDesktop()) return;
-        clearTimeout(overTimer);
-        outTimer = setTimeout(closeMenu, 260);
-      });
-    });
-  }catch(e){ /* no-op */ }
-});
-</script>
-
-
-<script>
-// add-enter-key: generic handler for login inputs
-document.addEventListener('DOMContentLoaded', function(){
-  function wireEnter(emailSel, passSel, btnSel){
-    var email = document.querySelector(emailSel);
-    var pass = document.querySelector(passSel);
-    var btn  = document.querySelector(btnSel);
-    if(!email || !pass || !btn) return;
-    function handler(e){
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        btn.click();
-      }
-    }
-    email.addEventListener('keydown', handler);
-    pass.addEventListener('keydown', handler);
-  }
-  // Common patterns
-  wireEnter('#email', '#pass', '#enter');     // alumno/apoderado, privado
-  wireEnter('#email', '#pass', '#btnLogin');  // admin
-});
-</script>
-
-
-<script type="module">
-  import { initAuthUI } from './auth.js';
-  initAuthUI();
-</script>
-
-<script>
-// HAMB_PATCH
-document.addEventListener('DOMContentLoaded', function(){
-  const hamb = document.getElementById('hamb');
-  const navMenu = document.getElementById('mainMenu');
-  if(hamb && navMenu){
-    hamb.addEventListener('click', function(e){
-      e.stopPropagation();
-      navMenu.classList.toggle('open');
-    });
-    document.addEventListener('click', function(){ navMenu.classList.remove('open'); });
-  }
-});
-</script>
-
-
-<script>
-// FILTER & RNPI PATCH
-document.addEventListener('DOMContentLoaded', function(){
-  // --- Filtro por nombre/curso ---
-  var filterInput = document.getElementById('filterInput');
-  if(filterInput){
-    var grid = document.querySelector('.cards-grid') || document.querySelector('[data-grid="cards"]');
-    function normalize(t){ return (t||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
-    function doFilter(){
-      var q = normalize(filterInput.value);
-      var cards = document.querySelectorAll('.student-card, .alumno-card, .exalumno-card');
-      cards.forEach(function(card){
-        var text = normalize(card.textContent);
-        card.style.display = (!q || text.indexOf(q) !== -1) ? '' : 'none';
-      });
-    }
-    filterInput.addEventListener('input', doFilter);
-  }
-
-  // --- Botones RNPI en exalumnos ---
-  var exCards = document.querySelectorAll('.exalumno-card');
-  exCards.forEach(function(card){
-    // Evitar duplicar
-    if(card.querySelector('.btn-rnpi')) return;
-    var footer = card.querySelector('.card-footer');
-    if(!footer){
-      footer = document.createElement('div');
-      footer.className = 'card-footer';
-      card.appendChild(footer);
-    }
-    var btn = document.createElement('a');
-    btn.className = 'btn-rnpi';
-    btn.target = '_blank';
-    btn.rel = 'noopener';
-    btn.href = 'https://rnpi.superdesalud.gob.cl/#';
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 0 1 5 5v1h1a4 4 0 1 1 0 8h-1v1a5 5 0 1 1-10 0v-1H6a4 4 0 1 1 0-8h1V7a5 5 0 0 1 5-5zm-3 14v1a3 3 0 1 0 6 0v-1H9zm9-2a2 2 0 0 0 0-4h-1v4h1zM7 14v-4H6a2 2 0 1 0 0 4h1zm3-7a3 3 0 1 0 6 0V7a3 3 0 1 0-6 0V7z"/></svg> RNPI';
-    btn.addEventListener('click', function(){
-      var rut = card.getAttribute('data-rut') || card.getAttribute('data-run') || '';
-      if(navigator.clipboard && rut){
-        navigator.clipboard.writeText(rut).catch(function(){});
-      }
-      // No podemos prellenar RNPI (SPA), abrimos home y dejamos RUT en portapapeles si existía
-    });
-    footer.appendChild(btn);
-  });
-});
-</script>
-
-</div></section><!--grid-end-->
-<div data-include="footer"></div></div>
 <script src="assets/include.js"></script>
 <script type="module" src="assets/live-sync-init.js"></script>
-<!-- Asegura inicialización tardía del menú de Cuenta -->
 <script type="module">
   import { initAuthUI } from './auth.js';
   window.addEventListener('DOMContentLoaded', () => setTimeout(initAuthUI, 0));
@@ -711,7 +507,5 @@ document.addEventListener('DOMContentLoaded', function(){
   });
   window.addEventListener('load', initAuthUI);
 </script>
-</body></html>
-
-
-
+</body>
+</html>

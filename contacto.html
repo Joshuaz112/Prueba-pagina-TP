@@ -100,313 +100,214 @@
     header.hero p{position:relative;z-index:1;font-size:1.3rem;opacity:0.9;margin:16px 0 0 0;max-width:600px;margin-left:auto;margin-right:auto;animation:fadeInUp 0.8s ease-out 0.2s both}
     @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
     
-    /* Estilos para formulario de contacto */
-    .contact-section{margin:40px 0;padding:32px 0}
-    .contact-section h2{color:var(--primary-700);font-size:2rem;margin:0 0 24px 0;text-align:center;position:relative}
-    .contact-section h2::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(90deg,var(--primary),var(--success));border-radius:2px}
-    .contact-section p{color:var(--muted);font-size:1.1rem;line-height:1.7;margin:0 0 20px 0;text-align:center;max-width:800px;margin-left:auto;margin-right:auto}
-    
-    /* Grid de contacto */
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:40px 0}
-    .contact-form{background:#fff;border-radius:16px;padding:32px;box-shadow:var(--shadow);border:1px solid var(--line);position:relative;overflow:hidden}
-    .contact-form::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--success));opacity:0;transition:opacity 0.3s ease}
-    .contact-form:hover::before{opacity:1}
-    .contact-info{background:#fff;border-radius:16px;padding:32px;box-shadow:var(--shadow);border:1px solid var(--line);position:relative;overflow:hidden}
-    .contact-info::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--success),var(--warning));opacity:0;transition:opacity 0.3s ease}
-    .contact-info:hover::before{opacity:1}
-    
-    /* Formulario */
-    .form-group{margin-bottom:24px}
-    .form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--primary-700);font-size:0.95rem}
-    .form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:2px solid var(--line);border-radius:10px;font-size:14px;transition:all 0.3s ease;background:#fff;color:var(--text)}
-    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(59,130,246,0.1);transform:translateY(-1px)}
-    .form-group textarea{min-height:120px;resize:vertical}
-    .form-submit{width:100%;padding:16px;background:linear-gradient(135deg,var(--primary),var(--primary-700));color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.3s ease;box-shadow:var(--shadow);position:relative;overflow:hidden}
-    .form-submit::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease}
-    .form-submit:hover::before{left:100%}
-    .form-submit:hover{background:linear-gradient(135deg,var(--primary-700),#1e40af);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
-    
-    /* Información de contacto */
-    .contact-item{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding:16px;background:var(--primary-50);border-radius:12px;transition:all 0.3s ease}
-    .contact-item:hover{background:var(--primary-100);transform:translateX(4px)}
-    .contact-icon{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--success));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);flex-shrink:0}
-    .contact-details h3{color:var(--primary-700);font-size:1.1rem;font-weight:700;margin:0 0 4px 0}
-    .contact-details p{color:var(--muted);font-size:0.95rem;margin:0;line-height:1.4}
-    
-    /* Responsive */
-    @media(max-width:768px){
-      .contact-grid{grid-template-columns:1fr;gap:24px}
-      .contact-form,.contact-info{padding:24px}
-      header.hero h1{font-size:2.5rem}
-      header.hero p{font-size:1.1rem}
-      .contact-section h2{font-size:1.75rem}
+    /* === Tarjetas de CONTACTO (independientes, look tipo Nosotros) === */
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px;
     }
+    .feature-card{
+      display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;
+      background:linear-gradient(#fff,#fff) padding-box,
+                 linear-gradient(90deg,var(--primary),var(--success)) border-box;
+      border:1px solid transparent;border-radius:16px;padding:22px;
+      box-shadow:0 8px 24px rgba(2,6,23,.06);
+      position:relative;overflow:hidden;transition:all .3s ease;min-height:260px;isolation:isolate;
+    }
+    .feature-card::before{
+      content:"";position:absolute;inset:0 0 auto 0;height:4px;
+      background:linear-gradient(90deg,var(--primary),var(--success));opacity:.95;
+    }
+    .feature-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .feature-card .feature-icon{
+      width:72px;height:72px;border-radius:999px;margin-top:2px;
+      display:flex;align-items:center;justify-content:center;
+      background:radial-gradient(ellipse at 30% 30%, var(--primary) 0%, var(--primary-700) 70%);
+      color:#fff;box-shadow:0 8px 16px rgba(2,6,23,.12);border:4px solid #fff;
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .feature-card .feature-icon:hover{transform:scale(1.06);box-shadow:var(--shadow-xl)}
+    .feature-card .feature-title{margin:12px 0 6px;font-size:1.05rem;font-weight:800;color:var(--primary-700);line-height:1.15}
+    .feature-card .feature-description{color:#475569;font-size:.98rem;line-height:1.6;margin:0}
+
+    /* Bloques intro/compromiso con aire extra */
+    .card--intro{padding:28px;text-align:center;margin-bottom:32px}
+    .card--intro h2{margin:0 0 16px 0;color:var(--primary-700);font-size:2rem}
+    .card--intro p{font-size:1.1rem;color:var(--muted);max-width:800px;margin:0 auto;line-height:1.6}
+
+    /* Accesibilidad y preferencias de movimiento */
+    a,button,.btn,.menu a{outline:none}
+    a:focus-visible,button:focus-visible,.menu a:focus-visible{
+      box-shadow:0 0 0 3px var(--primary-50),0 0 0 5px var(--primary);
+      border-radius:10px;
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important;scroll-behavior:auto!important}
+    }
+
+    /* Responsive fino */
+    @media (max-width:1024px){ .features-grid{gap:20px} }
+    @media (max-width:768px){
+      header.hero{padding:56px 16px 40px}
+      .features-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+      .feature-card{padding:18px;min-height:auto}
+      .feature-card .feature-icon{width:64px;height:64px}
+    }
+
     @media print{ .site-header,.btn,.hamb,.menu{display:none!important}; .card{box-shadow:none;border:0} header.hero{background:#fff;color:#000;border-bottom:2px solid #e5e7eb} }
-  
-    /* RESPONSIVE PATCH */
-    .topbar-right{ position:relative; overflow:visible; }
-    #nav-user{ position:relative; }
-    #nav-user .submenu{ right:0; left:auto; top:32px; z-index:5000; }
-    @media (max-width: 1200px){
-      .navbar{ grid-template-columns: auto 1fr auto !important; }
-    }
-    @media (max-width: 1024px){
-      .logo img{ height:96px; width:96px; }
-      .header-spacer{ height:148px; }
-    }
-    @media (max-width: 900px){
-      .menu{ display:none !important; position:absolute; top:124px; left:0; right:0; background:#fff; border-top:1px solid #e5e7eb; padding:12px; flex-direction:column; gap:12px; z-index:3050; }
-      .menu.open{ display:flex !important; }
-    }
-    @media (max-width: 800px){
-      #nav-user .submenu{ position:static; right:auto; left:auto; top:auto; }
-    }
         
 
-/* SEARCH & RNPI PATCH */
-.search-bar{display:flex;gap:8px;align-items:center;margin:10px 0 14px 0}
-.search-bar input[type="search"]{flex:1;min-width:220px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px}
-.btn-rnpi{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;cursor:pointer;text-decoration:none;color:#0f172a;font-weight:700}
-.btn-rnpi svg{width:16px;height:16px}
-.card-footer{margin-top:8px}
 
 </style>
-  <script>
-    function setupHeader(){
-      // Menú hamburguesa
-      const hamb=document.getElementById('hamb');
-      const navMenu=document.getElementById('mainMenu');
-      if(hamb&&navMenu){
-        hamb.addEventListener('click',(e)=>{e.stopPropagation();navMenu.classList.toggle('open');});
-      }
-      // Desplegables
-      const dropdowns=document.querySelectorAll('.nav-item.has-sub');
-      dropdowns.forEach(drop=>{
-        const btn=drop.querySelector('button');
-        if(btn){
-          btn.addEventListener('click',(e)=>{
-            e.stopPropagation();
-            const wasOpen=drop.classList.contains('open');
-            dropdowns.forEach(d=>d.classList.remove('open'));
-            if(!wasOpen) drop.classList.add('open');
-          });
-        }
-      });
-      document.addEventListener('click',()=>{ if(navMenu) navMenu.classList.remove('open'); dropdowns.forEach(d=>d.classList.remove('open')); });
-    }
-    document.addEventListener('DOMContentLoaded',setupHeader);
-  </script>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body><div class="site-wrap"><div data-include="header"></div><main class="site-main">
-
-  <div class="site-header">
-    <div class="topbar">
-      <div class="topbar-left">
-        <button class="hamb" id="hamb" aria-label="Abrir menú">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
-        </button>
-      </div>
-      <div class="topbar-right">
-        <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
-        <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
-        <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
-        <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
-
-        <!-- Cuenta (dropdown; el contenido lo rellena auth.js) -->
-        <div id="nav-user" class="nav-item has-sub">
-          <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
-          <div class="submenu" id="accountMenu" style="min-width:200px"></div>
+<body>
+  <div class="site-wrap">
+    <div class="site-header">
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="hamb" id="hamb" aria-label="Abrir menú">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></span><span>Menú</span>
+          </button>
         </div>
-      </div>
-    </div>
+        <div class="topbar-right">
+          <a class="link-icon" href="#" aria-label="Facebook"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.7-1.3 1.2V12h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12z"/></svg></span><span class="sr-only">Facebook</span></a>
+          <a class="link-icon" href="#" aria-label="LinkedIn"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1c.7-1.2 2.3-2.5 4.8-2.5 5.1 0 6 3.3 6 7.6V24h-5v-7.5c0-1.8 0-4.1-2.5-4.1-2.5 0-2.9 2-2.9 4v7.6H8z"/></svg></span><span class="sr-only">LinkedIn</span></a>
+          <a class="link-icon" href="#" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span><span class="sr-only">Instagram</span></a>
+          <a class="link-icon" href="#" aria-label="TikTok"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.2c-2 0-3.8-.7-5.2-2.1V16a6 6 0 1 1-6-6c.4 0 .7 0 1 .1v3.5a3 3 0 1 0 2 2.8V1h3.2c.4 1.9 2.2 3.4 4.1 3.6V7.2z"/></svg></span><span class="sr-only">TikTok</span></a>
 
-    <div class="navbar">
-      <nav id="mainMenu" class="menu">
-        <a href="index.html">Inicio</a>
-        <div class="nav-item has-sub">
-          <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="programa.html">Programa</a>
-            <a href="convenios.html">Convenios</a>
-            <a href="contacto.html">Contacto</a>
+          <!-- Cuenta (dropdown; lo rellena auth.js si lo usas) -->
+          <div id="nav-user" class="nav-item has-sub">
+            <button><span id="nav-username">Cuenta</span> <span class="chev">▾</span></button>
+            <div class="submenu" id="accountMenu" style="min-width:200px"></div>
           </div>
         </div>
-        <a href="docentes.html">Docentes</a>
-        <a id="nav-calif" href="calificaciones.html" style="display:none">Calificaciones</a>
-        <div class="nav-item has-sub">
-          <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
-          <div class="submenu">
-            <a href="alumnos.html">Alumnos</a>
-            <a href="exalumnos.html">Exalumnos</a>
+      </div>
+
+      <div class="navbar">
+        <nav id="mainMenu" class="menu">
+          <a href="index.html">Inicio</a>
+          <div class="nav-item has-sub">
+            <button data-menu-id="institucion">Institución <span class="chev">▾</span></button>
+            <div class="submenu">
+              <a href="nosotros.html">Nosotros</a>
+              <a href="programa.html">Programa</a>
+              <a href="convenios.html">Convenios</a>
+              <a href="contacto.html">Contacto</a>
+            </div>
           </div>
-        </div>
-              <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
-      </nav>
-      <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
-      <div></div>
+          <a href="docentes.html">Docentes</a>
+          
+          <div class="nav-item has-sub">
+            <button data-menu-id="Estudiantes">Estudiantes <span class="chev">▾</span></button>
+            <div class="submenu">
+              <a href="alumnos.html">Alumnos</a>
+              <a href="exalumnos.html">Exalumnos</a>
+            </div>
+          </div>
+          <a id="nav-admin" href="admin.html" style="display:none">Admin</a>
+        </nav>
+        <a class="logo" href="index.html"><img src="logo-tp.webp" alt="TP" /></a>
+        <div></div>
+      </div>
     </div>
-  </div>
 
   <div class="header-spacer"></div>
 
-<header class="hero">
-  <h1>Contáctanos</h1>
-  <p>Estamos aquí para ayudarte con cualquier consulta</p>
-  <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
-      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
-      <span>Respuesta Rápida</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
-      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
-      <span>Atención Personalizada</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
-      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
-      <span>Soporte Técnico</span>
-    </div>
-  </div>
-</header>
+    <!-- Hero -->
+    <header class="hero">
+      <h1>Contacto</h1>
+      <p>Programa Técnico Paramédico - Estamos aquí para orientarte sobre nuestro programa educativo</p>
+      <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+          <span>Atención Personalizada</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+          <span>Respuesta Rápida</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:12px 20px;border-radius:25px;backdrop-filter:blur(10px)">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
+          <span>Orientación Profesional</span>
+        </div>
+      </div>
+    </header>
 
-<div class="container">
-  <div class="contact-section">
-    <h2>¿Tienes alguna pregunta?</h2>
-    <p>No dudes en contactarnos. Nuestro equipo está disponible para ayudarte con cualquier consulta sobre nuestros programas, admisiones o servicios.</p>
+    <main class="site-main">
+      <div class="container">
+        <!-- Intro -->
+        <div class="card card--intro">
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--primary),var(--success));border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg)">
+            <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+          </div>
+          <h2>¿Tienes alguna pregunta sobre nuestro programa?</h2>
+          <p>No dudes en contactar a nuestro liceo. El equipo del programa Técnico Paramédico está disponible para ayudarte con cualquier consulta sobre el plan de estudios, requisitos de ingreso o proceso de matrícula. Estamos comprometidos con brindarte la mejor orientación para tu formación técnica.</p>
+        </div>
+
+        <!-- Tarjetas de contacto -->
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span>
+            </div>
+            <h3 class="feature-title">Dirección</h3>
+            <p class="feature-description">Liceo Técnico Profesional<br>Av. Principal 1234<br>Comuna, Región<br>Chile<br><br>Nuestro liceo cuenta con instalaciones modernas y laboratorios especializados para la formación técnica en salud.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+            </div>
+            <h3 class="feature-title">Teléfono</h3>
+            <p class="feature-description">Secretaría del Liceo:<br>+56 2 2345 6789<br>Coordinación TP Paramédico:<br>+56 9 8765 4321<br><br>Horario de atención para consultas sobre el programa técnico y proceso de matrícula.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+            </div>
+            <h3 class="feature-title">Correo Electrónico</h3>
+            <p class="feature-description">secretaria@liceo.cl<br>tecnico.paramedico@liceo.cl<br><br>Envíanos tus consultas sobre el programa técnico y te responderemos en un plazo máximo de 48 horas hábiles.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM12 13.5c1.25 0 2.5.5 2.5 1.5v1H9.5v-1c0-1 1.25-1.5 2.5-1.5z"/></svg></span>
+            </div>
+            <h3 class="feature-title">Horarios de Atención</h3>
+            <p class="feature-description">Lunes a Viernes: 8:00 - 17:00<br>Recreos: 10:00 - 10:20 y 15:30 - 15:50<br><br>Horarios especiales durante períodos de matrícula escolar. La coordinación del programa atiende con cita previa.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
+            </div>
+            <h3 class="feature-title">Formulario de Contacto</h3>
+            <p class="feature-description">Completa nuestro formulario en línea para consultas específicas sobre requisitos de ingreso al programa, plan de estudios, prácticas clínicas o cualquier información sobre la especialidad técnica.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <span class="icon" style="width:40px;height:40px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></span>
+            </div>
+            <h3 class="feature-title">Redes Sociales</h3>
+            <p class="feature-description">Síguenos en nuestras redes sociales para mantenerte informado sobre actividades del liceo, logros de nuestros estudiantes del programa técnico y eventos educativos.</p>
+          </div>
+        </div>
+
+        <!-- Compromiso -->
+        <div class="card" style="margin-top:24px">
+          <h2 style="margin:0 0 12px 0;color:var(--primary-700)">Nuestro Compromiso Educativo</h2>
+          <p style="color:var(--muted);line-height:1.7">
+            Como programa técnico de nivel medio, valoramos cada consulta de estudiantes y familias. Nuestro equipo docente y administrativo está capacitado para orientarte sobre la especialidad Técnico Paramédico, los requisitos de ingreso, el plan de estudios y las oportunidades laborales. Estamos aquí para apoyarte en tu formación técnica y preparación para el mundo laboral en el área de la salud.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <div data-include="footer"></div>
   </div>
-  
-  <div class="contact-grid">
-    <div class="contact-form">
-      <h3 style="color:var(--primary-700);font-size:1.5rem;margin:0 0 24px 0;text-align:center">Envíanos un mensaje</h3>
-      <form>
-        <div class="form-group">
-          <label for="nombre">Nombre completo *</label>
-          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Correo electrónico *</label>
-          <input type="email" id="email" name="email" required placeholder="tu@email.com">
-        </div>
-        
-        <div class="form-group">
-          <label for="telefono">Teléfono</label>
-          <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678">
-        </div>
-        
-        <div class="form-group">
-          <label for="asunto">Asunto *</label>
-          <select id="asunto" name="asunto" required>
-            <option value="">Selecciona un asunto</option>
-            <option value="admisiones">Admisiones</option>
-            <option value="programa">Programa académico</option>
-            <option value="practicas">Prácticas clínicas</option>
-            <option value="convenios">Convenios</option>
-            <option value="tecnico">Soporte técnico</option>
-            <option value="otro">Otro</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="mensaje">Mensaje *</label>
-          <textarea id="mensaje" name="mensaje" required placeholder="Escribe tu mensaje aquí..."></textarea>
-        </div>
-        
-        <button type="submit" class="form-submit">
-          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></span>
-          Enviar mensaje
-        </button>
-      </form>
-    </div>
-    
-    <div class="contact-info">
-      <h3 style="color:var(--primary-700);font-size:1.5rem;margin:0 0 24px 0;text-align:center">Información de contacto</h3>
-      
-      <div class="contact-item">
-        <div class="contact-icon">
-          <span class="icon" style="width:24px;height:24px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
-        </div>
-        <div class="contact-details">
-          <h3>Dirección</h3>
-          <p>Av. Principal 1234<br>Comuna, Región<br>Chile</p>
-        </div>
-      </div>
-      
-      <div class="contact-item">
-        <div class="contact-icon">
-          <span class="icon" style="width:24px;height:24px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
-        </div>
-        <div class="contact-details">
-          <h3>Teléfono</h3>
-          <p>+56 2 2345 6789<br>+56 9 8765 4321</p>
-        </div>
-      </div>
-      
-      <div class="contact-item">
-        <div class="contact-icon">
-          <span class="icon" style="width:24px;height:24px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
-        </div>
-        <div class="contact-details">
-          <h3>Email</h3>
-          <p>info@liceo.cl<br>admisiones@liceo.cl</p>
-        </div>
-      </div>
-      
-      <div class="contact-item">
-        <div class="contact-icon">
-          <span class="icon" style="width:24px;height:24px;color:#fff"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span>
-        </div>
-        <div class="contact-details">
-          <h3>Horarios</h3>
-          <p>Lunes a Viernes: 8:00 - 18:00<br>Sábados: 9:00 - 13:00</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="contact-section">
-    <h2>Redes Sociales</h2>
-    <p>Síguenos en nuestras redes sociales para mantenerte informado sobre las últimas noticias y eventos de nuestra institución.</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px">
-      <a href="#" class="btn" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:linear-gradient(135deg,#1877f2,#0d47a1);color:#fff;text-decoration:none;border-radius:10px;transition:all 0.3s ease">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></span>
-        Facebook
-      </a>
-      <a href="#" class="btn" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:linear-gradient(135deg,#1da1f2,#0d47a1);color:#fff;text-decoration:none;border-radius:10px;transition:all 0.3s ease">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></span>
-        Twitter
-      </a>
-      <a href="#" class="btn" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:linear-gradient(135deg,#e4405f,#c13584);color:#fff;text-decoration:none;border-radius:10px;transition:all 0.3s ease">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.746-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/></svg></span>
-        Instagram
-      </a>
-    </div>
-  </div>
-</div>
- 
-<!-- manual footer removed; keep only partial include -->
-  <div style="max-width:1200px;margin:0 auto;padding:20px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:start">
-      <div style="display:flex;gap:12px;align-items:center">
-        <img src="logo-tp.webp" alt="TP" style="height:40px;width:40px;border-radius:8px;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.05)"/>
-        <div style="color:#64748b;font-size:.9rem">
-          <strong style="color:#0f172a">Liceo TP Enfermería</strong><br>
-          Comprometidos con la excelencia y la formación integral.
-        </div>
-      </div>
-      <nav>
-        <a href="index.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Inicio</a>
-        <a href="nosotros.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Nosotros</a>
-        <a href="programa.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Programa</a>
-        <a href="convenios.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Convenios</a>
-        <a href="contacto.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Contacto</a>
-        <a href="calificaciones.html" style="display:inline-block;margin:6px 12px 0 0;color:#1d4ed8;text-decoration:none;font-weight:600">Calificaciones</a>
-      </nav>
-      <div style="color:#64748b;font-size:.85rem;margin-top:8px">© <span id="fy"></span> Liceo Técnico Profesional. Todos los derechos reservados.</div>
-    </div>
-  </div>
--->
 <script>try{var fy=document.getElementById('fy');if(fy){fy.textContent=(new Date()).getFullYear();}}catch(e){}</script>
 
 <script>
