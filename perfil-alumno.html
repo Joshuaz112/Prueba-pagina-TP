@@ -10,10 +10,52 @@
   <link rel="icon" href="logo-tp.webp">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/perfil-alumno.css">
+  <style>
+    /* Ensure proper layout with fixed header */
+    body {
+      padding-top: 56px; /* Space for fixed header */
+    }
+    
+    /* Header spacing */
+    .header-spacer {
+      height: 56px; /* Match header height */
+      margin-bottom: 2rem;
+    }
+    
+    /* Main content spacing */
+    .site-main {
+      flex: 1;
+      padding: 1rem 0;
+    }
+    
+    /* Footer spacing */
+    .site-footer {
+      margin-top: auto;
+    }
+  </style>
 </head>
 <body>
-  <div data-include="header"></div>
-  <div class="header-spacer"></div>
+  <div class="site-wrap">
+    <div class="topbar">
+      <div class="nav">
+        <a href="index.html" class="brand">
+          <img src="logo-tp.webp" alt="TP Enfermería">
+          <span>TP Enfermería</span>
+        </a>
+        <div class="spacer"></div>
+        <div class="links">
+          <a class="link" href="nosotros.html">Nosotros</a>
+          <a class="link" href="programa.html">Programa</a>
+          <a class="link" href="convenios.html">Convenios</a>
+          <a class="link" href="contacto.html">Contacto</a>
+          <a class="link" href="alumnos.html">Alumnos</a>
+          <a class="link" href="exalumnos.html">Exalumnos</a>
+          <a class="link" href="docentes.html">Docentes</a>
+          <a id="nav-admin" class="cta" style="display:none" href="admin.html">Admin</a>
+        </div>
+      </div>
+    </div>
+    <div class="header-spacer"></div>
 
   <main class="site-main" id="app">
     <section class="page-hero">
@@ -56,10 +98,27 @@
     </section>
   </main>
 
-  <div data-include="footer"></div>
+    <footer class="footer">
+      <div class="footer-accent"></div>
+      <div class="footer-wrap">
+        <div class="footer-bottom">
+          <p class="copyright">&copy; 2023 TP Enfermería. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
 
   <script type="module" src="students.js"></script>
   <script src="assets/include.js"></script>
   <script src="assets/perfil-alumno.js"></script>
+  <script>
+    // Admin button visibility
+    document.addEventListener('DOMContentLoaded', function() {
+      const adminNavItem = document.getElementById('nav-admin');
+      if (sessionStorage.getItem('tp_admin') === '1' && adminNavItem) {
+        adminNavItem.style.display = 'inline-flex';
+      }
+    });
+  </script>
 </body>
 </html>
