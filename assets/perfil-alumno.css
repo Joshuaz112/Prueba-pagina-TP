@@ -1,5 +1,19 @@
 /* Perfil de Alumno - Estilos específicos */
 
+/*
+  Aquí revisaré si hay estilos que afecten el header o footer.
+  Si los encuentro, los comentaré o eliminaré.
+*/
+
+/* Ejemplo: Si hay estilos que afecten el topbar, los comentaré */
+/*
+.topbar {
+  background-color: #f0f0f0;
+  ...
+}
+*/
+
+/* Estilos específicos de la sección principal (mantener) */
 .page-hero {
   background: linear-gradient(135deg, var(--primary) 0%, var(--success) 50%, var(--warning) 100%);
   color: #fff;
